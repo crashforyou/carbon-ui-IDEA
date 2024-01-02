@@ -29,38 +29,20 @@
   </a-form>
 </template>
 
-<script>
-import {reactive} from "vue";
+<script setup>
+import {reactive,ref} from "vue";
 import {Form, Select, Radio, Input, Button, FormItem} from "ant-design-vue";
 
-export default {
-  components: {
-    "a-form": Form,
-    "a-form-item": FormItem,
-    "a-select": Select,
-    "a-select-option": Select.Option,
-    "a-radio-group": Radio.Group,
-    "a-radio": Radio,
-    "a-input": Input,
-    "a-button": Button,
-  },
-  setup() {
-    const form = reactive({
-      account: "",
-      transferType: "入金",
-      transferAmount: "",
-      paymentPassword: "",
-    });
+const form = reactive({
+  account: "",
+  transferType: "入金",
+  transferAmount: "",
+  paymentPassword: "",
+});
 
-    function onSubmit() {
-      console.log(form);
-      // 在这里添加你的提交逻辑
-    }
-
-    return {
-      form,
-      onSubmit,
-    };
-  },
-};
+function onSubmit() {
+  console.log(form);
+  // 在这里添加你的提交逻辑
+}
 </script>
+

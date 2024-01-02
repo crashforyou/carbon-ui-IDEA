@@ -14,7 +14,8 @@
     </a-tab-pane>
   </a-tabs>
 </template>
-<script>
+
+<script  setup>
 import {ref} from "vue";
 import {Tabs, TabPane} from "ant-design-vue";
 import CapitalAccount from "@/views/bottomViews/CapitalServiceView/components/CapitalAccount.vue";
@@ -22,22 +23,6 @@ import CapitalFlow from "@/views/bottomViews/CapitalServiceView/components/Capit
 import CapitalRequestFlow from "@/views/bottomViews/CapitalServiceView/components/CapitalRequestFlow.vue";
 import TransactionFlow from "@/views/bottomViews/CapitalServiceView/components/TransactionFlow.vue";
 
-export default {
-  components: {
-    "a-tabs": Tabs,
-    "a-tab-pane": TabPane,
-    CapitalAccount,
-    CapitalFlow,
-    CapitalRequestFlow,
-    TransactionFlow,
-  },
-  setup() {
-    const activeKey = ref("1");
-    return {
-      activeKey,
-    };
-  },
-};
-
-
+const activeKey = ref("1");
 </script>
+

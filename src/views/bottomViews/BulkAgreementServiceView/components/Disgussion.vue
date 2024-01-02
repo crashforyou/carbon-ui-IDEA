@@ -52,83 +52,64 @@
   </a-layout>
 </template>
 
-<script>
-import {ref} from "vue";
+<script setup>
+import { ref } from "vue";
 
-export default {
-  setup() {
-    const price = ref("");
-    const quantity = ref("");
-    const note = ref("");
-    const availableFunds = ref(""); // 这里可以填写本轮询价可用资金
-    const availableQuota = ref(""); // 这里可以填写可用配额
-    const transactionData = ref([
-      // 在这里添加交易数据
-    ]);
+const price = ref("");
+const quantity = ref("");
+const note = ref("");
+const availableFunds = ref(""); // 这里可以填写本轮询价可用资金
+const availableQuota = ref(""); // 这里可以填写可用配额
+const transactionData = ref([
+  // 在这里添加交易数据
+]);
 
-    const transactionColumns = ref([
-      {title: "报价编号", dataIndex: "quoteId", key: "quoteId"},
-      {title: "标的物编号", dataIndex: "itemId", key: "itemId"},
-      {
-        title: "对手方名称",
-        dataIndex: "counterpartyName",
-        key: "counterpartyName",
-      },
-      {title: "账户类型", dataIndex: "accountType", key: "accountType"},
-      {title: "回应编号", dataIndex: "responseId", key: "responseId"},
-      {title: "回应状态", dataIndex: "responseStatus", key: "responseStatus"},
-      {
-        title: "对手方报价方向",
-        dataIndex: "counterpartyQuoteDirection",
-        key: "counterpartyQuoteDirection",
-      },
-      {
-        title: "回应方交易账号",
-        dataIndex: "responseTransactionAccount",
-        key: "responseTransactionAccount",
-      },
-    ]);
-
-    const quoteData = ref([
-      // 在这里添加报价记录数据
-    ]);
-
-    const quoteColumns = ref([
-      {title: "序号", dataIndex: "index", key: "index"},
-      {title: "操作", dataIndex: "operation", key: "operation"},
-      {title: "议价方", dataIndex: "negotiator", key: "negotiator"},
-      {title: "协议价格", dataIndex: "agreedPrice", key: "agreedPrice"},
-      {title: "出价类型", dataIndex: "bidType", key: "bidType"},
-      {title: "协议数量", dataIndex: "agreedQuantity", key: "agreedQuantity"},
-      {title: "协议金额", dataIndex: "agreedAmount", key: "agreedAmount"},
-      {title: "协议备注", dataIndex: "agreedNote", key: "agreedNote"},
-    ]);
-
-    const goBack = () => {
-      // 在这里添加返回上级页面的代码
-    };
-    const handleSubmit = () => {
-      // 在这里添加出价的代码
-    };
-
-    const terminate = () => {
-      // 在这里添加终止的代码
-    };
-
-    return {
-      transactionData,
-      transactionColumns,
-      quoteData,
-      quoteColumns,
-      goBack,
-      price,
-      quantity,
-      note,
-      availableFunds,
-      availableQuota,
-      handleSubmit,
-      terminate,
-    };
+const transactionColumns = ref([
+  { title: "报价编号", dataIndex: "quoteId", key: "quoteId" },
+  { title: "标的物编号", dataIndex: "itemId", key: "itemId" },
+  {
+    title: "对手方名称",
+    dataIndex: "counterpartyName",
+    key: "counterpartyName",
   },
+  { title: "账户类型", dataIndex: "accountType", key: "accountType" },
+  { title: "回应编号", dataIndex: "responseId", key: "responseId" },
+  { title: "回应状态", dataIndex: "responseStatus", key: "responseStatus" },
+  {
+    title: "对手方报价方向",
+    dataIndex: "counterpartyQuoteDirection",
+    key: "counterpartyQuoteDirection",
+  },
+  {
+    title: "回应方交易账号",
+    dataIndex: "responseTransactionAccount",
+    key: "responseTransactionAccount",
+  },
+]);
+
+const quoteData = ref([
+  // 在这里添加报价记录数据
+]);
+
+const quoteColumns = ref([
+  { title: "序号", dataIndex: "index", key: "index" },
+  { title: "操作", dataIndex: "operation", key: "operation" },
+  { title: "议价方", dataIndex: "negotiator", key: "negotiator" },
+  { title: "协议价格", dataIndex: "agreedPrice", key: "agreedPrice" },
+  { title: "出价类型", dataIndex: "bidType", key: "bidType" },
+  { title: "协议数量", dataIndex: "agreedQuantity", key: "agreedQuantity" },
+  { title: "协议金额", dataIndex: "agreedAmount", key: "agreedAmount" },
+  { title: "协议备注", dataIndex: "agreedNote", key: "agreedNote" },
+]);
+
+const goBack = () => {
+  // 在这里添加返回上级页面的代码
+};
+const handleSubmit = () => {
+  // 在这里添加出价的代码
+};
+
+const terminate = () => {
+  // 在这里添加终止的代码
 };
 </script>

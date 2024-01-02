@@ -56,7 +56,7 @@
     </template>
   </a-table>
 </template>
-<script lang="ts" setup>
+<script setup>
 import {SearchOutlined} from '@ant-design/icons-vue';
 import {reactive, ref} from 'vue';
 

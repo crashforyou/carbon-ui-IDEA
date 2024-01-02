@@ -30,83 +30,60 @@
   />
 </template>
 
-<script>
+<script setup>
 import {reactive, ref} from "vue";
 import {Form, Select, Button, Table, DatePicker, message} from "ant-design-vue";
 
-export default {
-  components: {
-    "a-form": Form,
-    "a-form-item": Form.Item,
-    "a-select": Select,
-    "a-select-option": Select.Option,
-    "a-button": Button,
-    "a-table": Table,
-    "a-range-picker": DatePicker.RangePicker,
-  },
-  setup() {
-    const targetCode = ref(null);
-    const dateRange = ref([]);
-    const direction = ref(null);
-    const data = ref([]);
-    const pagination = reactive({current: 1, pageSize: 10});
+const targetCode = ref(null);
+const dateRange = ref([]);
+const direction = ref(null);
+const data = ref([]);
+const pagination = reactive({current: 1, pageSize: 10});
 
-    const columns = [
-      {title: "委托日期", dataIndex: "orderDate", width: 100},
-      {title: "委托时间", dataIndex: "orderTime", width: 100},
-      {title: "操作员代码", dataIndex: "operatorCode", width: 120},
-      {title: "标的物代码", dataIndex: "code", width: 120},
-      {title: "标的物名称", dataIndex: "name", width: 120},
-      {title: "买卖方向", dataIndex: "direction", width: 100},
-      {title: "挂牌方式", dataIndex: "listingMode", width: 100},
-      {title: "委托数量", dataIndex: "orderQuantity", width: 100},
-      {title: "委托价格", dataIndex: "orderPrice", width: 100},
-      {title: "成交金额", dataIndex: "transactionAmount", width: 100},
-      {title: "成交量", dataIndex: "transactionQuantity", width: 100},
-      {title: "撤单量", dataIndex: "cancellationQuantity", width: 100},
-      {title: "交易账号", dataIndex: "account", width: 100},
-      {title: "状态", dataIndex: "status", width: 100},
-      {title: "委托编号", dataIndex: "orderNumber", width: 100},
-    ];
+const columns = [
+  {title: "委托日期", dataIndex: "orderDate", width: 100},
+  {title: "委托时间", dataIndex: "orderTime", width: 100},
+  {title: "操作员代码", dataIndex: "operatorCode", width: 120},
+  {title: "标的物代码", dataIndex: "code", width: 120},
+  {title: "标的物名称", dataIndex: "name", width: 120},
+  {title: "买卖方向", dataIndex: "direction", width: 100},
+  {title: "挂牌方式", dataIndex: "listingMode", width: 100},
+  {title: "委托数量", dataIndex: "orderQuantity", width: 100},
+  {title: "委托价格", dataIndex: "orderPrice", width: 100},
+  {title: "成交金额", dataIndex: "transactionAmount", width: 100},
+  {title: "成交量", dataIndex: "transactionQuantity", width: 100},
+  {title: "撤单量", dataIndex: "cancellationQuantity", width: 100},
+  {title: "交易账号", dataIndex: "account", width: 100},
+  {title: "状态", dataIndex: "status", width: 100},
+  {title: "委托编号", dataIndex: "orderNumber", width: 100},
+];
 
-    const handleSubmit = async () => {
-      try {
-        // Handle the submit event
-        // You may need to call your backend API here
-        // For example:
-        // const response = await fetch('/api/search', {
-        //   method: 'POST',
-        //   body: JSON.stringify({
-        //     targetCode: targetCode.value,
-        //     dateRange: dateRange.value,
-        //     direction: direction.value,
-        //     pagination,
-        //   }),
-        // });
-        // const result = await response.json();
-        // data.value = result.data;
-        // pagination.total = result.total;
-      } catch (error) {
-        message.error("搜索失败，请稍后再试");
-      }
-    };
+const handleSubmit = async () => {
+  try {
+    // Handle the submit event
+    // You may need to call your backend API here
+    // For example:
+    // const response = await fetch('/api/search', {
+    //   method: 'POST',
+    //   body: JSON.stringify({
+    //     targetCode: targetCode.value,
+    //     dateRange: dateRange.value,
+    //     direction: direction.value,
+    //     pagination,
+    //   }),
+    // });
+    // const result = await response.json();
+    // data.value = result.data;
+    // pagination.total = result.total;
+  } catch (error) {
+    message.error("搜索失败，请稍后再试");
+  }
+};
 
-    const handleReset = () => {
-      targetCode.value = null;
-      dateRange.value = [];
-      direction.value = null;
-    };
-
-    return {
-      targetCode,
-      dateRange,
-      direction,
-      data,
-      pagination,
-      columns,
-      handleSubmit,
-      handleReset,
-    };
-  },
+const handleReset = () => {
+  targetCode.value = null;
+  dateRange.value = [];
+  direction.value = null;
 };
 </script>
+

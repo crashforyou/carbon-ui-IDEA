@@ -29,66 +29,42 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import {ref} from "vue";
-import {Select, Button, Table} from "ant-design-vue";
 
-export default {
-  components: {
-    "a-select": Select,
-    "a-select-option": Select.Option,
-    "a-button": Button,
-    "a-table": Table,
-  },
-  setup() {
-    const selectedCode = ref(null);
-    const selectedDirection = ref(null);
-    const selectedStatus = ref(null);
-    const codes = ref(["代码1", "代码2", "代码3"]);
-    const directions = ref(["买入", "卖出"]);
-    const statuses = ref(["未成交", "部分成交", "全部成交", "已撤销"]);
-    const data = ref([]);
-    const columns = [
-      {title: "委托编号", dataIndex: "orderNumber"},
-      {title: "委托日期", dataIndex: "orderDate"},
-      {title: "委托时间", dataIndex: "orderTime"},
-      {title: "操作员代码", dataIndex: "operatorCode"},
-      {title: "交易账号", dataIndex: "account"},
-      {title: "标的物代码", dataIndex: "code"},
-      {title: "标的物名称", dataIndex: "name"},
-      {title: "买卖方向", dataIndex: "direction"},
-      {title: "挂牌方式", dataIndex: "listingMode"},
-      {title: "委托数量", dataIndex: "orderQuantity"},
-      {title: "委托价格", dataIndex: "orderPrice"},
-      {title: "成交金额", dataIndex: "transactionAmount"},
-      {title: "成交数量", dataIndex: "transactionQuantity"},
-    ];
-    const pagination = {pageSize: 10};
+const selectedCode = ref(null);
+const selectedDirection = ref(null);
+const selectedStatus = ref(null);
+const codes = ref(["代码1", "代码2", "代码3"]);
+const directions = ref(["买入", "卖出"]);
+const statuses = ref(["未成交", "部分成交", "全部成交", "已撤销"]);
+const data = ref([]);
+const columns = [
+  {title: "委托编号", dataIndex: "orderNumber"},
+  {title: "委托日期", dataIndex: "orderDate"},
+  {title: "委托时间", dataIndex: "orderTime"},
+  {title: "操作员代码", dataIndex: "operatorCode"},
+  {title: "交易账号", dataIndex: "account"},
+  {title: "标的物代码", dataIndex: "code"},
+  {title: "标的物名称", dataIndex: "name"},
+  {title: "买卖方向", dataIndex: "direction"},
+  {title: "挂牌方式", dataIndex: "listingMode"},
+  {title: "委托数量", dataIndex: "orderQuantity"},
+  {title: "委托价格", dataIndex: "orderPrice"},
+  {title: "成交金额", dataIndex: "transactionAmount"},
+  {title: "成交数量", dataIndex: "transactionQuantity"},
+];
+const pagination = {pageSize: 10};
 
-    const search = () => {
-      // 在这里执行你的搜索逻辑，然后更新data
-    };
+const search = () => {
+  // 在这里执行搜索逻辑，然后更新data
+};
 
-    const clear = () => {
-      selectedCode.value = null;
-      selectedDirection.value = null;
-      selectedStatus.value = null;
-      data.value = [];
-    };
-
-    return {
-      selectedCode,
-      selectedDirection,
-      selectedStatus,
-      codes,
-      directions,
-      statuses,
-      data,
-      columns,
-      pagination,
-      search,
-      clear,
-    };
-  },
+const clear = () => {
+  selectedCode.value = null;
+  selectedDirection.value = null;
+  selectedStatus.value = null;
+  data.value = [];
 };
 </script>
+

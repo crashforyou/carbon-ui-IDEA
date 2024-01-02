@@ -14,10 +14,10 @@
   </a-table>
 </template>
 
-<script lang="ts" setup>
-import type {TableColumnsType} from "ant-design-vue";
+<script setup>
+import {ref} from "vue";
 
-const columns: TableColumnsType = [
+const columns = [
   {
     title: "操作",
     key: "operation",
@@ -36,21 +36,7 @@ const columns: TableColumnsType = [
   {title: "报价编号", dataIndex: "offerNumber", key: "10", width: 150},
 ];
 
-interface DataItem {
-  key: number;
-  offerTime: string;
-  subjectCode: string;
-  direction: string;
-  initialOfferPrice: string;
-  initialOfferQuantity: string;
-  initialOfferAmount: string;
-  transactionAccount: string;
-  offerStatus: string;
-  inquiryStatus: string;
-  offerNumber: string;
-}
-
-const data: DataItem[] = [];
+const data = [];
 for (let i = 0; i < 100; i++) {
   data.push({
     key: i,
@@ -67,3 +53,4 @@ for (let i = 0; i < 100; i++) {
   });
 }
 </script>
+

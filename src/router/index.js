@@ -3,23 +3,76 @@ import HomeView from '../views/HomeView.vue'
 import BulkAgreementGroupView from '@/views/bottomViews/BulkAgreementServiceView/Group.vue'
 import BulkAgreementOfferView from '@/views/bottomViews/BulkAgreementServiceView/Offer.vue'
 import BulkAgreementQueryView from '@/views/bottomViews/BulkAgreementServiceView/Query.vue'
+import CapitalQuery from "@/views/bottomViews/CapitalServiceView/CapitalQuery.vue";
+import InOrOut  from "@/views/bottomViews/CapitalServiceView/InOrOut.vue";
+import QuotaQuery from "@/views/bottomViews/QuotaServiceView/QuotaQuery.vue";
+import QuotaInOrOut from "@/views/bottomViews/QuotaServiceView/QuotaInOrOut.vue";
+import DayBargainSelect from "@/views/bottomViews/DayQueryServiceView/DayBargainSelect.vue";
+import DayCommissionSelect from "@/views/bottomViews/DayQueryServiceView/DayCommissionSelect.vue";
+import ListingHistoryCommission
+  from "@/views/bottomViews/HistoryQueryServiceView/components/ListingHistoryCommission.vue";
+import ListingServiceIndex from "@/views/bottomViews/ListingServiceView/index.vue";
 const routes = [
   {
-
-  },
-  {
     path: '/',
-    name: 'home',
-    component: HomeView
+    name: 'Listing',
+    component:ListingServiceIndex
   },
   {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
-  }
+    path: '/bulkAgreement/Offer',
+    name:'BulkAgreementOffer',
+    component:BulkAgreementOfferView
+  },
+  {
+    path: '/bulkAgreement/Group',
+    name:'BulkAgreementGroup',
+    component: BulkAgreementGroupView
+  },
+  {
+    path: '/bulkAgreement/Query',
+    name:'BulkAgreementQuery',
+    component: BulkAgreementQueryView
+  },
+  {
+    path: '/capital/Query',
+    name:'CapitalQuery',
+    component: CapitalQuery
+  },
+  {
+    path: '/capital/InOrOut',
+    name:'InOrOut',
+    component: InOrOut
+  },
+  {
+    path: '/quota/Query',
+    name:'QuotaQuery',
+    component: QuotaQuery
+  },
+  {
+    path: '/quota/InOrOut',
+    name:'QuotaInOrOut',
+    component: QuotaInOrOut
+  },
+  {
+    path: '/dayQuery/BargainSelect',
+    name:'DayBargainSelect',
+    component: DayBargainSelect
+  },
+  {
+    path: '/dayQuery/CommissionSelect',
+    name:'DayCommissionSelect',
+    component: DayCommissionSelect
+  },
+  {
+    path: '/historyQuery/ListingHistoryCommission',
+    name:'ListingHistoryCommission',
+    component: ListingHistoryCommission
+  },
+  {
+    path: '/listingService',
+    name:'ListingServiceIndex',
+    component: ListingServiceIndex
+  },
 ]
 
 const router = createRouter({

@@ -83,77 +83,36 @@
   </a-row>
 </template>
 
-<script>
+<script setup>
 import {ref} from "vue";
-import {Tabs, TabPane, Form, Input, Select, Button, List, InputNumber, Table} from "ant-design-vue";
 
-export default {
-  components: {
-    "a-row": Row,
-    "a-col": Col,
-    "a-tabs": Tabs,
-    "a-tab-pane": TabPane,
-    "a-form": Form,
-    "a-form-item": Form.Item,
-    "a-input": Input,
-    "a-select": Select,
-    "a-select-option": Select.Option,
-    "a-button": Button,
-    "a-list": List,
-    "a-list-item": List.Item,
-    "a-input-number": InputNumber,
-    "a-table": Table,
-  },
-  setup() {
-    const activeKey = ref("1");
-    const targetCode = ref("");
-    const targetName = ref("");
-    const accountType = ref(null);
-    const tradeAccount = ref(null);
-    const price = ref(0);
-    const availableFunds = ref(0);
-    const buyableQuantity = ref(0);
-    const quantity = ref(0);
-    const sellPrices = ref([]);
-    const latestPrice = ref(0);
-    const increase = ref(0);
-    const buyPrices = ref([]);
-    const upperPrice = ref(0);
-    const lowerPrice = ref(0);
-    const data = ref([]);
-    const columns = [
-      // Define your columns here
-    ];
+const activeKey = ref("1");
+const targetCode = ref("");
+const targetName = ref("");
+const accountType = ref(null);
+const tradeAccount = ref(null);
+const price = ref(0);
+const availableFunds = ref(0);
+const buyableQuantity = ref(0);
+const quantity = ref(0);
+const sellPrices = ref([]);
+const latestPrice = ref(0);
+const increase = ref(0);
+const buyPrices = ref([]);
+const upperPrice = ref(0);
+const lowerPrice = ref(0);
+const data = ref([]);
+const columns = [
+  // Define your columns here
+];
 
-    const handleSubmit = () => {
-      // Handle the submit event
-    };
+const handleSubmit = () => {
+  // Handle the submit event
+};
 
-    const handleCodeChange = () => {
-      // Handle the change event of the target code input
-      // You may need to fetch the target name, available funds, buyable quantity, etc.
-    };
-
-    return {
-      targetCode,
-      targetName,
-      accountType,
-      tradeAccount,
-      price,
-      availableFunds,
-      buyableQuantity,
-      quantity,
-      sellPrices,
-      latestPrice,
-      increase,
-      buyPrices,
-      upperPrice,
-      lowerPrice,
-      data,
-      columns,
-      handleSubmit,
-      handleCodeChange,
-    };
-  },
+const handleCodeChange = () => {
+  // Handle the change event of the target code input
+  // You may need to fetch the target name, available funds, buyable quantity, etc.
 };
 </script>
+

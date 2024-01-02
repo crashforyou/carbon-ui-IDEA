@@ -10,38 +10,24 @@
   </a-tabs>
 </template>
 
-<script>
+<script setup>
 import {ref} from "vue";
 import QuerySelect from "@/views/bottomViews/BulkAgreementServiceView/components/QuerySelect.vue";
 import BargainSelect from "@/views/bottomViews/BulkAgreementServiceView/components/BargainSelect.vue";
 import {Tabs, TabPane} from "ant-design-vue";
 
 const activeKey = ref("1");
-export default {
-  components: {
-    "a-tabs": Tabs,
-    "a-tab-pane": TabPane,
-    QuerySelect,
-    BargainSelect,
-  },
-  setup() {
-    const queryResult1 = ref([]);
-    const queryResult2 = ref([]);
-    const showQuerySelect = () => {
-      // 询价查询并更新queryResult
-      activeKey.value = "1";
-    };
-    const showBargainSelect = () => {
-      // 成交查询并更新queryResult
-      activeKey.value = "2";
-    };
-    return {
-      activeKey,
-      queryResult1,
-      queryResult2,
-      showQuerySelect,
-      showBargainSelect,
-    };
-  },
+const queryResult1 = ref([]);
+const queryResult2 = ref([]);
+
+const showQuerySelect = () => {
+  // 询价查询并更新queryResult
+  activeKey.value = "1";
+};
+
+const showBargainSelect = () => {
+  // 成交查询并更新queryResult
+  activeKey.value = "2";
 };
 </script>
+

@@ -18,13 +18,13 @@
               <span>大宗协议</span>
             </span>
           </template>
-          <router-link to="/">
+          <router-link to="/bulkAgreement/Offer">
             <a-menu-item key="sub1_1">大宗协议报价</a-menu-item>
           </router-link>
-          <router-link to="/">
+          <router-link to="/bulkAgreement/Query">
             <a-menu-item key="sub1_2">大宗协议询价</a-menu-item>
           </router-link>
-          <router-link to="/">
+          <router-link to="/bulkAgreement/Group">
             <a-menu-item key="sub1_3">群组管理</a-menu-item>
           </router-link>
         </a-sub-menu>
@@ -51,10 +51,10 @@
               <span>资金管理</span>
             </span>
           </template>
-          <router-link to="/">
+          <router-link to="/capital/InOrOut">
             <a-menu-item key="sub3_1">入金/出金</a-menu-item>
           </router-link>
-          <router-link to="/">
+          <router-link to="/capital/Query">
             <a-menu-item key="sub3_2">资金查询</a-menu-item>
           </router-link>
         </a-sub-menu>
@@ -66,10 +66,10 @@
               <span>配额管理</span>
             </span>
           </template>
-          <router-link to="/">
+          <router-link to="/quota/InOrOut">
             <a-menu-item key="sub4_1">转入/转出</a-menu-item>
           </router-link>
-          <router-link to="/">
+          <router-link to="/quota/Query">
             <a-menu-item key="sub4_2">配额查询</a-menu-item>
           </router-link>
         </a-sub-menu>
@@ -81,10 +81,10 @@
               <span>当日查询</span>
             </span>
           </template>
-          <router-link to="/">
+          <router-link to="/dayQuery/CommissionSelect">
             <a-menu-item key="sub5_1">当日委托查询</a-menu-item>
           </router-link>
-          <router-link to="/">
+          <router-link to="/dayQuery/BargainSelect">
             <a-menu-item key="sub5_2">当日成交查询</a-menu-item>
           </router-link>
         </a-sub-menu>
@@ -96,7 +96,7 @@
               <span>历史查询</span>
             </span>
           </template>
-          <router-link to="/">
+          <router-link to="/historyQuery/ListingHistoryCommission">
             <a-menu-item key="sub6_1">挂牌交易查询</a-menu-item>
           </router-link>
           <router-link to="/">
@@ -143,21 +143,31 @@
       <a-layout-header style="background: #fff; padding: 0"></a-layout-header>
       <a-layout-content style="margin: 0 16px">
         <div class="content">
-          <router-view name="topView" class="topView">
+          <a-tabs v-model:activeKey="activeKey" class="topView">
+            <a-tab-pane key="1" tab="买入摘牌"
+            >Content of Tab Pane 1
+            </a-tab-pane
+            >
+            <a-tab-pane key="2" tab="卖出摘牌" force-render
+            >Content of Tab Pane 2
+            </a-tab-pane
+            >
+            <a-tab-pane key="3" tab="市场">Content of Tab Pane 3</a-tab-pane>
+            <a-tab-pane key="4" tab="分时">Content of Tab Pane 3</a-tab-pane>
 
-          </router-view>
-          <router-view name="bottomView" class="bottomView">
+            <a-tab-pane key="5" tab="K线">Content of Tab Pane 3</a-tab-pane>
 
-          </router-view>
+            <a-tab-pane key="6" tab="分笔">Content of Tab Pane 3</a-tab-pane>
+          </a-tabs>
+          <router-view class="bottomView"></router-view>
         </div>
       </a-layout-content>
     </a-layout>
   </a-layout>
 </template>
-<script lang="ts" setup>
+
+<script  setup>
 import {
-  PieChartOutlined,
-  DesktopOutlined,
   UserOutlined,
   AreaChartOutlined,
   InteractionOutlined,
@@ -167,14 +177,14 @@ import {
   ProfileOutlined,
   ScheduleOutlined,
   SwitcherOutlined,
-  TeamOutlined,
-  FileOutlined,
 } from "@ant-design/icons-vue";
 import {ref} from "vue";
 
-const collapsed = ref<boolean>(false);
-const selectedKeys = ref<string[]>(["1"]);
+const activeKey = ref("1");
+const collapsed = ref(false);
+const selectedKeys = ref(["1"]);
 </script>
+
 <style scoped>
 #components-layout-demo-side .logo {
   height: 32px;

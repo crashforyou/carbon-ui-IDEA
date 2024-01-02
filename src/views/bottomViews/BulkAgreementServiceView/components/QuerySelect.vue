@@ -12,17 +12,16 @@
         <a
             v-if="record.inquiryStatus === '已报单'"
             @click="goToNegotiationPage(record)"
-        >洽谈</a
-        >
+        >洽谈</a>
       </template>
     </template>
   </a-table>
 </template>
 
-<script lang="ts" setup>
-import type {TableColumnsType} from "ant-design-vue";
+<script setup>
+import { ref } from "vue";
 
-const columns: TableColumnsType = [
+const columns = ref([
   {
     title: "操作",
     key: "operation",
@@ -51,28 +50,17 @@ const columns: TableColumnsType = [
   },
   {title: "报价状态", dataIndex: "offerStatus", key: "6", width: 150},
   {title: "询价状态", dataIndex: "inquiryStatus", key: "7", width: 150},
-];
+]);
 
-const goToNegotiationPage = (record: DataItem) => {
+const goToNegotiationPage = (record) => {
   // 使用Vue Router进行页面跳转
-  this.$router.push({name: 'NegotiationPage', params: {id: record.key}});
-  console.log(`跳转到${record.key}的洽谈页面`);
+  // this.$router.push({name: 'NegotiationPage', params: {id: record.key}});
+  // console.log(`跳转到${record.key}的洽谈页面`);
 };
 
-interface DataItem {
-  key: number;
-  subjectCode: string;
-  subjectName: string;
-  initialOfferPrice: string;
-  initialOfferQuantity: string;
-  initialOfferAmount: string;
-  offerStatus: string;
-  inquiryStatus: string;
-}
-
-const data: DataItem[] = [];
+const data = ref([]);
 for (let i = 0; i < 100; i++) {
-  data.push({
+  data.value.push({
     key: i,
     subjectCode: "100000",
     subjectName: "标的物名称",
@@ -84,3 +72,5 @@ for (let i = 0; i < 100; i++) {
   });
 }
 </script>
+
+

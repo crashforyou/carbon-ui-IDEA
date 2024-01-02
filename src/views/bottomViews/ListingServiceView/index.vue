@@ -69,7 +69,7 @@
     </a-layout>
   </a-layout>
 </template>
-<script lang="ts" setup>
+<script setup>
 import {ref} from "vue";
 import {
   UserOutlined,
@@ -77,10 +77,11 @@ import {
   NotificationOutlined,
 } from "@ant-design/icons-vue";
 
-const selectedKeys1 = ref<string[]>(["2"]);
-const selectedKeys2 = ref<string[]>(["1"]);
-const openKeys = ref<string[]>(["sub1"]);
+const selectedKeys1 = ref(["2"]);
+const selectedKeys2 = ref(["1"]);
+const openKeys = ref(["sub1"]);
 </script>
+
 <style scoped>
 #components-layout-demo-top-side-2 .logo {
   float: left;

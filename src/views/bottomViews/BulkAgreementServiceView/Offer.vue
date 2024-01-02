@@ -182,126 +182,94 @@
   </div>
 </template>
 
-<script>
+<script  setup>
 import {ref, nextTick} from "vue";
 import MyTable from "@/components/directionOfferQuery.vue";
 import {Form, Radio, Select, Input, Table, Button} from "ant-design-vue";
 
-export default {
-  components: {
-    "a-form": Form,
-    MyTable,
-    "a-form-item": Form.Item,
-    "a-input": Input,
-    "a-select": Select,
-    "a-radio-group": Radio.Group,
-    "a-radio": Radio,
-    "a-table": Table,
-    "a-table-column": Table.Column,
-    "a-button": Button,
-  },
-  setup() {
-    const directionalOfferFormModel = ref({
-      code: "",
-      name: "",
-      accountType: "",
-      offerAccount: "",
-      flow: "卖出",
-      available: "",
-      price: "",
-      Num: "",
-      directionClient: "",
-      // 其他表单项
-    });
-    const groupOfferFormModel = ref({
-      code: "",
-      name: "",
-      accountType: "",
-      offerAccount: "",
-      flow: "卖出",
-      available: "",
-      price: "",
-      Num: "",
-      directionGroup: "",
-      // 其他表单项
-    });
-    const updateFlow = () => {
-      nextTick(() => {
-        console.log("用户点击了" + directionalOfferFormModel.value.flow);
-      });
-    };
-    const submitForm = () => {
-      // 提交表单
-    };
-
-    const clearForm = () => {
-      // 清空表单
-    };
-    const queryResult = ref([]);
-    const isOfferQuery = ref(false);
-    const isTransactionQuery = ref(false);
-    const isDirectionalOffer = ref(false);
-    const isGroupOffer = ref(false);
-
-    const showDirectionalOffer = () => {
-      isDirectionalOffer.value = true;
-      isGroupOffer.value = false;
-    };
-
-    const showGroupOffer = () => {
-      isGroupOffer.value = true;
-      isDirectionalOffer.value = false;
-    };
-
-    const showOfferQuery = () => {
-      isOfferQuery.value = true;
-      isTransactionQuery.value = false;
-      // 查询报价并更新queryResult
-    };
-
-    const showTransactionQuery = () => {
-      isTransactionQuery.value = true;
-      isOfferQuery.value = false;
-      // 查询成交并更新queryResult
-    };
-
-    return {
-      directionalOfferFormModel,
-      groupOfferFormModel,
-      submitForm,
-      clearForm,
-      queryResult,
-      isOfferQuery,
-      isTransactionQuery,
-      isDirectionalOffer,
-      isGroupOffer,
-      showDirectionalOffer,
-      showGroupOffer,
-      showOfferQuery,
-      showTransactionQuery,
-      updateFlow,
-      actionRender(record) {
-        if (record.status === "未成交") {
-          return (
-              <div>
-                <a-button>洽谈</a-button>
-                <a-button>详情</a-button>
-                <a-button>修改</a-button>
-                <a-button>撤回</a-button>
-              </div>
-          );
-        } else if (record.status === "已成交") {
-          return (
-              <div>
-                <a-button>洽谈查询</a-button>
-                <a-button>详情</a-button>
-              </div>
-          );
-        }
-      },
-    };
-  },
+const directionalOfferFormModel = ref({
+  code: "",
+  name: "",
+  accountType: "",
+  offerAccount: "",
+  flow: "卖出",
+  available: "",
+  price: "",
+  Num: "",
+  directionClient: "",
+  // 其他表单项
+});
+const groupOfferFormModel = ref({
+  code: "",
+  name: "",
+  accountType: "",
+  offerAccount: "",
+  flow: "卖出",
+  available: "",
+  price: "",
+  Num: "",
+  directionGroup: "",
+  // 其他表单项
+});
+const updateFlow = () => {
+  nextTick(() => {
+    console.log("用户点击了" + directionalOfferFormModel.value.flow);
+  });
 };
+const submitForm = () => {
+  // 提交表单
+};
+
+const clearForm = () => {
+  // 清空表单
+};
+const queryResult = ref([]);
+const isOfferQuery = ref(false);
+const isTransactionQuery = ref(false);
+const isDirectionalOffer = ref(false);
+const isGroupOffer = ref(false);
+
+const showDirectionalOffer = () => {
+  isDirectionalOffer.value = true;
+  isGroupOffer.value = false;
+};
+
+const showGroupOffer = () => {
+  isGroupOffer.value = true;
+  isDirectionalOffer.value = false;
+};
+
+const showOfferQuery = () => {
+  isOfferQuery.value = true;
+  isTransactionQuery.value = false;
+  // 查询报价并更新queryResult
+};
+
+const showTransactionQuery = () => {
+  isTransactionQuery.value = true;
+  isOfferQuery.value = false;
+  // 查询成交并更新queryResult
+};
+
+// const actionRender = (record) => {
+//   if (record.status === "未成交") {
+//     return (
+//         <div>
+//             <a-button > 洽谈 < /a-button>
+//         <a-button> 详情 < /a-button>
+//         < a - button > 修改 < /a-button>
+//         < a - button > 撤回 < /a-button>
+//         < /div>
+//     );
+//   } else if (record.status === "已成交") {
+//     return (
+//         <div>
+//             <a-button > 洽谈查询 < /a-button>
+//         < a - button > 详情 < /a-button>
+//         < /div>
+//     );
+//   }
+// };
 </script>
 
 <style scoped>

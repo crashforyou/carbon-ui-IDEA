@@ -31,56 +31,36 @@
   </div>
 </template>
 
-<script>
-import {reactive, ref} from "vue";
+<script setup>
+import {reactive} from "vue";
 import {Form, Select, Radio, Input, Button, FormItem, InputNumber} from "ant-design-vue";
 import axios from "axios";
 
-export default {
-  components: {
-    "a-form": Form,
-    "a-form-item": FormItem,
-    "a-select": Select,
-    "a-select-option": Select.Option,
-    "a-radio-group": Radio.Group,
-    "a-radio": Radio,
-    "a-input": Input,
-    "a-button": Button,
-    "a-input-number": InputNumber,
-  },
-  setup() {
-    const QuotaForm = reactive({
-      account: "",
-      code: "",
-      name: "",
-      direction: "转入",
-      quantity: "",
-    });
+const QuotaForm = reactive({
+  account: "",
+  code: "",
+  name: "",
+  direction: "转入",
+  quantity: "",
+});
 
-    const handleSubmit = async () => {
-      try {
-        // 在这里处理提交操作
-        const response = await axios.post("/api/submit", QuotaForm);
-        console.log(response.data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
+// const handleSubmit = async () => {
+//   try {
+//     // 处理提交操作
+//     const response = await axios.post("/api/submit", QuotaForm);
+//     console.log(response.data);
+//   } catch (error) {
+//     console.error(error);
+//   }
+// };
 
-    const handleReset = () => {
-      // 在这里处理清空操作
-      QuotaForm.account = "";
-      QuotaForm.code = "";
-      QuotaForm.name = "";
-      QuotaForm.direction = "转入";
-      QuotaForm.quantity = "";
-    };
-
-    return {
-      QuotaForm,
-      handleSubmit,
-      handleReset,
-    };
-  },
+const handleReset = () => {
+  // 在这里处理清空操作
+  QuotaForm.account = "";
+  QuotaForm.code = "";
+  QuotaForm.name = "";
+  QuotaForm.direction = "转入";
+  QuotaForm.quantity = "";
 };
 </script>
+

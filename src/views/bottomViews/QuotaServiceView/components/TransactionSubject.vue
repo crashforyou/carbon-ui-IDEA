@@ -16,55 +16,34 @@
   </div>
 </template>
 
-<script>
-import {ref} from "vue";
-import {Select, Button, Table} from "ant-design-vue";
+<script setup>
+import { ref } from "vue";
 
-export default {
-  components: {
-    "a-select": Select,
-    "a-select-option": Select.Option,
-    "a-button": Button,
-    "a-table": Table,
-  },
-  setup() {
-    const selectedCode = ref(null);
-    const codes = ref(["代码1", "代码2", "代码3"]);
-    const data = ref([]);
-    const columns = [
-      {title: "市场名称", dataIndex: "marketName"},
-      {title: "标的物代码", dataIndex: "code"},
-      {title: "标的物名称", dataIndex: "name"},
-      {title: "持有数量(吨)", dataIndex: "holdAmount"},
-      {title: "可用数量(吨)", dataIndex: "availableAmount"},
-      {title: "冻结数量(吨)", dataIndex: "frozenAmount"},
-      {title: "买入数量(吨)", dataIndex: "buyAmount"},
-      {title: "卖出数量(吨)", dataIndex: "sellAmount"},
-      {title: "转入申请数量(吨)", dataIndex: "transferInAmount"},
-      {title: "转出申请数量(吨)", dataIndex: "transferOutAmount"},
-      {title: "交易账号", dataIndex: "account"},
-    ];
-    const pagination = {pageSize: 10};
+const selectedCode = ref(null);
+const codes = ref(["代码1", "代码2", "代码3"]);
+const data = ref([]);
+const columns = [
+  {title: "市场名称", dataIndex: "marketName"},
+  {title: "标的物代码", dataIndex: "code"},
+  {title: "标的物名称", dataIndex: "name"},
+  {title: "持有数量(吨)", dataIndex: "holdAmount"},
+  {title: "可用数量(吨)", dataIndex: "availableAmount"},
+  {title: "冻结数量(吨)", dataIndex: "frozenAmount"},
+  {title: "买入数量(吨)", dataIndex: "buyAmount"},
+  {title: "卖出数量(吨)", dataIndex: "sellAmount"},
+  {title: "转入申请数量(吨)", dataIndex: "transferInAmount"},
+  {title: "转出申请数量(吨)", dataIndex: "transferOutAmount"},
+  {title: "交易账号", dataIndex: "account"},
+];
+const pagination = {pageSize: 10};
 
-    const search = () => {
-      // 在这里执行你的搜索逻辑，然后更新data
+const search = () => {
+  // 在这里执行你的搜索逻辑，然后更新data
+};
 
-    };
-
-    const clear = () => {
-      selectedCode.value = null;
-      data.value = [];
-    };
-
-    return {
-      selectedCode,
-      codes,
-      data,
-      columns,
-      pagination,
-      search,
-      clear,
-    };
-  },
+const clear = () => {
+  selectedCode.value = null;
+  data.value = [];
 };
 </script>
+

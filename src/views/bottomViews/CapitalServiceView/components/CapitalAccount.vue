@@ -22,84 +22,63 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import {ref} from "vue";
-import {Form, Select, Button, Table, FormItem} from "ant-design-vue";
 import axios from "core-js/internals/queue";
 
-export default {
-  components: {
-    "a-form": Form,
-    "a-form-item": FormItem,
-    "a-select": Select,
-    "a-select-option": Select.Option,
-    "a-button": Button,
-    "a-table": Table,
+const accounts = ref([
+  {label: "账号1", value: "1"},
+  {label: "账号2", value: "2"},
+  // 添加更多账号
+]);
+
+const selectedAccount = ref(accounts.value[0].value);
+
+const columns = [
+  {
+    title: "资金账号",
+    dataIndex: "account",
+    key: "account",
   },
-  setup() {
-    const accounts = ref([
-      {label: "账号1", value: "1"},
-      {label: "账号2", value: "2"},
-      // 添加更多账号
-    ]);
+  {
+    title: "账号类型",
+    dataIndex: "type",
+    key: "type",
+  },
+  {
+    title: "资金余额",
+    dataIndex: "balance",
+    key: "balance",
+  },
+  {
+    title: "可用资金",
+    dataIndex: "available",
+    key: "available",
+  },
+  {
+    title: "可出资金",
+    dataIndex: "withdrawable",
+    key: "withdrawable",
+  },
+];
 
-    const selectedAccount = ref(accounts.value[0].value);
+const data = ref([]); // 从后端获取数据
 
-    const columns = [
-      {
-        title: "资金账号",
-        dataIndex: "account",
-        key: "account",
-      },
-      {
-        title: "账号类型",
-        dataIndex: "type",
-        key: "type",
-      },
-      {
-        title: "资金余额",
-        dataIndex: "balance",
-        key: "balance",
-      },
-      {
-        title: "可用资金",
-        dataIndex: "available",
-        key: "available",
-      },
-      {
-        title: "可出资金",
-        dataIndex: "withdrawable",
-        key: "withdrawable",
-      },
-    ];
-
-    const data = ref([]); // 从后端获取数据
-
-    const search = () => {
-      // 使用selectedAccount从后端服务获取数据
-      axios.get('/api/search', {
-        params: {
-          account: selectedAccount.value
-        }
+const search = () => {
+  // 使用selectedAccount从后端服务获取数据
+  axios.get('/api/search', {
+    params: {
+      account: selectedAccount.value
+    }
+  })
+      .then(response => {
+        // 更新表格数据
+        data.value = response.data;
       })
-          .then(response => {
-            // 更新表格数据
-            data.value = response.data;
-          })
-          .catch(error => {
-            // 处理错误
-            console.error(error);
-          });
-    };
-
-
-    return {
-      accounts,
-      selectedAccount,
-      columns,
-      data,
-      search,
-    };
-  },
+      .catch(error => {
+        // 处理错误
+        console.error(error);
+      });
 };
 </script>
+
