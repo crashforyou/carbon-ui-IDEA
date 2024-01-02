@@ -2,11 +2,11 @@
   <a-layout style="min-height: 100vh">
     <!--侧边栏-->
     <a-layout-sider v-model:collapsed="collapsed" collapsible>
-      <div class="logo" />
+      <div class="logo"/>
       <a-menu v-model:selectedKeys="selectedKeys" theme="dark" mode="inline">
         <router-link to="/">
           <a-menu-item key="1">
-            <area-chart-outlined />
+            <area-chart-outlined/>
             <span>挂牌交易</span>
           </a-menu-item>
         </router-link>
@@ -14,7 +14,7 @@
         <a-sub-menu key="sub1">
           <template #title>
             <span>
-              <interaction-outlined />
+              <interaction-outlined/>
               <span>大宗协议</span>
             </span>
           </template>
@@ -32,7 +32,7 @@
         <a-sub-menu key="sub2">
           <template #title>
             <span>
-              <credit-card-outlined />
+              <credit-card-outlined/>
               <span>单向竞价</span>
             </span>
           </template>
@@ -47,7 +47,7 @@
         <a-sub-menu key="sub3">
           <template #title>
             <span>
-              <transaction-outlined />
+              <transaction-outlined/>
               <span>资金管理</span>
             </span>
           </template>
@@ -62,7 +62,7 @@
         <a-sub-menu key="sub4">
           <template #title>
             <span>
-              <pound-outlined />
+              <pound-outlined/>
               <span>配额管理</span>
             </span>
           </template>
@@ -77,7 +77,7 @@
         <a-sub-menu key="sub5">
           <template #title>
             <span>
-              <profile-outlined />
+              <profile-outlined/>
               <span>当日查询</span>
             </span>
           </template>
@@ -92,7 +92,7 @@
         <a-sub-menu key="sub6">
           <template #title>
             <span>
-              <switcher-outlined />
+              <switcher-outlined/>
               <span>历史查询</span>
             </span>
           </template>
@@ -116,7 +116,7 @@
         <a-sub-menu key="sub7">
           <template #title>
             <span>
-              <schedule-outlined />
+              <schedule-outlined/>
               <span>日终报表查询</span>
             </span>
           </template>
@@ -128,7 +128,7 @@
         <a-sub-menu key="sub8">
           <template #title>
             <span>
-              <user-outlined />
+              <user-outlined/>
               <span>用户信息管理</span>
             </span>
           </template>
@@ -140,110 +140,14 @@
     </a-layout-sider>
 
     <a-layout>
-      <a-layout-header style="background: #fff; padding: 0"> </a-layout-header>
+      <a-layout-header style="background: #fff; padding: 0"></a-layout-header>
       <a-layout-content style="margin: 0 16px">
         <div class="content">
           <router-view name="topView" class="topView">
-            ...
-            <br />
-            Really
-            <br />
-            ...
-            <br />
-            ...
-            <br />
-            ...
-            <br />
-            long
-            <br />
-            ...
-            <br />
-            ...
-            <br />
-            ...
-            <br />
-            ...
-            <br />
-            ...
-            <br />
-            ...
-            <br />
-            ...
-            <br />
-            ...
-            <br />
-            ...
-            <br />
-            ...
-            <br />
+
           </router-view>
           <router-view name="bottomView" class="bottomView">
-            ...
-            <br />
-            Really
-            <br />
-            ...
-            <br />
-            ...
-            <br />
-            ...
-            <br />
-            long
-            <br />
-            ...
-            <br />
-            ...
-            <br />
-            ...
-            <br />
-            ...
-            <br />
-            ...
-            <br />
-            ...
-            <br />
-            ...
-            <br />
-            ...
-            <br />
-            ...
-            <br />
-            ...
-            <br />
-            ...
-            <br />
-            ...
-            <br />
-            ...
-            <br />
-            ...
-            <br />
-            ...
-            <br />
-            ...
-            <br />
-            ...
-            <br />
-            ...
-            <br />
-            ...
-            <br />
-            ...
-            ...............................000000000000000000000000000000000000000000000000000000000000000000............................................................................................
-            <br />
-            ...
-            <br />
-            ...
-            <br />
-            ...
-            <br />
-            ...
-            <br />
-            ...
-            <br />
-            ...
-            <br />
-            ...
+
           </router-view>
         </div>
       </a-layout-content>
@@ -266,7 +170,7 @@ import {
   TeamOutlined,
   FileOutlined,
 } from "@ant-design/icons-vue";
-import { ref } from "vue";
+import {ref} from "vue";
 
 const collapsed = ref<boolean>(false);
 const selectedKeys = ref<string[]>(["1"]);
