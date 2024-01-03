@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
 import BulkAgreementGroupView from '@/views/bottomViews/BulkAgreementServiceView/Group.vue'
 import BulkAgreementOfferView from '@/views/bottomViews/BulkAgreementServiceView/Offer.vue'
 import BulkAgreementQueryView from '@/views/bottomViews/BulkAgreementServiceView/Query.vue'

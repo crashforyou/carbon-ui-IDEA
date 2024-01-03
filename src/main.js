@@ -1,8 +1,7 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-import MyApp from "@/MyApp.vue";
+import antd from 'ant-design-vue'
 import router from './router'
 import store from './store'
 
-// createApp(App).use(store).use(router).mount('#app')
-createApp(MyApp).use(store).use(router).mount('#myapp')
+createApp(App).use(store).use(router).use(antd).mount('#app')
