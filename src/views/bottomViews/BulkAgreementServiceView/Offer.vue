@@ -1,8 +1,8 @@
 <!--大宗协议报价-->
 <template>
   <div class="main">
-    <button @click="showDirectionalOffer">定向报价</button>
-    <button @click="showGroupOffer">群组报价</button>
+    <button :class="{ active: activeButton === 'button1' }" @click="showDirectionalOffer('button1')">定向报价</button>
+    <button :class="{ active: activeButton === 'button2' }" @click="showGroupOffer('button2')">群组报价</button>
 
     <div v-if="isDirectionalOffer">
       <div class="left">
@@ -67,28 +67,13 @@
         </a-form>
       </div>
       <div class="right">
-        <button @click="showOfferQuery">报价查询</button>
-        <button @click="showTransactionQuery">成交查询</button>
-        <MyTable :dataSource="queryResult" v-if="isOfferQuery"></MyTable>
-        <a-table :dataSource="queryResult" v-if="isTransactionQuery">
-          <a-table-column
-              title="操作"
-              key="action"
-              scopedSlots="{ customRender: 'action' }"
-          />
-          <a-table-column
-              v-for="(value, key) in queryResult[0]"
-              :key="key"
-              :title="key"
-              :dataIndex="key"
-          />
-        </a-table>
+        <DirectionOfferQuery></DirectionOfferQuery>
       </div>
     </div>
 
     <div v-if="isGroupOffer">
       <div class="left">
-        <a-form :model="groupOfferFormModel">
+        <a-form :model="groupOfferFormModel" :label-col="{ span: 7 }" :wrapper-col="{ span: 15 }">
           <a-form-item label="标的物代码">
             <a-input v-model="groupOfferFormModel.code"/>
           </a-form-item>
@@ -142,50 +127,24 @@
           <a-form-item label="选择群组">
             <a-input v-model="groupOfferFormModel.directionGroup"/>
           </a-form-item>
-          <a-form-item>
-            <a-button type="primary" @click="submitForm">提交</a-button>
-            <a-button @click="clearForm">清空</a-button>
-          </a-form-item>
+          <div class="buttonGroup">
+            <button @click="submitForm">提交</button>
+            <button @click="clearForm">清空</button>
+          </div>
         </a-form>
       </div>
       <div class="right">
-        <button @click="showOfferQuery">报价查询</button>
-        <button @click="showTransactionQuery">成交查询</button>
-        <a-table :dataSource="queryResult" v-if="isOfferQuery">
-          <a-table-column
-              title="操作"
-              key="action"
-              scopedSlots="{ customRender: 'action' }"
-          />
-          <a-table-column
-              v-for="(value, key) in queryResult[0]"
-              :key="key"
-              :title="key"
-              :dataIndex="key"
-          />
-        </a-table>
-        <a-table :dataSource="queryResult" v-if="isTransactionQuery">
-          <a-table-column
-              title="操作"
-              key="action"
-              scopedSlots="{ customRender: 'actionRender' }"
-          />
-          <a-table-column
-              v-for="(value, key) in queryResult[0]"
-              :key="key"
-              :title="key"
-              :dataIndex="key"
-          />
-        </a-table>
       </div>
     </div>
   </div>
 </template>
 
 <script  setup>
-import {ref, nextTick} from "vue";
-import MyTable from "@/components/directionOfferQuery.vue";
+import {ref, nextTick, onMounted} from "vue";
+import DirectionOfferQuery from "@/components/directionOfferQuery.vue";
 import {Form, Radio, Select, Input, Table, Button} from "ant-design-vue";
+
+let activeButton = "button1"
 
 const directionalOfferFormModel = ref({
   code: "",
@@ -226,29 +185,19 @@ const clearForm = () => {
 const queryResult = ref([]);
 const isOfferQuery = ref(false);
 const isTransactionQuery = ref(false);
-const isDirectionalOffer = ref(false);
+const isDirectionalOffer = ref(true);
 const isGroupOffer = ref(false);
 
-const showDirectionalOffer = () => {
+const showDirectionalOffer = (button) => {
   isDirectionalOffer.value = true;
   isGroupOffer.value = false;
+  activeButton = button
 };
 
-const showGroupOffer = () => {
+const showGroupOffer = (button) => {
   isGroupOffer.value = true;
   isDirectionalOffer.value = false;
-};
-
-const showOfferQuery = () => {
-  isOfferQuery.value = true;
-  isTransactionQuery.value = false;
-  // 查询报价并更新queryResult
-};
-
-const showTransactionQuery = () => {
-  isTransactionQuery.value = true;
-  isOfferQuery.value = false;
-  // 查询成交并更新queryResult
+  activeButton = button
 };
 
 // const actionRender = (record) => {
@@ -279,7 +228,7 @@ const showTransactionQuery = () => {
 .left {
   float: left;
   padding: 10px;
-  height: 40vh;
+  height: 42.3vh;
   box-sizing: border-box;
   overflow: auto;
   background: #eceff6;
@@ -288,29 +237,33 @@ const showTransactionQuery = () => {
 }
 .right {
   float: right;
-  padding: 10px;
-  box-sizing: border-box;
-  background: #92bb6e;
+  height: 42.3vh;
+  width: 76%;
+}
+.selectButton{
+  background: #eceff6;
+  border-top: 2px solid #a8b7d3;
+  border-bottom: 2px solid #a8b7d3;
 }
 .buttonGroup{
   position: relative;
-  left: 5vh;
+  left: 8vh;
   width: 25vh;
   display: flex;
   gap: 1vh;
   text-align: center;
 }
 button {
-  margin: 10px;
-  padding: 10px 20px;
-  font-size: 16px;
+  margin: 5px;
+  padding: 8px 13px;
+  font-size: 14px;
   border: none;
   border-radius: 5px;
+  background-color: #d4cfcc;
+}
+button:hover,button.active{
   color: white;
-  background-color: #3c8dbc;
+  background-color: #17294f;
 }
 
-button:hover {
-  background-color: #2c6da3;
-}
 </style>
