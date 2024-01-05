@@ -1,6 +1,6 @@
 <!--大宗协议报价-->
 <template>
-  <div>
+  <div class="main">
     <button @click="showDirectionalOffer">定向报价</button>
     <button @click="showGroupOffer">群组报价</button>
 
@@ -61,8 +61,8 @@
             <a-input v-model="directionalOfferFormModel.directionClient"/>
           </a-form-item>
           <a-form-item>
-            <a-button type="primary" @click="submitForm">提交</a-button>
-            <a-button @click="clearForm">清空</a-button>
+            <button  @click="submitForm">提交</button>
+            <button @click="clearForm">清空</button>
           </a-form-item>
         </a-form>
       </div>
@@ -273,15 +273,19 @@ const showTransactionQuery = () => {
 </script>
 
 <style scoped>
+.main{
+  overflow: hidden;
+}
 .left {
-  width: 50%;
+  width: 25%;
+  height: 362px;
   float: left;
   padding: 20px;
   box-sizing: border-box;
+  overflow: auto;
 }
-
 .right {
-  width: 50%;
+  width: 75%;
   float: right;
   padding: 20px;
   box-sizing: border-box;

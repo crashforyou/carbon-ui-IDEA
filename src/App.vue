@@ -1,5 +1,5 @@
 <template>
-  <a-layout style="min-height: 100vh">
+  <a-layout class="main">
     <!--侧边栏-->
     <a-layout-sider v-model:collapsed="collapsed" collapsible>
       <div class="logo"/>
@@ -139,29 +139,28 @@
       </a-menu>
     </a-layout-sider>
 
-    <a-layout>
-      <a-layout-content style="margin: 0 16px">
-        <div class="content">
-          <a-tabs v-model:activeKey="activeKey" class="topView">
-            <a-tab-pane key="1" tab="买入摘牌"
-            >Content of Tab Pane 1
-            </a-tab-pane
-            >
-            <a-tab-pane key="2" tab="卖出摘牌" force-render
-            >Content of Tab Pane 2
-            </a-tab-pane
-            >
-            <a-tab-pane key="3" tab="市场">Content of Tab Pane 3</a-tab-pane>
-            <a-tab-pane key="4" tab="分时">Content of Tab Pane 3</a-tab-pane>
+    <a-layout-content style="margin: 0 16px">
+      <div class="content">
+        <!-- <a-tabs v-model:activeKey="activeKey" class="topView">
+          <a-tab-pane key="1" tab="买入摘牌"
+          >Content of Tab Pane 1
+          </a-tab-pane
+          >
+          <a-tab-pane key="2" tab="卖出摘牌" force-render
+          >Content of Tab Pane 2
+          </a-tab-pane
+          >
+          <a-tab-pane key="3" tab="市场">Content of Tab Pane 3</a-tab-pane>
+          <a-tab-pane key="4" tab="分时">Content of Tab Pane 3</a-tab-pane>
 
-            <a-tab-pane key="5" tab="K线">Content of Tab Pane 3</a-tab-pane>
+          <a-tab-pane key="5" tab="K线">Content of Tab Pane 3</a-tab-pane>
 
-            <a-tab-pane key="6" tab="分笔">Content of Tab Pane 3</a-tab-pane>
-          </a-tabs>
-          <router-view class="bottomView"></router-view>
-        </div>
-      </a-layout-content>
-    </a-layout>
+          <a-tab-pane key="6" tab="分笔">Content of Tab Pane 3</a-tab-pane>
+        </a-tabs> -->
+        <div class="topView">市场</div>
+        <router-view class="bottomView"></router-view>
+      </div>
+    </a-layout-content>
   </a-layout>
 </template>
 
@@ -179,7 +178,6 @@ import {
 } from "@ant-design/icons-vue";
 import {Tabs, TabPane} from "ant-design-vue";
 import {ref} from "vue";
-import Antd from "ant-design-vue";
 
 const activeKey = ref("1");
 const collapsed = ref(false);
@@ -187,33 +185,23 @@ const selectedKeys = ref(["1"]);
 </script>
 
 <style scoped>
-#components-layout-demo-side .logo {
-  height: 32px;
+.main{
+  min-height: 93vh;
+}
+.logo {
+  height: 100px;
   margin: 16px;
   background: rgba(255, 255, 255, 0.3);
 }
-
-.site-layout .site-layout-background {
-  background: #fff;
+.content{}
+.topView{
+  background: #d69c9c;
+  width: 100%;
+  height: 360px;
 }
-
-[data-theme="dark"] .site-layout .site-layout-background {
-  background: #141414;
-}
-
-.content {
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-}
-
-.topView {
-  flex-grow: 1;
-  overflow: auto;
-}
-
-.bottomView {
-  flex-grow: 1;
-  overflow: auto;
+.bottomView{
+  width: 100%;
+  height: 10px;
+  background: #d4e1da;
 }
 </style>
