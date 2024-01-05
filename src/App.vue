@@ -1,7 +1,7 @@
 <template>
   <a-layout class="main">
     <!--侧边栏-->
-    <a-layout-sider v-model:collapsed="collapsed" collapsible>
+    <a-layout-sider v-model:collapsed="collapsed"  class="menu">
       <div class="logo"/>
       <a-menu v-model:selectedKeys="selectedKeys" theme="dark" mode="inline">
         <router-link to="/">
@@ -139,7 +139,7 @@
       </a-menu>
     </a-layout-sider>
 
-    <a-layout-content style="margin: 0 16px">
+    <a-layout-content style="margin: 0 5px">
       <div class="content">
         <!-- <a-tabs v-model:activeKey="activeKey" class="topView">
           <a-tab-pane key="1" tab="买入摘牌"
@@ -158,7 +158,8 @@
           <a-tab-pane key="6" tab="分笔">Content of Tab Pane 3</a-tab-pane>
         </a-tabs> -->
         <div class="topView">市场</div>
-        <router-view class="bottomView"></router-view>
+        <div class="bottomView">操作</div>
+        <!-- <router-view class="bottomView"></router-view> -->
       </div>
     </a-layout-content>
   </a-layout>
@@ -186,22 +187,27 @@ const selectedKeys = ref(["1"]);
 
 <style scoped>
 .main{
-  min-height: 93vh;
+  /* overflow: hidden; */
 }
 .logo {
   height: 100px;
   margin: 16px;
   background: rgba(255, 255, 255, 0.3);
 }
+.menu{
+  overflow: auto ;
+  height: 757px ;
+  width: 220px;
+}
 .content{}
 .topView{
   background: #d69c9c;
   width: 100%;
-  height: 360px;
+  height: 378px;
 }
 .bottomView{
   width: 100%;
-  height: 10px;
+  height: 379px;
   background: #d4e1da;
 }
 </style>

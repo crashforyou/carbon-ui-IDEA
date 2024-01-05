@@ -76,6 +76,7 @@
 
 <style scoped>
 .menu{
+  height: 500px;
   overflow: auto;
 }
 .content-out{
