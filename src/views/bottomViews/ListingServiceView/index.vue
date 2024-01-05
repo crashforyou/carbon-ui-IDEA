@@ -76,7 +76,6 @@
 
 <style scoped>
 .menu{
-  height: 500px;
   overflow: auto;
 }
 .content-out{
@@ -86,6 +85,5 @@
   background: #fff;
   padding: 24px;
   margin: 0;
-  min-Height: 280px;
 }
 </style>

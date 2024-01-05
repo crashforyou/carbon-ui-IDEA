@@ -1,7 +1,8 @@
 <template>
-  <a-layout class="main">
+  <div class="container">
+    <a-layout>
     <!--侧边栏-->
-    <a-layout-sider v-model:collapsed="collapsed"  class="menu">
+    <a-layout-sider v-model:collapsed="collapsed">
       <div class="logo"/>
       <a-menu v-model:selectedKeys="selectedKeys" theme="dark" mode="inline">
         <router-link to="/">
@@ -158,11 +159,12 @@
           <a-tab-pane key="6" tab="分笔">Content of Tab Pane 3</a-tab-pane>
         </a-tabs> -->
         <div class="topView">市场</div>
-        <div class="bottomView">操作</div>
-        <!-- <router-view class="bottomView"></router-view> -->
+        <!-- <div class="bottomView">操作</div> -->
+        <router-view class="bottomView"></router-view>
       </div>
     </a-layout-content>
-  </a-layout>
+    </a-layout>
+  </div>
 </template>
 
 <script setup>
@@ -186,28 +188,28 @@ const selectedKeys = ref(["1"]);
 </script>
 
 <style scoped>
-.main{
-  /* overflow: hidden; */
+.container{
+  width: 100%;
+  height: 97vh;
 }
 .logo {
-  height: 100px;
+  height: 16vh;
   margin: 16px;
   background: rgba(255, 255, 255, 0.3);
 }
 .menu{
   overflow: auto ;
-  height: 757px ;
-  width: 220px;
+  height: 81vh;
 }
 .content{}
 .topView{
   background: #d69c9c;
   width: 100%;
-  height: 378px;
+  height: 48.5vh;
 }
 .bottomView{
   width: 100%;
-  height: 379px;
+  height: 48.5vh;
   background: #d4e1da;
 }
 </style>

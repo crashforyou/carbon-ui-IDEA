@@ -278,7 +278,7 @@ const showTransactionQuery = () => {
 }
 .left {
   width: 25%;
-  height: 362px;
+  height: 38.5vh;
   float: left;
   padding: 20px;
   box-sizing: border-box;
