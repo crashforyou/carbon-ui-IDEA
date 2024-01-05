@@ -139,9 +139,9 @@
   </div>
 </template>
 
-<script  setup>
-import {ref, nextTick, onMounted} from "vue";
-import DirectionOfferQuery from "@/components/directionOfferQuery.vue";
+<script setup>
+import {ref, nextTick} from "vue";
+import DirectionOfferQuery from "./components/DirectionOfferQuery.vue";
 import {Form, Radio, Select, Input, Table, Button} from "ant-design-vue";
 
 let activeButton = "button1"
@@ -183,8 +183,6 @@ const clearForm = () => {
   // 清空表单
 };
 const queryResult = ref([]);
-const isOfferQuery = ref(false);
-const isTransactionQuery = ref(false);
 const isDirectionalOffer = ref(true);
 const isGroupOffer = ref(false);
 

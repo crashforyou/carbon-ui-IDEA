@@ -4,13 +4,14 @@
       <button :class="{ active: activeButton === 'button1' }" @click="showOfferQuery('button1')">报价查询</button>
       <button :class="{ active: activeButton === 'button2' }" @click="showTransactionQuery('button2')">成交查询</button>
   </div>
-  <div v-show="isOfferQuery">
+  <div v-if="isOfferQuery">
     <a-table 
       :columns="columns" 
       :data-source="data" 
-      :scroll="{ x: 2000, y: 240 }"  
+      :scroll="{y: 240 }"  
       size="small" 
       :pagination="false"
+      bordered
       >
       <template #bodyCell="{ column, record }">
         <template v-if="column.key === 'operation'">
@@ -22,16 +23,38 @@
           <a v-if="record.inquiryStatus === '询价结束'" style="margin-left: 5px">详情</a>
         </template>
       </template>
-  </a-table>
+    </a-table>
+  </div>
+  <div v-if="isTransactionQuery">
+    <!-- <a-table 
+      :columns="columns" 
+      :data-source="data" 
+      :scroll="{y: 240 }"  
+      size="small" 
+      :pagination="false"
+      bordered
+      >
+      <template #bodyCell="{ column, record }">
+        <template v-if="column.key === 'operation'">
+          <a v-if="record.inquiryStatus === '未询价'">洽谈</a>
+          <a v-if="record.inquiryStatus === '未询价'" style="margin-left: 5px">详情</a>
+          <a v-if="record.inquiryStatus === '未询价'" style="margin-left: 5px">修改</a>
+          <a v-if="record.inquiryStatus === '未询价'" style="margin-left: 5px">撤回</a>
+          <a v-if="record.inquiryStatus === '询价结束'">洽谈查询</a>
+          <a v-if="record.inquiryStatus === '询价结束'" style="margin-left: 5px">详情</a>
+        </template>
+      </template>
+    </a-table> -->
   </div>
 </template>
 
 <script setup>
-import {ref} from "vue";
+import {ref,nextTick} from "vue";
 
 let activeButton = 'button1'
-let isOfferQuery = true;
-let isTransactionQuery = false;
+const isOfferQuery = ref(true);
+const isTransactionQuery = ref(false);
+
 const columns = [
   {
     title: "操作",
@@ -69,17 +92,18 @@ for (let i = 0; i < 100; i++) {
   });
 }
 const showOfferQuery = (button) => {
-  isOfferQuery = true;
-  isTransactionQuery = false;
+  isOfferQuery.value = true;
+  isTransactionQuery.value = false;
   activeButton = button
-  // 查询报价并更新queryResult
+    // 查询报价并更新queryResult
+
 };
 
 const showTransactionQuery = (button) => {
-  isTransactionQuery = true;
-  isOfferQuery = false;
+  isTransactionQuery.value = true;
+  isOfferQuery.value = false;
   activeButton = button
-  // 查询成交并更新queryResult
+    // 查询成交并更新queryResult
 };
 </script>
 <style scoped>
