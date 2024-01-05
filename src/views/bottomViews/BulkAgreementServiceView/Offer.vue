@@ -6,7 +6,7 @@
 
     <div v-if="isDirectionalOffer">
       <div class="left">
-        <a-form :model="directionalOfferFormModel">
+        <a-form :model="directionalOfferFormModel" :label-col="{ span: 7 }" :wrapper-col="{ span: 15 }" >
           <a-form-item label="标的物代码">
             <a-input v-model="directionalOfferFormModel.code"/>
           </a-form-item>
@@ -60,10 +60,10 @@
           <a-form-item label="定向用户">
             <a-input v-model="directionalOfferFormModel.directionClient"/>
           </a-form-item>
-          <a-form-item>
-            <button  @click="submitForm">提交</button>
+          <div class="buttonGroup">
+            <button @click="submitForm">提交</button>
             <button @click="clearForm">清空</button>
-          </a-form-item>
+          </div>
         </a-form>
       </div>
       <div class="right">
@@ -274,23 +274,32 @@ const showTransactionQuery = () => {
 
 <style scoped>
 .main{
-  overflow: hidden;
+  border: 2px solid #a8b7d3;
 }
 .left {
-  width: 25%;
-  height: 38.5vh;
   float: left;
-  padding: 20px;
+  padding: 10px;
+  height: 40vh;
   box-sizing: border-box;
   overflow: auto;
+  background: #eceff6;
+  border-top: 2px solid #a8b7d3;
+  border-right: 2px solid #a8b7d3;
 }
 .right {
-  width: 75%;
   float: right;
-  padding: 20px;
+  padding: 10px;
   box-sizing: border-box;
+  background: #92bb6e;
 }
-
+.buttonGroup{
+  position: relative;
+  left: 5vh;
+  width: 25vh;
+  display: flex;
+  gap: 1vh;
+  text-align: center;
+}
 button {
   margin: 10px;
   padding: 10px 20px;

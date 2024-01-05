@@ -1,7 +1,6 @@
-<!-- ok -->
 <template>
   <a-layout>
-    <a-layout-sider width="200" class="menu">
+    <a-layout-sider width="200" theme="light" class="menu">
       <a-menu
           v-model:selectedKeys="selectedKeys2"
           v-model:openKeys="openKeys"
@@ -79,11 +78,10 @@
   overflow: auto;
 }
 .content-out{
-  padding: 0px 5px 0px;
+  padding: 0px 0px 0px 5px;
 }
 .content-in{
   background: #fff;
   padding: 24px;
-  margin: 0;
 }
 </style>

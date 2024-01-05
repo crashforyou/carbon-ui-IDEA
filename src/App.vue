@@ -1,9 +1,9 @@
 <template>
-  <div class="container">
+  <div class="AppContainer">
     <a-layout>
     <!--侧边栏-->
-    <a-layout-sider v-model:collapsed="collapsed">
-      <div class="logo"/>
+    <a-layout-sider v-model:collapsed="collapsed"  class="AppMenu">
+      <div class="logo"></div>
       <a-menu v-model:selectedKeys="selectedKeys" theme="dark" mode="inline">
         <router-link to="/">
           <a-menu-item key="1">
@@ -187,29 +187,41 @@ const collapsed = ref(false);
 const selectedKeys = ref(["1"]);
 </script>
 
-<style scoped>
-.container{
+<style>
+.AppContainer{
   width: 100%;
   height: 97vh;
 }
 .logo {
   height: 16vh;
   margin: 16px;
-  background: rgba(255, 255, 255, 0.3);
+  background: rgba(187, 181, 181, 0.3);
 }
-.menu{
-  overflow: auto ;
-  height: 81vh;
+.AppMenu{
+  overflow: auto;
+  height: 97vh;
 }
 .content{}
 .topView{
   background: #d69c9c;
-  width: 100%;
   height: 48.5vh;
 }
 .bottomView{
-  width: 100%;
   height: 48.5vh;
-  background: #d4e1da;
 }
+::-webkit-scrollbar-track {
+   background: rgba(0, 0, 0, 0.1); 
+   border-radius: 0; 
+   } 
+::-webkit-scrollbar {
+   -webkit-appearance: none; 
+   width: 6px; 
+   height: 6px; 
+  } 
+::-webkit-scrollbar-thumb { 
+  cursor: pointer; 
+  border-radius: 5px; 
+  background: rgba(0, 0, 0, 0.15); 
+  transition: color 0.2s ease; 
+  }
 </style>
