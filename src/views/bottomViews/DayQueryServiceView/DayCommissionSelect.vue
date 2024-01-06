@@ -1,31 +1,35 @@
 <template>
-  <div>
-    <a-select v-model="selectedCode" placeholder="请选择标的物代码">
-      <a-select-option v-for="code in codes" :key="code">{{
-          code
-        }}
-      </a-select-option>
-    </a-select>
-    <a-select v-model="selectedMode" placeholder="请选择交易模式">
-      <a-select-option v-for="mode in modes" :key="mode">{{
-          mode
-        }}
-      </a-select-option>
-    </a-select>
-    <a-select v-model="selectedDirection" placeholder="请选择买卖方向">
-      <a-select-option v-for="direction in directions" :key="direction">{{
-          direction
-        }}
-      </a-select-option>
-    </a-select>
-    <a-button type="primary" @click="search">搜索</a-button>
-    <a-button @click="clear">清空</a-button>
+  <div class="main">
+    <div>
+      <a-form :layout="'inline'" @submit="handleSubmit">
+        <a-form-item label="&nbsp;&nbsp;标的物代码">
+          <a-input size="small"/>
+        </a-form-item>
+        <a-form-item label="交易日期">
+          <a-range-picker v-model="dateRange" size="small"/>
+        </a-form-item>
+        <a-form-item label="买卖方向">
+          <a-select v-model="direction" placeholder="请选择买卖方向" size="small" style="width: 150px">
+            <a-select-option value="all" >1</a-select-option>
+            <a-select-option value="buy">2</a-select-option>
+            <a-select-option value="sell">3</a-select-option>
+            <!-- 更多选项 -->
+          </a-select>
+        </a-form-item>
+        <a-form-item>
+          <button html-type="submit">搜索</button>
+          <span>&nbsp;&nbsp;&nbsp;</span>
+          <button @click="handleReset">清空</button>
+        </a-form-item>
+      </a-form>
+    </div>
     <a-table
         :dataSource="data"
         :columns="columns"
-        :pagination="pagination"
-        :scroll="{ x: 'max-content' }"
-    ></a-table>
+        :pagination="false"
+        :scroll="{}"
+        
+    />
   </div>
 </template>
 
@@ -65,3 +69,22 @@ const clear = () => {
   data.value = [];
 };
 </script>
+<style scoped>
+.main{
+  background: #eceff6;
+  border: 2px solid #a8b7d3;
+}
+button {
+  margin: 5px;
+  padding: 6px 16px;
+  font-size: 14px;
+  border: none;
+  border-radius: 5px;
+  background-color: #d4cfcc;
+}
+button:hover{
+  color: white;
+  background-color: #17294f;
+  cursor: pointer;
+}
+</style>

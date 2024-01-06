@@ -14,6 +14,8 @@
         :dataSource="data"
         :columns="columns"
         :pagination="pagination"
+        size="small" 
+        bordered
     ></a-table>
   </div>
 </template>

@@ -25,6 +25,8 @@
         :dataSource="data"
         :columns="columns"
         :pagination="pagination"
+        size="small" 
+        bordered
         :scroll="{y: 250 }"
     ></a-table>
   </div>
