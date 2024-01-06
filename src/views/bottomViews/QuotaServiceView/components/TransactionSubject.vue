@@ -1,13 +1,15 @@
 <template>
   <div>
-    <a-select v-model="selectedCode" placeholder="请选择标的物代码">
-      <a-select-option v-for="code in codes" :key="code">{{
-          code
-        }}
-      </a-select-option>
-    </a-select>
-    <a-button type="primary" @click="search">搜索</a-button>
-    <a-button @click="clear">清空</a-button>
+    <a-form :layout="'inline'" @submit="handleSubmit">
+      <a-form-item label="&nbsp;&nbsp;标的物代码">
+        <a-input size="small"/>
+      </a-form-item>
+      <a-form-item>
+        <button html-type="submit">搜索</button>
+        <span>&nbsp;&nbsp;&nbsp;</span>
+        <button @click="handleReset">清空</button>
+      </a-form-item>
+    </a-form>
     <a-table
         :dataSource="data"
         :columns="columns"
