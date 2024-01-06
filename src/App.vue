@@ -121,7 +121,7 @@
               <span>日终报表查询</span>
             </span>
           </template>
-          <router-link to="/">
+          <router-link to="/report">
             <a-menu-item key="sub7_1">日终报表查询</a-menu-item>
           </router-link>
         </a-sub-menu>

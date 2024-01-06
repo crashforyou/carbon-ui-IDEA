@@ -12,6 +12,7 @@ import ListingSelect from "@/views/bottomViews/HistoryQueryServiceView/ListingSe
 import BulkAgreementSelect from "@/views/bottomViews/HistoryQueryServiceView/BulkAgreementSelect";
 import ActionSelect from "@/views/bottomViews/HistoryQueryServiceView/ActionSelect";
 import ListingServiceIndex from "@/views/bottomViews/ListingServiceView/index.vue";
+import ReportSelect from "@/views/bottomViews/ReportServiceView/ReportSelect.vue";
 const routes = [
   {
     path: '/',
@@ -83,6 +84,11 @@ const routes = [
     name:'ListingServiceIndex',
     component: ListingServiceIndex
   },
+  {
+    path:'/report',
+    name:'report',
+    component:ReportSelect
+  }
 ]
 
 const router = createRouter({
