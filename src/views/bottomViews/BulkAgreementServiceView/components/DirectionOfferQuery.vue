@@ -103,6 +103,7 @@ button {
 button:hover,button.active{
   color: white;
   background-color: #17294f;
+  cursor: pointer;
 }
 .selectButton{
   background: #eceff6;
