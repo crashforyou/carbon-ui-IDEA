@@ -26,6 +26,12 @@
   const selectedCode = ref(null);
   const codes = ref(["代码1", "代码2", "代码3"]);
   const data = ref([]);
+  for (let i = 0; i < 100; i++) {
+    data.value.push({
+      key: i,
+      marketName:"市场名称",
+    });
+  }
   const columns = [
     {title: "市场名称", dataIndex: "marketName"},
     {title: "标的物代码", dataIndex: "code"},
