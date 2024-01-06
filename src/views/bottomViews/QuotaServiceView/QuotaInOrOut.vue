@@ -90,8 +90,8 @@ const handleReset = () => {
   left: 4vh;
 }
 .buttonGroup{
-  position: relative;
-  left: 25vh;
+  position: relative; 
+  left: 24vh; 
 }
 button {
   margin: 5px;
