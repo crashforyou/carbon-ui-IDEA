@@ -21,26 +21,6 @@ import CapitalRequestFlow from "@/views/bottomViews/CapitalServiceView/component
 import TransactionFlow from "@/views/bottomViews/CapitalServiceView/components/TransactionFlow.vue";
 
 const activeButton = ref("button1");
-
-const showCapitalAccountSelect = () => {
-  // 询价查询并更新queryResult
-  activeKey.value = "1";
-};
-
-const showDepositAndWithdrawalRecordSelect = () => {
-  // 询价查询并更新queryResult
-  activeKey.value = "2";
-};
-
-const showCapitalTradeRecordSelect = () => {
-  // 询价查询并更新queryResult
-  activeKey.value = "3";
-};
-
-const showDepositAndWithdrawalRequestRecordSelect = () => {
-  // 询价查询并更新queryResult
-  activeKey.value = "4";
-};
 </script>
 
 <style scoped>
@@ -63,11 +43,6 @@ button:hover,button.active{
   color: white;
   background-color: #17294f;
   cursor: pointer;
-}
-.selectButton{
-  background: #eceff6;
-  border-top: 2px solid #a8b7d3;
-  border-bottom: 2px solid #a8b7d3;
 }
 
 </style>

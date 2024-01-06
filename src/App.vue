@@ -106,10 +106,10 @@
           <router-link to="/historyQuery/ActionSelect">
             <a-menu-item key="sub6_3">单项竞价查询</a-menu-item>
           </router-link>
-          <router-link to="/">
+          <router-link to="/capital/Query">
             <a-menu-item key="sub6_4">资金查询</a-menu-item>
           </router-link>
-          <router-link to="/">
+          <router-link to="/quota/Query">
             <a-menu-item key="sub6_5">配额查询</a-menu-item>
           </router-link>
         </a-sub-menu>
