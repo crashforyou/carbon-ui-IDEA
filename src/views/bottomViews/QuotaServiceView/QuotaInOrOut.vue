@@ -1,6 +1,9 @@
 <template>
-  <div>
-    <a-form @submit="handleSubmit">
+  <div class="main">
+    <div class="spanTip">
+      <span>转入/转出</span>
+    </div>
+    <a-form @submit="handleSubmit" :label-col="{ span: 7 }" :wrapper-col="{ span: 10 }" class="form">
       <a-form-item label="配额登记账户">
         <a-select v-model="QuotaForm.account">
           <!-- 添加账户选项 -->
@@ -21,13 +24,11 @@
       <a-form-item label="划拨数量">
         <a-input-number v-model="QuotaForm.quantity"/>
       </a-form-item>
-      <a-form-item>
-        <a-space>
-          <a-button type="primary" html-type="submit">提交</a-button>
-          <a-button @click="handleReset">清空</a-button>
-        </a-space>
-      </a-form-item>
     </a-form>
+    <div class="buttonGroup">
+      <button  html-type="submit">提交</button>
+      <button @click="handleReset" class="second">清空</button>
+    </div>
   </div>
 </template>
 
@@ -64,3 +65,39 @@ const handleReset = () => {
 };
 </script>
 
+<style scoped>
+.main{
+  background: #eceff6;
+  border: 2px solid #a8b7d3;
+}
+.spanTip{
+  border-bottom: 2px solid #a8b7d3;
+  padding: 1.5vh;
+}
+.form{
+  position: relative;
+  top: 1.5vh;
+  right: 30vh;
+}
+.second{
+  position: relative;
+  left: 8vh;
+}
+.buttonGroup{
+  position: relative;
+  left: 30vh;
+  gap: 10vh;
+}
+button {
+  margin: 5px;
+  padding: 6px 16px;
+  font-size: 14px;
+  border: none;
+  border-radius: 5px;
+  background-color: #d4cfcc;
+}
+button:hover{
+  color: white;
+  background-color: #17294f;
+}
+</style>

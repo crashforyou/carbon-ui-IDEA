@@ -1,10 +1,10 @@
 <!--大宗协议报价-->
 <template>
   <div class="main">
-    <button :class="{ active: activeButton === 'button1' }" @click="showDirectionalOffer('button1')">定向报价</button>
-    <button :class="{ active: activeButton === 'button2' }" @click="showGroupOffer('button2')">群组报价</button>
+    <button :class="{ active: activeButton === 'button1' }" @click="activeButton = 'button1'">定向报价</button>
+    <button :class="{ active: activeButton === 'button2' }" @click="activeButton = 'button2'">群组报价</button>
 
-    <div v-if="isDirectionalOffer">
+    <div v-if="activeButton === 'button1'">
       <div class="left">
         <a-form :model="directionalOfferFormModel" :label-col="{ span: 7 }" :wrapper-col="{ span: 15 }" >
           <a-form-item label="标的物代码">
@@ -71,7 +71,7 @@
       </div>
     </div>
 
-    <div v-if="isGroupOffer">
+    <div v-if="activeButton === 'button2'">
       <div class="left">
         <a-form :model="groupOfferFormModel" :label-col="{ span: 7 }" :wrapper-col="{ span: 15 }">
           <a-form-item label="标的物代码">
@@ -144,7 +144,7 @@ import {ref, nextTick} from "vue";
 import DirectionOfferQuery from "./components/DirectionOfferQuery.vue";
 import {Form, Radio, Select, Input, Table, Button} from "ant-design-vue";
 
-let activeButton = "button1"
+const activeButton = ref("button1")
 
 const directionalOfferFormModel = ref({
   code: "",

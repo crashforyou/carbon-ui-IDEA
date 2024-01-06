@@ -1,34 +1,41 @@
 <template>
-  <a-button type="primary" @click="addGroup">添加</a-button>
-  <a-button type="default" @click="refreshData">刷新</a-button>
-  <a-table
-      :columns="columns"
-      :data-source="data"
-      class="components-table-demo-nested"
-  >
-    <template #bodyCell="{ column }">
-      <template v-if="column.key === 'operation'">
-        <a @click="editGroup">修改</a>
-        <a>删除</a>
-        <a @click="addCustomer">新增成员</a>
-        <!-- 添加新增成员的链接，绑定 addCustomer 函数 -->
-      </template>
-    </template>
-    <template #expandedRowRender>
-      <a-table
-          :columns="innerColumns"
-          :data-source="innerData"
-          :pagination="false"
-      >
-        <template #bodyCell="{ column }">
-          <template v-if="column.key === 'operation'">
-            <a @click="editCustomer">修改</a>
-            <a>删除</a>
-          </template>
+  <div class="main">
+    <div class="butttonGroup">
+      <button type="primary" @click="addGroup">添加</button>
+      <button type="default" @click="refreshData">刷新</button>
+    </div>
+    <a-table
+        :columns="columns"
+        :data-source="data"
+        :scroll="{y: 230}"  
+        size="small" 
+        bordered
+    >
+      <template #bodyCell="{ column }">
+        <template v-if="column.key === 'operation'">
+          <a @click="editGroup">修改</a>
+          <a>删除</a>
+          <a @click="addCustomer">新增成员</a>
+          <!-- 添加新增成员的链接，绑定 addCustomer 函数 -->
         </template>
-      </a-table>
-    </template>
-  </a-table>
+      </template>
+      <template #expandedRowRender>
+        <a-table
+            :columns="innerColumns"
+            :data-source="innerData"
+            :pagination="false"
+            size="small" 
+            bordered
+        >
+          <template #bodyCell="{ column }">
+            <template v-if="column.key === 'operation'">
+              <a>删除</a>
+            </template>
+          </template>
+        </a-table>
+      </template>
+    </a-table>
+  </div>
 
   <a-modal
       v-model:visible="groupModalVisible"
@@ -46,15 +53,15 @@
   </a-modal>
   <a-modal
       v-model:visible="customerModalVisible"
-      title="修改客户名称"
+      title="修改群组名称"
       ok-text="确定"
       cancel-text="取消"
       @ok="handleCustomerOk"
       @cancel="handleCustomerCancel"
   >
     <a-form :model="customerForm" :rules="customerRules">
-      <a-form-item label="客户名称" name="name">
-        <a-input placeholder="请输入客户名称"></a-input>
+      <a-form-item label="群组名称" name="name">
+        <a-input placeholder="请输入新的群组名称"></a-input>
       </a-form-item>
     </a-form>
   </a-modal>
@@ -79,14 +86,14 @@ import {ref} from "vue";
 import {DownOutlined} from "@ant-design/icons-vue";
 
 const columns = [
-  {title: "群组名称", dataIndex: "name", key: "name"},
-  {title: "创建时间", dataIndex: "createdAt", key: "createdAt"},
-  {title: "修改时间", dataIndex: "updatedAt", key: "updatedAt"},
-  {title: "操作", key: "operation"},
+  {title: "群组名称", dataIndex: "name", key: "name",align:"center"},
+  {title: "创建时间", dataIndex: "createdAt", key: "createdAt",align:"center"},
+  {title: "修改时间", dataIndex: "updatedAt", key: "updatedAt",align:"center"},
+  {title: "操作", key: "operation",align:"center"},
 ];
 
 const data = [];
-for (let i = 0; i < 3; ++i) {
+for (let i = 0; i < 100; ++i) {
   data.push({
     key: i,
     name: `Group ${i + 1}`,
@@ -96,13 +103,9 @@ for (let i = 0; i < 3; ++i) {
 }
 
 const innerColumns = [
-  {title: "序号", dataIndex: "index", key: "index"},
-  {title: "客户名称", dataIndex: "name", key: "name"},
-  {
-    title: "操作",
-    dataIndex: "operation",
-    key: "operation",
-  },
+  {title: "序号", dataIndex: "index", key: "index",align:"center"},
+  {title: "客户名称", dataIndex: "name", key: "name",align:"center"},
+  {title: "操作", dataIndex: "operation",key: "operation",align:"center"},
 ];
 
 const innerData = [];
@@ -142,11 +145,6 @@ const editGroup = (record) => {
   groupForm.value.name = record.name;
 };
 
-const editCustomer = (record) => {
-  customerModalVisible.value = true;
-  currentCustomer.value = record;
-  customerForm.value.name = record.name;
-};
 
 const addCustomer = (record) => {
   addCustomerModalVisible.value = true;
@@ -240,5 +238,28 @@ const refreshData = () => {
 <style scoped>
 a {
   margin: 0 2px; /* 这表示左右各有 10 像素的间距 */
+}
+.main{
+  border: 2px solid #a8b7d3;
+}
+.butttonGroup{
+  border-bottom: 2px solid #a8b7d3;
+}
+button {
+  margin: 5px;
+  padding: 8px 16px;
+  font-size: 14px;
+  border: none;
+  border-radius: 5px;
+  background-color: #d4cfcc;
+}
+button:hover{
+  color: white;
+  background-color: #17294f;
+}
+.selectButton{
+  background: #eceff6;
+  border-top: 2px solid #a8b7d3;
+  border-bottom: 2px solid #a8b7d3;
 }
 </style>

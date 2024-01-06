@@ -1,16 +1,15 @@
-<!--定向报价中报价查询-->
+<!--定向报价-->
 <template>
   <div class="selectButton">
-      <button :class="{ active: activeButton === 'button1' }" @click="showOfferQuery('button1')">报价查询</button>
-      <button :class="{ active: activeButton === 'button2' }" @click="showTransactionQuery('button2')">成交查询</button>
+      <button :class="{ active: activeButton === 'button1' }" @click="activeButton = 'button1'">报价查询</button>
+      <button :class="{ active: activeButton === 'button2' }" @click="activeButton = 'button2'">成交查询</button>
   </div>
-  <div v-if="isOfferQuery">
+  <div v-if="activeButton === 'button1'">
     <a-table 
       :columns="columns" 
       :data-source="data" 
-      :scroll="{y: 240 }"  
+      :scroll="{y: 185}"  
       size="small" 
-      :pagination="false"
       bordered
       >
       <template #bodyCell="{ column, record }">
@@ -25,7 +24,7 @@
       </template>
     </a-table>
   </div>
-  <div v-if="isTransactionQuery">
+  <div v-if="activeButton === 'button2'">
     <!-- <a-table 
       :columns="columns" 
       :data-source="data" 
@@ -51,7 +50,7 @@
 <script setup>
 import {ref,nextTick} from "vue";
 
-let activeButton = 'button1'
+const activeButton = ref('button1')
 const isOfferQuery = ref(true);
 const isTransactionQuery = ref(false);
 
@@ -91,20 +90,6 @@ for (let i = 0; i < 100; i++) {
     offerNumber: "100000",
   });
 }
-const showOfferQuery = (button) => {
-  isOfferQuery.value = true;
-  isTransactionQuery.value = false;
-  activeButton = button
-    // 查询报价并更新queryResult
-
-};
-
-const showTransactionQuery = (button) => {
-  isTransactionQuery.value = true;
-  isOfferQuery.value = false;
-  activeButton = button
-    // 查询成交并更新queryResult
-};
 </script>
 <style scoped>
 button {

@@ -1,5 +1,5 @@
 <template>
-  <a-layout>
+  <a-layout class="main">
     <a-layout-sider width="200" theme="light" class="menu">
       <a-menu
           v-model:selectedKeys="selectedKeys2"
@@ -74,8 +74,12 @@
 </script>
 
 <style scoped>
+.main{
+  border: 2px solid #a8b7d3;
+}
 .menu{
   overflow: auto;
+  border-right: 2px solid #a8b7d3;
 }
 .content-out{
   padding: 0px 0px 0px 5px;

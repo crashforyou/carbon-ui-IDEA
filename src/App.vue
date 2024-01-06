@@ -73,6 +73,9 @@
           <router-link to="/quota/Query">
             <a-menu-item key="sub4_2">配额查询</a-menu-item>
           </router-link>
+          <router-link to="/quota/InOrOut">
+            <a-menu-item key="sub4_3">转入/转出</a-menu-item>
+          </router-link>
         </a-sub-menu>
 
         <a-sub-menu key="sub5">
