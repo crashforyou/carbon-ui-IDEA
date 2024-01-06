@@ -24,7 +24,7 @@
     <a-table 
       :columns="columns" 
       :data-source="data"
-      :scroll="{y: 250 }"
+      :scroll="{y: 200 }"
       size="small" 
       bordered
     />
