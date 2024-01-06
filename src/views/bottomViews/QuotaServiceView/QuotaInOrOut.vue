@@ -3,28 +3,30 @@
     <div class="spanTip">
       <span>转入/转出</span>
     </div>
-    <a-form @submit="handleSubmit" :label-col="{ span: 7 }" :wrapper-col="{ span: 10 }" class="form">
-      <a-form-item label="配额登记账户">
-        <a-select v-model="QuotaForm.account">
-          <!-- 添加账户选项 -->
-        </a-select>
-      </a-form-item>
-      <a-form-item label="标的物代码">
-        <a-input v-model="QuotaForm.code"/>
-      </a-form-item>
-      <a-form-item label="标的物名称">
-        <a-input v-model="QuotaForm.name"/>
-      </a-form-item>
-      <a-form-item label="划拨方向">
-        <a-radio-group v-model:value="QuotaForm.direction">
-          <a-radio value="in">转入</a-radio>
-          <a-radio value="out">转出</a-radio>
-        </a-radio-group>
-      </a-form-item>
-      <a-form-item label="划拨数量">
-        <a-input-number v-model="QuotaForm.quantity"/>
-      </a-form-item>
-    </a-form>
+    <div>
+      <a-form @submit="handleSubmit" :label-col="{ span: 7 }" :wrapper-col="{ span: 10 }" class="form">
+        <a-form-item label="配额登记账户">
+          <a-select v-model="QuotaForm.account">
+            <!-- 添加账户选项 -->
+          </a-select>
+        </a-form-item>
+        <a-form-item label="标的物代码">
+          <a-input v-model="QuotaForm.code"/>
+        </a-form-item>
+        <a-form-item label="标的物名称">
+          <a-input v-model="QuotaForm.name"/>
+        </a-form-item>
+        <a-form-item label="划拨方向">
+          <a-radio-group v-model:value="QuotaForm.direction">
+            <a-radio value="in">转入</a-radio>
+            <a-radio value="out">转出</a-radio>
+          </a-radio-group>
+        </a-form-item>
+        <a-form-item label="划拨数量">
+          <a-input-number v-model="QuotaForm.quantity"/>
+        </a-form-item>
+      </a-form>
+    </div>
     <div class="buttonGroup">
       <button  html-type="submit">提交</button>
       <button @click="handleReset" class="second">清空</button>
@@ -69,24 +71,27 @@ const handleReset = () => {
 .main{
   background: #eceff6;
   border: 2px solid #a8b7d3;
+  
 }
 .spanTip{
   border-bottom: 2px solid #a8b7d3;
   padding: 1.5vh;
 }
+.formdiv{
+  background: #6f3030;
+}
 .form{
   position: relative;
   top: 1.5vh;
-  right: 30vh;
+  width: 50%;
 }
 .second{
   position: relative;
-  left: 8vh;
+  left: 4vh;
 }
 .buttonGroup{
   position: relative;
-  left: 30vh;
-  gap: 10vh;
+  left: 25vh;
 }
 button {
   margin: 5px;
