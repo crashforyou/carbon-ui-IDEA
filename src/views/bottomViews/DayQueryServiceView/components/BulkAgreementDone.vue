@@ -25,10 +25,9 @@
   <a-table
       :columns="columns"
       :data-source="data"
-      :pagination="false"
       size="small"
       bordered
-      :scroll="{ y: 252 }"
+      :scroll="{ y: 198 }"
   />
 </template>
 
@@ -50,7 +49,7 @@ const columns = [
   {title: "标的物名称", dataIndex: "name", width: 120},
   {title: "初始单价", dataIndex: "firstPrice", width: 100},
   {title: "初始数量", dataIndex: "firstAmount", width: 100},
-  {title: "初始报价金额", dataIndex: "firstBalance", width: 100},
+  {title: "初始报价金额", dataIndex: "firstBalance", width: 120},
   {title: "买卖方向", dataIndex: "direction", width: 100},
   {title: "成交单价", dataIndex: "finallyPrice", width: 100},
   {title: "成交数量", dataIndex: "finallyAmount", width: 100},

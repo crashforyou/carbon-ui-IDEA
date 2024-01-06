@@ -3,14 +3,21 @@
     <a-layout>
     <!--侧边栏-->
     <a-layout-sider v-model:collapsed="collapsed"  class="AppMenu">
-      <div class="logo"></div>
+      <div class="logo">
+        <Avatar></Avatar>
+      </div>
       <a-menu v-model:selectedKeys="selectedKeys" theme="dark" mode="inline">
-        <router-link to="/">
-          <a-menu-item key="1">
-            <area-chart-outlined/>
-            <span>挂牌交易</span>
-          </a-menu-item>
-        </router-link>
+        <a-sub-menu key="sub0">
+          <template #title>
+            <span>
+              <area-chart-outlined/>
+              <span>挂牌交易</span>
+            </span>
+          </template>
+          <router-link to="/">
+            <a-menu-item key="sub0_1">挂牌交易</a-menu-item>
+          </router-link>
+        </a-sub-menu>
 
         <a-sub-menu key="sub1">
           <template #title>
@@ -180,6 +187,7 @@ import {
   ScheduleOutlined,
   SwitcherOutlined,
 } from "@ant-design/icons-vue";
+import Avatar from "@/views/Avatar.vue"
 import {Tabs, TabPane} from "ant-design-vue";
 import {ref} from "vue";
 
@@ -195,6 +203,7 @@ const selectedKeys = ref(["1"]);
 }
 .logo {
   height: 16vh;
+  width: 84%;
   margin: 16px;
   background: rgba(187, 181, 181, 0.3);
 }

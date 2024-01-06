@@ -25,10 +25,9 @@
   <a-table
       :columns="columns"
       :data-source="data"
-      :pagination="false"
       size="small" 
       bordered
-      :scroll="{ y: 252 }"
+      :scroll="{ y: 198 }"
   />
 </template>
 
