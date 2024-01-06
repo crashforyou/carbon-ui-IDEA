@@ -7,9 +7,6 @@
         <!-- 更多选项 -->
       </a-select>
     </a-form-item>
-    <a-form-item label="报价日期">
-      <a-range-picker v-model="dateRange" size="small"/>
-    </a-form-item>
     <a-form-item label="买卖方向">
       <a-select v-model="direction" placeholder="请选择买卖方向" size="small" style="width: 150px">
         <a-select-option value="all" >全部</a-select-option>

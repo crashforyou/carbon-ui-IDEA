@@ -18,7 +18,7 @@ import { ref } from "vue";
 import BulkAgreementOffer from "./components/BulkAgreementOffer.vue"
 import BulkAgreementQuery from "./components/BulkAgreementQuery.vue"
 import BulkAgreementDone from "./components/BulkAgreementDone.vue"
-import ListingDayCommission from "@/views/bottomViews/HistoryQueryServiceView/components/ListingDayCommission";
+import ListingDayCommission from "./components/ListingDayCommission";
 
 const activeButton = ref("button1")
 </script>
