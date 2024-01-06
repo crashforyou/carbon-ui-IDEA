@@ -7,7 +7,7 @@
         <!-- 更多选项 -->
       </a-select>
     </a-form-item>
-    <a-form-item label="报价日期">
+    <a-form-item label="询价日期">
       <a-range-picker v-model="dateRange" size="small"/>
     </a-form-item>
     <a-form-item label="买卖方向">
@@ -52,14 +52,9 @@ const columns = [
   {title: "标的物代码", dataIndex: "code", width: 120},
   {title: "标的物名称", dataIndex: "name", width: 120},
   {title: "买卖方向", dataIndex: "direction", width: 100},
-  {title: "挂牌方式", dataIndex: "listingMode", width: 100},
   {title: "委托数量", dataIndex: "orderQuantity", width: 100},
   {title: "委托价格", dataIndex: "orderPrice", width: 100},
-  {title: "成交金额", dataIndex: "transactionAmount", width: 100},
-  {title: "成交量", dataIndex: "transactionQuantity", width: 100},
-  {title: "撤单量", dataIndex: "cancellationQuantity", width: 100},
-  {title: "交易账号", dataIndex: "account", width: 100},
-  {title: "状态", dataIndex: "status", width: 100},
+  {title: "对方", dataIndex: "DirectionOrGroupId", width: 100},
   {title: "委托编号", dataIndex: "orderNumber", width: 100},
 ];
 
@@ -72,14 +67,9 @@ for (let i = 0; i < 100; i++) {
     code: `标的物代码${i + 1}`,
     name: `标的物名称${i + 1}`,
     direction: `买卖方向${i + 1}`,
-    listingMode: `挂牌方式${i + 1}`,
     orderQuantity: `委托数量${i + 1}`,
     orderPrice: `委托价格${i + 1}`,
-    transactionAmount: `成交金额${i + 1}`,
-    transactionQuantity: `成交量${i + 1}`,
-    cancellationQuantity: `撤单量${i + 1}`,
-    account: `交易账号${i + 1}`,
-    status: `状态${i + 1}`,
+    directionOrGroupId: `对方${i + 1}`,
     orderNumber: `委托编号${i + 1}`,
   });
 }

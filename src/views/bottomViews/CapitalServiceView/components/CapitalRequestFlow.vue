@@ -60,17 +60,17 @@ const columns = [
     dataIndex: "bankAccount",
     key: "bankAccount",
   },
-  {
-    title: "交易系统流水号",
-    dataIndex: "transactionSystemSerialNumber",
-    key: "transactionSystemSerialNumber",
-  },
-  {
-    title: "注册登记系统流水号",
-    dataIndex: "registrationSystemSerialNumber",
-    key: "registrationSystemSerialNumber",
-  },
-  {
+  // {
+  //   title: "交易系统流水号",
+  //   dataIndex: "transactionSystemSerialNumber",
+  //   key: "transactionSystemSerialNumber",
+  // },
+  // {
+  //   title: "注册登记系统流水号",
+  //   dataIndex: "registrationSystemSerialNumber",
+  //   key: "registrationSystemSerialNumber",
+  // },
+   {
     title: "划转类型",
     dataIndex: "transferType",
     key: "transferType",
@@ -93,7 +93,20 @@ const columns = [
 ];
 
 const data = ref([]); // 从后端获取数据
-
+for (let i = 0; i < 100; i++) {
+  data.value.push({
+    key: i,
+    tradeDate:"交易日期",
+    Time:"交易时间",
+    initiator:"发起方",
+    boundBank:"绑定银行",
+    bankAccount:"银行账号",
+    transferType:"划转类型",
+    applicationStatus:"申请状态",
+    amount:"发生金额",
+    remake:"备注",
+  });
+}
 // 在组件创建后立即执行
 const fetchData = async () => {
   try {
