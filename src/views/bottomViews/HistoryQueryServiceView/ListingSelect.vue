@@ -10,8 +10,8 @@
 </template>
 <script setup>
   import { ref } from "vue";
-  import ListingHistoryCommission from "./components/ListingHistoryCommission.vue"
-  import ListingHistoryBargain from "./components/ListingHistoryBargain.vue"
+  import ListingHistoryCommission from "./components/ListingDayCommission.vue"
+  import ListingHistoryBargain from "./components/ListingDayBargain.vue"
 
   const activeButton = ref("button1")
 </script>
