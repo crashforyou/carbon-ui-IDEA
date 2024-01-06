@@ -9,10 +9,36 @@
         </a-form-item>
         <a-form-item>
           <button html-type="submit">搜索</button>
+          <button>打印</button>
         </a-form-item>
       </a-form>
       <div class="content">
-        content
+        <a-descriptions title="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;全国碳排放权交易客户日终报表" bordered :column=2>
+          <a-descriptions-item label="Product">Cloud Database</a-descriptions-item>
+          <a-descriptions-item label="Billing Mode">Prepaid</a-descriptions-item>
+          <a-descriptions-item label="Automatic Renewal">YES</a-descriptions-item>
+          <a-descriptions-item label="Automatic Renewal">YES</a-descriptions-item>
+          <a-descriptions-item label="Automatic Renewal">YES</a-descriptions-item>
+          <a-descriptions-item label="Automatic Renewal">YES</a-descriptions-item>
+        </a-descriptions>
+
+        <a-descriptions title="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;资金日终" bordered :column=2>
+          <a-descriptions-item label="Product">Cloud Database</a-descriptions-item>
+          <a-descriptions-item label="Billing Mode">Prepaid</a-descriptions-item>
+          <a-descriptions-item label="Automatic Renewal">YES</a-descriptions-item>
+          <a-descriptions-item label="Automatic Renewal">YES</a-descriptions-item>
+          <a-descriptions-item label="Automatic Renewal">YES</a-descriptions-item>
+          <a-descriptions-item label="Automatic Renewal">YES</a-descriptions-item>
+        </a-descriptions>
+
+        <a-descriptions title="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;配额日终" bordered :column=2>
+          <a-descriptions-item label="Product">Cloud Database</a-descriptions-item>
+          <a-descriptions-item label="Billing Mode">Prepaid</a-descriptions-item>
+          <a-descriptions-item label="Automatic Renewal">YES</a-descriptions-item>
+          <a-descriptions-item label="Automatic Renewal">YES</a-descriptions-item>
+          <a-descriptions-item label="Automatic Renewal">YES</a-descriptions-item>
+          <a-descriptions-item label="Automatic Renewal">YES</a-descriptions-item>
+        </a-descriptions>
       </div>
     </div>
   </template>
@@ -24,24 +50,15 @@
   const selectedCode = ref(null);
   const selectedMode = ref(null);
   const selectedDirection = ref(null);
-  const codes = ref(["代码1", "代码2", "代码3"]);
-  const modes = ref(["模式1", "模式2", "模式3"]);
-  const directions = ref(["买入", "卖出"]);
   const data = ref([]);
   const columns = [
-    {title: "成交时间", dataIndex: "transactionTime"},
-    {title: "标的物代码", dataIndex: "code"},
-    {title: "标的物名称", dataIndex: "name"},
-    {title: "买卖方向", dataIndex: "direction"},
-    {title: "挂牌方式", dataIndex: "listingMode"},
-    {title: "成交价格（元/吨）", dataIndex: "transactionPrice"},
-    {title: "成交数量（吨）", dataIndex: "transactionQuantity"},
-    {title: "成交金额（元）", dataIndex: "transactionAmount"},
-    {title: "对手方客户号", dataIndex: "counterpartyCustomerNumber"},
-    {title: "对手方客户名", dataIndex: "counterpartyCustomerName"},
-  ];
-  const pagination = {pageSize: 10};
-  
+  {title: "交易日期", dataIndex: "tradeDate" , width: 120},
+  {title: "打印时间", dataIndex: "printTime", width: 120},
+  {title: "客户号", dataIndex: "customerNumber",width: 120},
+  {title: "客户名称", dataIndex: "customerName",width: 120},
+  {title: "集团代码", dataIndex: "code",width: 120},
+  {title: "集团单位名称", dataIndex: "name",width: 120},
+];
   const search = () => {
     // 执行搜索逻辑，然后更新data
   };
@@ -59,7 +76,13 @@
     border: 2px solid #a8b7d3;
   }
   .content{
-    border-top: 2px solid #a8b7d3
+    border-top: 2px solid #a8b7d3;
+    overflow: auto;
+    max-height: 90%;
+  }
+  .descriptions{
+    overflow: auto;
+    max-height: 100px;
   }
   button {
     margin: 5px;
