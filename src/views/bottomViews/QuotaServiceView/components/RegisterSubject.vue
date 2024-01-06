@@ -15,7 +15,7 @@
           :columns="columns"
           :pagination="pagination"
           size="small" 
-          :scroll="{y:180}"
+          :scroll="{y:202}"
           bordered
       ></a-table>
     </div>

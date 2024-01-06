@@ -27,7 +27,7 @@
         :pagination="pagination"
         size="small" 
         bordered
-        :scroll="{ y:180}"
+        :scroll="{ y:202}"
     ></a-table>
   </div>
 </template>

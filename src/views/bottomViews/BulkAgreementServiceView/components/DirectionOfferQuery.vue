@@ -8,7 +8,7 @@
     <a-table 
       :columns="columns" 
       :data-source="data" 
-      :scroll="{y: 185}"  
+      :scroll="{y: 186}"  
       size="small" 
       bordered
       >

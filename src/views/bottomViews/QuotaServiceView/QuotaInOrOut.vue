@@ -91,6 +91,7 @@ const handleReset = () => {
 }
 .buttonGroup{
   position: relative; 
+  top:-0.8vh;
   left: 24vh; 
 }
 button {

@@ -140,7 +140,7 @@
       </a-menu>
     </a-layout-sider>
 
-    <a-layout-content style="margin: 0 5px">
+    <a-layout-content style="margin: 0 2px">
       <div class="content">
         <!-- <a-tabs v-model:activeKey="activeKey" class="topView">
           <a-tab-pane key="1" tab="买入摘牌"
@@ -165,6 +165,7 @@
     </a-layout-content>
     </a-layout>
   </div>
+  <div class="annnounce">12</div>
 </template>
 
 <script setup>
@@ -190,7 +191,7 @@ const selectedKeys = ref(["1"]);
 <style>
 .AppContainer{
   width: 100%;
-  height: 97vh;
+  height: 94vh;
 }
 .logo {
   height: 16vh;
@@ -199,15 +200,19 @@ const selectedKeys = ref(["1"]);
 }
 .AppMenu{
   overflow: auto;
-  height: 97vh;
+  height: 94vh;
 }
 .content{}
 .topView{
   background: #d69c9c;
-  height: 48.5vh;
+  height: 47vh;
 }
 .bottomView{
-  height: 48.5vh;
+  height: 47vh;
+}
+.annnounce{
+  height: 3vh;
+  background: #212121;
 }
 ::-webkit-scrollbar-track {
    background: rgba(0, 0, 0, 0.1); 

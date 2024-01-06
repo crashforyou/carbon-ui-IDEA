@@ -7,7 +7,7 @@
     <a-table
         :columns="columns"
         :data-source="data"
-        :scroll="{y: 230}"  
+        :scroll="{y: 232}"  
         size="small" 
         bordered
     >
@@ -241,6 +241,7 @@ a {
 }
 .main{
   border: 2px solid #a8b7d3;
+  height: 47vh;
 }
 .butttonGroup{
   border-bottom: 2px solid #a8b7d3;

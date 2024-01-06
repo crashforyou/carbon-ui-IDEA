@@ -226,7 +226,7 @@ const showGroupOffer = (button) => {
 .left {
   float: left;
   padding: 10px;
-  height: 42.3vh;
+  height: 40.8vh;
   box-sizing: border-box;
   overflow: auto;
   background: #eceff6;
@@ -235,7 +235,6 @@ const showGroupOffer = (button) => {
 }
 .right {
   float: right;
-  height: 42.3vh;
   width: 76%;
 }
 .selectButton{

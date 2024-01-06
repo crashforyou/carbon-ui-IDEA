@@ -14,7 +14,7 @@
         :dataSource="data"
         :columns="columns"
         :pagination="pagination"
-        :scroll="y"
+        :scroll="{y:202}"
         size="small" 
         bordered
     ></a-table>
@@ -23,7 +23,7 @@
 
 <script setup>
 import { ref } from "vue";
-const y =ref({y:"23vh"})
+
 const selectedCode = ref(null);
 const codes = ref(["代码1", "代码2", "代码3"]);
 const data = ref([]);
@@ -42,8 +42,8 @@ const columns = [
   {title: "冻结数量(吨)", dataIndex: "frozenAmount"},
   {title: "买入数量(吨)", dataIndex: "buyAmount"},
   {title: "卖出数量(吨)", dataIndex: "sellAmount"},
-  {title: "转入申请数量(吨)", dataIndex: "transferInAmount"},
-  {title: "转出申请数量(吨)", dataIndex: "transferOutAmount"},
+  {title: "转入申请数量(吨)", dataIndex: "transferInAmount" ,width:130},
+  {title: "转出申请数量(吨)", dataIndex: "transferOutAmount",width:130},
   {title: "交易账号", dataIndex: "account"},
 ];
 const pagination = {pageSize: 10};

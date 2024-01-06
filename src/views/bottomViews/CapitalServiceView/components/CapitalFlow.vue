@@ -21,7 +21,7 @@
     </a-form-item>
   </a-form>
   <div>
-    <a-table :columns="columns" :data-source="data" :scroll="{y: 200 }" size="small" bordered/>
+    <a-table :columns="columns" :data-source="data" :scroll="{y: 198 }" size="small" bordered/>
   </div>
 </template>
 
