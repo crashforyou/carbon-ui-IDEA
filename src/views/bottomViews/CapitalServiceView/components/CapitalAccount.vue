@@ -3,7 +3,7 @@
 <template>
   <div>
     <a-form :layout="'inline'">
-      <a-form-item label="资金账号">
+      <a-form-item label="资金账号" class="capitalAccount">
         <a-select v-model="selectedAccount" placeholder="选择一个资金账号">
           <a-select-option
               v-for="account in accounts"
@@ -14,11 +14,11 @@
           </a-select-option>
         </a-select>
       </a-form-item>
-      <a-form-item>
-        <a-button type="primary" @click="search">搜索</a-button>
+      <a-form-item class="capitalAccount">
+        <button type="primary" @click="search">搜索</button>
       </a-form-item>
     </a-form>
-    <a-table :columns="columns" :data-source="data"/>
+    <a-table :columns="columns" :data-source="data"  :scroll="{ x: 1280, y: 200 }" size="small" />
   </div>
 </template>
 
@@ -63,6 +63,17 @@ const columns = [
 ];
 
 const data = ref([]); // 从后端获取数据
+for (let i = 0; i < 100; i++) {
+  data.value.push({
+    key: i,
+    account:"11111",
+    type:"vip",
+    balance:"1000000",
+    available:"100000",
+    withdrawable:"100000",
+
+  });
+}
 
 const search = () => {
   // 使用selectedAccount从后端服务获取数据
@@ -82,3 +93,20 @@ const search = () => {
 };
 </script>
 
+<style>
+.capitalAccount{
+  height: 30px;
+}
+button {
+  margin: 5px;
+  padding: 8px 13px;
+  font-size: 14px;
+  border: none;
+  border-radius: 5px;
+  background-color: #d4cfcc;
+}
+button:hover,button.active{
+  color: white;
+  background-color: #17294f;
+}
+</style>
