@@ -38,6 +38,12 @@ import {ref} from "vue";
 const selectedCode = ref(null);
 const codes = ref(["代码1", "代码2", "代码3"]);
 const data = ref([]);
+for (let i = 0; i < 100; i++) {
+  data.value.push({
+    key: i,
+    tradeDate:"交易日期",
+  });
+}
 const columns = [
   {title: "交易日期", dataIndex: "tradeDate"},
   {title: "交易时间", dataIndex: "tradeTime"},
