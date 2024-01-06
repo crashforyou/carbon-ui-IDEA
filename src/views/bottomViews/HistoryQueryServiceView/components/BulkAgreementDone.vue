@@ -79,7 +79,7 @@ for (let i = 0; i < 100; i++) {
     finallyBalance:`最终金额${i+1}`,
     direction: `买卖方向${i + 1}`,
     account: `交易账号${i + 1}`,
-    directionOrGroupId:"对方"${i + 1},
+    directionOrGroupId:`对方${i + 1}`,
     orderNumber: `委托编号${i + 1}`,
   });
 }

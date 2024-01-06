@@ -1,34 +1,31 @@
 <template>
   <div class="main">
-    <div>
-      <a-form :layout="'inline'" @submit="handleSubmit">
-        <a-form-item label="&nbsp;&nbsp;标的物代码">
-          <a-input size="small"/>
-        </a-form-item>
-        <a-form-item label="交易日期">
-          <a-range-picker v-model="dateRange" size="small"/>
-        </a-form-item>
-        <a-form-item label="买卖方向">
-          <a-select v-model="direction" placeholder="请选择买卖方向" size="small" style="width: 150px">
-            <a-select-option value="all" >1</a-select-option>
-            <a-select-option value="buy">2</a-select-option>
-            <a-select-option value="sell">3</a-select-option>
-            <!-- 更多选项 -->
-          </a-select>
-        </a-form-item>
-        <a-form-item>
-          <button html-type="submit">搜索</button>
-          <span>&nbsp;&nbsp;&nbsp;</span>
-          <button @click="handleReset">清空</button>
-        </a-form-item>
-      </a-form>
-    </div>
+    <a-form :layout="'inline'" @submit="handleSubmit">
+      <a-form-item label="&nbsp;&nbsp;标的物代码">
+        <a-input size="small"/>
+      </a-form-item>
+      <a-form-item label="委托日期">
+        <a-range-picker v-model="dateRange" size="small"/>
+      </a-form-item>
+      <a-form-item label="买卖方向">
+        <a-select v-model="direction" placeholder="请选择买卖方向" size="small" style="width: 150px">
+          <a-select-option value="all" >1</a-select-option>
+          <a-select-option value="buy">2</a-select-option>
+          <a-select-option value="sell">3</a-select-option>
+          <!-- 更多选项 -->
+        </a-select>
+      </a-form-item>
+      <a-form-item>
+        <button html-type="submit">搜索</button>
+        <span>&nbsp;&nbsp;&nbsp;</span>
+        <button @click="handleReset">清空</button>
+      </a-form-item>
+    </a-form>
     <a-table
         :dataSource="data"
         :columns="columns"
         :pagination="false"
         :scroll="{}"
-        
     />
   </div>
 </template>
@@ -76,7 +73,7 @@ const clear = () => {
 }
 button {
   margin: 5px;
-  padding: 6px 16px;
+  padding: 3px 16px;
   font-size: 14px;
   border: none;
   border-radius: 5px;
