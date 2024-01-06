@@ -78,7 +78,20 @@ const columns = [
 ];
 
 const data = ref([]); // 从后端获取数据
-
+for (let i = 0; i < 100; i++) {
+  data.value.push({
+    key: i,
+    tradeDate:"交易日期",
+    tradeTime:"交易时间",
+    account:"资金账号",
+    operatorCode:"操作员",
+    transferType:"划转类型",
+    amount:"发生金额",
+    balance:"期后余额",
+    availableBalance:"期后可用余额",
+    serialNumber:"流水号",
+  });
+}
 // 在组件创建后立即执行
 const fetchData = async () => {
   try {
