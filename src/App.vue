@@ -97,13 +97,13 @@
               <span>历史查询</span>
             </span>
           </template>
-          <router-link to="/historyQuery/ListingHistoryCommission">
+          <router-link to="/historyQuery/ListingSelect">
             <a-menu-item key="sub6_1">挂牌交易查询</a-menu-item>
           </router-link>
-          <router-link to="/">
+          <router-link to="/historyQuery/BulkAgreementSelect">
             <a-menu-item key="sub6_2">大宗协议查询</a-menu-item>
           </router-link>
-          <router-link to="/">
+          <router-link to="/historyQuery/ActionSelect">
             <a-menu-item key="sub6_3">单项竞价查询</a-menu-item>
           </router-link>
           <router-link to="/">

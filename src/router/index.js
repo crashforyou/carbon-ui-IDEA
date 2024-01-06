@@ -8,7 +8,9 @@ import QuotaQuery from "@/views/bottomViews/QuotaServiceView/QuotaQuery.vue";
 import QuotaInOrOut from "@/views/bottomViews/QuotaServiceView/QuotaInOrOut.vue";
 import DayBargainSelect from "@/views/bottomViews/DayQueryServiceView/DayBargainSelect.vue";
 import DayCommissionSelect from "@/views/bottomViews/DayQueryServiceView/DayCommissionSelect.vue";
-import ListingBargainSelect from "@/views/bottomViews/HistoryQueryServiceView/ListingBargainSelect.vue";
+import ListingSelect from "@/views/bottomViews/HistoryQueryServiceView/ListingSelect.vue";
+import BulkAgreementSelect from "@/views/bottomViews/HistoryQueryServiceView/BulkAgreementSelect";
+import ActionSelect from "@/views/bottomViews/HistoryQueryServiceView/ActionSelect";
 import ListingServiceIndex from "@/views/bottomViews/ListingServiceView/index.vue";
 const routes = [
   {
@@ -62,9 +64,19 @@ const routes = [
     component: DayCommissionSelect
   },
   {
-    path: '/historyQuery/ListingHistoryCommission',
-    name:'ListingHistoryCommission',
-    component: ListingBargainSelect
+    path: '/historyQuery/ListingSelect',
+    name:'ListingSelect',
+    component: ListingSelect
+  },
+  {
+    path: '/historyQuery/BulkAgreementSelect',
+    name:'BulkAgreementSelect',
+    component: BulkAgreementSelect
+  },
+  {
+    path: '/historyQuery/ActionSelect',
+    name:'ActionSelect',
+    component: ActionSelect
   },
   {
     path: '/listingService',
