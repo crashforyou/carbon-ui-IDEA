@@ -14,6 +14,7 @@
         :dataSource="data"
         :columns="columns"
         :pagination="pagination"
+        :scroll="y"
         size="small" 
         bordered
     ></a-table>
@@ -22,7 +23,7 @@
 
 <script setup>
 import { ref } from "vue";
-
+const y =ref({y:"23vh"})
 const selectedCode = ref(null);
 const codes = ref(["代码1", "代码2", "代码3"]);
 const data = ref([]);

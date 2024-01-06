@@ -104,7 +104,7 @@
             <a-menu-item key="sub6_2">大宗协议查询</a-menu-item>
           </router-link>
           <router-link to="/historyQuery/ActionSelect">
-            <a-menu-item key="sub6_3">单项竞价查询</a-menu-item>
+            <a-menu-item key="sub6_3">单向竞价查询</a-menu-item>
           </router-link>
           <router-link to="/capital/Query">
             <a-menu-item key="sub6_4">资金查询</a-menu-item>
