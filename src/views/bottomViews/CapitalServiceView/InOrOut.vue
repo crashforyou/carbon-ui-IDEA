@@ -67,7 +67,6 @@ const handleReset = () => {
 .main{
   background: #eceff6;
   border: 2px solid #a8b7d3;
-  
 }
 .spanTip{
   border-bottom: 2px solid #a8b7d3;

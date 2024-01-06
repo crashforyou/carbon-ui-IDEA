@@ -2,9 +2,9 @@
 <!--资金账号-->
 <template>
   <div>
-    <a-form :layout="'inline'">
-      <a-form-item label="资金账号" class="capitalAccount">
-        <a-select v-model="selectedAccount" placeholder="选择一个资金账号">
+    <a-form :layout="'inline'" >
+      <a-form-item label="&nbsp;&nbsp;账号类型">
+        <a-select v-model="selectedAccount" placeholder="选择账号类型" size="small">
           <a-select-option
               v-for="account in accounts"
               :key="account.value"
@@ -18,7 +18,14 @@
         <button type="primary" @click="search">搜索</button>
       </a-form-item>
     </a-form>
-    <a-table :columns="columns" :data-source="data"  :scroll="{ x: 1280, y: 200 }" size="small" />
+    <a-table 
+      :columns="columns" 
+      :data-source="data"  
+      :scroll="{y: 250 }"
+      size="small" 
+      bordered
+      :pagination="false"
+    />
   </div>
 </template>
 
@@ -28,7 +35,7 @@ import axios from "core-js/internals/queue";
 
 const accounts = ref([
   {label: "账号1", value: "1"},
-  {label: "账号2", value: "2"},
+  {label: "账号2", value: "2"}
   // 添加更多账号
 ]);
 
@@ -94,19 +101,17 @@ const search = () => {
 </script>
 
 <style>
-.capitalAccount{
-  height: 30px;
-}
 button {
-  margin: 5px;
-  padding: 8px 13px;
+  margin:2px;
+  padding: 6px 18px;
   font-size: 14px;
   border: none;
   border-radius: 5px;
   background-color: #d4cfcc;
 }
-button:hover,button.active{
+button:hover{
   color: white;
   background-color: #17294f;
+  cursor: pointer;
 }
 </style>

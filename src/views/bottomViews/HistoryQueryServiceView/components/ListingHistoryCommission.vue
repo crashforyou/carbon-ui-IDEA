@@ -12,7 +12,7 @@
     </a-form-item>
     <a-form-item label="买卖方向">
       <a-select v-model="direction" placeholder="请选择买卖方向" size="small" style="width: 150px">
-        <a-select-option value="all" checked>全部</a-select-option>
+        <a-select-option value="all" >全部</a-select-option>
         <a-select-option value="buy">买入</a-select-option>
         <a-select-option value="sell">卖出</a-select-option>
         <!-- 更多选项 -->
