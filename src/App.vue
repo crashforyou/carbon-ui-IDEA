@@ -205,7 +205,7 @@ const selectedKeys = ref(["1"]);
   height: 16vh;
   width: 84%;
   margin: 16px;
-  background: rgba(187, 181, 181, 0.3);
+  background: #001c3a;
 }
 .AppMenu{
   overflow: auto;
