@@ -172,7 +172,7 @@
     </a-layout-content>
     </a-layout>
   </div>
-  <div class="annnounce">12</div>
+  <Announce></Announce>
 </template>
 
 <script setup>
@@ -188,6 +188,7 @@ import {
   SwitcherOutlined,
 } from "@ant-design/icons-vue";
 import Avatar from "@/views/Avatar.vue"
+import Announce from "@/views/Announce.vue"
 import {Tabs, TabPane} from "ant-design-vue";
 import {ref} from "vue";
 
@@ -219,10 +220,7 @@ const selectedKeys = ref(["1"]);
 .bottomView{
   height: 47vh;
 }
-.annnounce{
-  height: 3vh;
-  background: #212121;
-}
+
 ::-webkit-scrollbar-track {
    background: rgba(0, 0, 0, 0.1); 
    border-radius: 0; 
