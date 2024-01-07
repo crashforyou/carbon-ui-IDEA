@@ -100,7 +100,7 @@ const search = () => {
 };
 </script>
 
-<style>
+<style scoped>
 button {
   margin:2px;
   padding: 6px 18px;

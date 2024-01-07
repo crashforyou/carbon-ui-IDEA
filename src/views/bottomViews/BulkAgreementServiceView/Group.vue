@@ -259,9 +259,4 @@ button:hover{
   background-color: #17294f;
   cursor: pointer;
 }
-.selectButton{
-  background: #eceff6;
-  border-top: 2px solid #a8b7d3;
-  border-bottom: 2px solid #a8b7d3;
-}
 </style>

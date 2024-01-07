@@ -1,5 +1,8 @@
 <template>
     <div class="main">
+      <div style="border-bottom: 2px solid #a8b7d3;padding: 1.5vh;">
+        <span>日终报表查询</span>
+      </div>
       <a-form :layout="'inline'" @submit="handleSubmit">
         <a-form-item label="&nbsp;&nbsp;客户号">
           <a-input size="small"/>
@@ -78,7 +81,7 @@
   .content{
     border-top: 2px solid #a8b7d3;
     overflow: auto;
-    max-height: 90%;
+    max-height: 80%;
   }
   .descriptions{
     overflow: auto;

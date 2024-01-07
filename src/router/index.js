@@ -13,9 +13,8 @@ import BulkAgreementSelect from "@/views/bottomViews/HistoryQueryServiceView/Bul
 import ActionSelect from "@/views/bottomViews/HistoryQueryServiceView/ActionSelect";
 import ListingServiceIndex from "@/views/bottomViews/ListingServiceView/index.vue";
 import ReportSelect from "@/views/bottomViews/ReportServiceView/ReportSelect.vue";
-import CapitalAccountManage from "@/views/bottomViews/UserServiceView/CapitalAccountManage.vue";
-import QuotaAccountManage from "@/views/bottomViews/UserServiceView/QuotaAccountManage.vue";
-
+import AuctionTrade from "@/views/bottomViews/AuctionServiceView/AuctionTrade.vue";
+import AuctionRequest from "@/views/bottomViews/AuctionServiceView/AuctionRequest.vue";
 const routes = [
   {
     path: '/',
@@ -93,14 +92,14 @@ const routes = [
     component:ReportSelect
   },
   {
-    path:'/account/CapitalAccountManage',
-    name:'CapitalAccountManage',
-    component: CapitalAccountManage
+    path:'/Auction/trade',
+    name:'trade',
+    component:AuctionTrade
   },
   {
-    path:'/account/QuotaAccountManage',
-    name:'QuotaAccountManage',
-    component: QuotaAccountManage
+    path:'/Auction/request',
+    name:'request',
+    component:AuctionRequest
   }
 ]
 

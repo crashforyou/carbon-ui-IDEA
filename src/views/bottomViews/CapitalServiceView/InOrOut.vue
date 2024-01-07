@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-    <div class="spanTip">
+    <div style="border-bottom: 2px solid #a8b7d3;padding: 1.5vh;">
       <span>入金/出金</span>
     </div>
     <div>
@@ -67,13 +67,6 @@ const handleReset = () => {
 .main{
   background: #eceff6;
   border: 2px solid #a8b7d3;
-}
-.spanTip{
-  border-bottom: 2px solid #a8b7d3;
-  padding: 1.5vh;
-}
-.formdiv{
-  background: #6f3030;
 }
 .form{
   position: relative;

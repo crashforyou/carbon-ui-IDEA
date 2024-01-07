@@ -1,7 +1,7 @@
 <!--定向报价-->
 <template>
   <div class="selectButton">
-      <button :class="{ active: activeButton === 'button1' }" @click="activeButton = 'button1'">报价查询</button>
+      <button :class="{ active: activeButton === 'button1' }" @click="activeButton = 'button1'">申请查询</button>
       <button :class="{ active: activeButton === 'button2' }" @click="activeButton = 'button2'">成交查询</button>
   </div>
   <div v-if="activeButton === 'button1'">

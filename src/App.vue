@@ -44,11 +44,11 @@
               <span>单向竞价</span>
             </span>
           </template>
-          <router-link to="/">
-            <a-menu-item key="sub2_1">Team 1</a-menu-item>
+          <router-link to="/Auction/trade">
+            <a-menu-item key="sub2_1">单向竞价</a-menu-item>
           </router-link>
-          <router-link to="/">
-            <a-menu-item key="sub2_2">Team 2</a-menu-item>
+          <router-link to="/Auction/request">
+            <a-menu-item key="sub2_2">单向竞价申请</a-menu-item>
           </router-link>
         </a-sub-menu>
 
@@ -175,7 +175,7 @@
     </a-layout-content>
     </a-layout>
   </div>
-  <div class="annnounce">12</div>
+  <Announce></Announce>
 </template>
 
 <script setup>
@@ -191,6 +191,7 @@ import {
   SwitcherOutlined,
 } from "@ant-design/icons-vue";
 import Avatar from "@/views/Avatar.vue"
+import Announce from "@/views/Announce.vue"
 import {Tabs, TabPane} from "ant-design-vue";
 import {ref} from "vue";
 
@@ -208,7 +209,7 @@ const selectedKeys = ref(["1"]);
   height: 16vh;
   width: 84%;
   margin: 16px;
-  background: rgba(187, 181, 181, 0.3);
+  background: #001c3a;
 }
 .AppMenu{
   overflow: auto;
@@ -222,10 +223,7 @@ const selectedKeys = ref(["1"]);
 .bottomView{
   height: 47vh;
 }
-.annnounce{
-  height: 3vh;
-  background: #212121;
-}
+
 ::-webkit-scrollbar-track {
    background: rgba(0, 0, 0, 0.1); 
    border-radius: 0; 

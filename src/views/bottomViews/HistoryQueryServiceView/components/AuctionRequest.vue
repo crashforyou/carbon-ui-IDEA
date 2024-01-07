@@ -7,7 +7,7 @@
         <!-- 更多选项 -->
       </a-select>
     </a-form-item>
-    <a-form-item label="成交日期">
+    <a-form-item label="委托日期">
       <a-range-picker v-model="dateRange" size="small"/>
     </a-form-item>
     <a-form-item>
