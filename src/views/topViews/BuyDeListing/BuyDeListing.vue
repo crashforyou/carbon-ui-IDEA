@@ -1,9 +1,14 @@
 <template>
-  <a-table :dataSource="dataSource" :columns="columns" />
+  <a-table :dataSource="dataSource" :columns="columns"/>
+  <DelistingForm v-if="showForm" :record="currentRecord" @close="showForm = false"/>
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import {ref} from 'vue';
+import DelistingForm from "@/views/topViews/BuyDeListing/components/DelistingForm.vue";
+
+const showForm = ref(false);
+const currentRecord = ref(null);
 
 const dataSource = ref([
   {
@@ -65,4 +70,10 @@ const columns = ref([
     ),
   },
 ]);
+
+
+const openForm = (record) => {
+  currentRecord.value = record;
+  showForm.value = true;
+};
 </script>
