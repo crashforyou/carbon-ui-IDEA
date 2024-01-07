@@ -12,7 +12,7 @@
         >
         <template #bodyCell="{ column, record }">
             <template v-if="column.key === 'operation'">
-            <a v-if="record.inquiryStatus === '未询价'" @click="record.inquiryStatus = '已报单'">加入询价</a>
+            <a v-if="record.inquiryStatus === '未询价'" @click="record.inquiryStatus = '已报单'">加入竞价</a>
             <a v-if="record.inquiryStatus === '已报单'" @click="goToNegotiationPage(record)">洽谈</a>
             </template>
         </template>
@@ -27,11 +27,11 @@
     {title: "操作",key: "operation",width: 100,fixed: "left",align:'center'},
     {title: "标的物代码", dataIndex: "subjectCode", key: "1", width: 150,align:'center'},
     {title: "标的物名称", dataIndex: "subjectName", key: "2", width: 150,align:'center'},
-    {title: "初始报价价格",dataIndex: "initialOfferPrice",key: "3",width: 150,align:'center'},
-    {title: "初始报价数量(吨)",dataIndex: "initialOfferQuantity",key: "4",width: 150,align:'center'},
-    {title: "初始报价金额",dataIndex: "initialOfferAmount",key: "5",width: 150,align:'center'},
-    {title: "报价状态", dataIndex: "offerStatus", key: "6", width: 150,align:'center'},
-    {title: "询价状态", dataIndex: "inquiryStatus", key: "7", width: 150,align:'center'}
+    {title: "委托初始价格",dataIndex: "initialOfferPrice",key: "3",width: 150,align:'center'},
+    {title: "委托数量(吨)",dataIndex: "initialOfferQuantity",key: "4",width: 150,align:'center'},
+    {title: "委托初始金额",dataIndex: "initialOfferAmount",key: "5",width: 150,align:'center'},
+    {title: "最新价格", dataIndex: "recentPrice", key: "6", width: 150,align:'center'},
+    {title: "成交状态", dataIndex: "Status", key: "7", width: 150,align:'center'}
   ]);
   
   const goToNegotiationPage = (record) => {
@@ -49,8 +49,9 @@
       initialOfferPrice: "100",
       initialOfferQuantity: "100",
       initialOfferAmount: "100",
-      offerStatus: "已报单",
+      recentPrice: "1000",
       inquiryStatus: "未询价",
+      Status:"未成交",
     });
   }
 </script>
