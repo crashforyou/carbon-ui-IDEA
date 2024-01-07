@@ -9,6 +9,10 @@ import DelistingForm from "@/views/topViews/SellDeListing/components/DelistingFo
 
 const showForm = ref(false);
 const currentRecord = ref(null);
+const openForm = (record) => {
+  currentRecord.value = record;
+  showForm.value = true;
+};
 
 const dataSource = ref([
   {
@@ -64,16 +68,11 @@ const columns = ref([
     key: 'action',
     fixed: 'right',
     render: (text, record) => (
-        <a-space size="middle">
-          <a>摘牌</a>
-        </a-space>
+        <a onClick={() => openForm(record)}>摘牌</a>
     ),
   },
 ]);
 
 
-const openForm = (record) => {
-  currentRecord.value = record;
-  showForm.value = true;
-};
+
 </script>

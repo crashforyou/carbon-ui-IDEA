@@ -36,6 +36,8 @@
 import {ref} from 'vue';
 import Market from "@/views/topViews/Market/Market.vue";
 import KLine from "@/views/topViews/KLine/KLine.vue";
+import BuyDeListing from "@/views/topViews/BuyDeListing/BuyDeListing.vue";
+import SellDeListing from "@/views/topViews/SellDeListing/SellDeListing.vue";
 import {
   UserOutlined,
   AreaChartOutlined,
