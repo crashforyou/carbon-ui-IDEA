@@ -140,10 +140,10 @@
               <span>账户管理</span>
             </span>
           </template>
-          <router-link to="/account/CapitalAccountManage">
+          <router-link to="/Account/CapitalAccountManage">
             <a-menu-item key="sub8_1">资金账户管理</a-menu-item>
           </router-link>
-          <router-link to="/account/QuotaAccountManage">
+          <router-link to="/Account/QuotaAccountManage">
             <a-menu-item key="sub8_2">配额账户管理</a-menu-item>
           </router-link>
         </a-sub-menu>

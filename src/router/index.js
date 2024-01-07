@@ -15,6 +15,8 @@ import ListingServiceIndex from "@/views/bottomViews/ListingServiceView/index.vu
 import ReportSelect from "@/views/bottomViews/ReportServiceView/ReportSelect.vue";
 import AuctionTrade from "@/views/bottomViews/AuctionServiceView/AuctionTrade.vue";
 import AuctionRequest from "@/views/bottomViews/AuctionServiceView/AuctionRequest.vue";
+import CapitalAccountManage from "@/views/bottomViews/UserServiceView/CapitalAccountManage.vue"
+import QuotaAccountManage from "@/views/bottomViews/UserServiceView/QuotaAccountManage.vue"
 const routes = [
   {
     path: '/',
@@ -100,6 +102,16 @@ const routes = [
     path:'/Auction/request',
     name:'request',
     component:AuctionRequest
+  },
+  {
+    path:'/Account/CapitalAccountManage',
+    name:'CapitalAccountManage',
+    component:CapitalAccountManage
+  },
+  {
+    path:'/Account/QuotaAccountManage',
+    name:'QuotaAccountManage',
+    component:QuotaAccountManage
   }
 ]
 
