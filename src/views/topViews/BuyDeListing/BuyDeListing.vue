@@ -67,11 +67,11 @@ const columns = ref([
     title: '操作',
     key: 'action',
     fixed: 'right',
-    render: (text, record) => (
-        <a-space size="middle">
-          <a onClick={() => openForm(record)}>摘牌</a>
-        </a-space>
-    ),
+    // render: (text, record) => (
+        // <a-space size="middle">
+        //   <a onClick={() => openForm(record)}>摘牌</a>
+        // </a-space>
+    // ),
   },
 ]);
 

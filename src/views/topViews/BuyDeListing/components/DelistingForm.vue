@@ -48,11 +48,11 @@
 <script setup>
 import {ref, toRefs} from 'vue';
 
-const props = withDefaults(defineProps({
-  record: Object,
-}), {
-  record: {},
-});
+// const props = withDefaults(defineProps({
+//   record: Object,
+// }), {
+//   record: {},
+// });
 
 const {record} = toRefs(props);
 const accountType = ref('');

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="mainer">
     <div>
       <a-form @submit="handleSubmit" :label-col="{ span: 7 }" :wrapper-col="{ span: 10 }" class="form">
         <a-form-item label="资金账号">
@@ -68,16 +68,15 @@ const handleReset = () => {
 </script>
 
 <style scoped>
-.main{
+.mainer{
   background: #eceff6;
-  border: 2px solid #a8b7d3;
+  height: 86%;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 .spanTip{
   border-bottom: 2px solid #a8b7d3;
   padding: 1.5vh;
-}
-.formdiv{
-  background: #6f3030;
 }
 .form{
   position: relative;
