@@ -13,6 +13,8 @@ import BulkAgreementSelect from "@/views/bottomViews/HistoryQueryServiceView/Bul
 import ActionSelect from "@/views/bottomViews/HistoryQueryServiceView/ActionSelect";
 import ListingServiceIndex from "@/views/bottomViews/ListingServiceView/index.vue";
 import ReportSelect from "@/views/bottomViews/ReportServiceView/ReportSelect.vue";
+import AuctionTrade from "@/views/bottomViews/AuctionServiceView/AuctionTrade.vue";
+import AuctionRequest from "@/views/bottomViews/AuctionServiceView/AuctionRequest.vue";
 const routes = [
   {
     path: '/',
@@ -88,6 +90,16 @@ const routes = [
     path:'/report',
     name:'report',
     component:ReportSelect
+  },
+  {
+    path:'/Auction/trade',
+    name:'trade',
+    component:AuctionTrade
+  },
+  {
+    path:'/Auction/request',
+    name:'request',
+    component:AuctionRequest
   }
 ]
 

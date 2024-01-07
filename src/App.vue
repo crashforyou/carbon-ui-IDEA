@@ -44,11 +44,11 @@
               <span>单向竞价</span>
             </span>
           </template>
-          <router-link to="/">
-            <a-menu-item key="sub2_1">Team 1</a-menu-item>
+          <router-link to="/Auction/trade">
+            <a-menu-item key="sub2_1">单向竞价</a-menu-item>
           </router-link>
-          <router-link to="/">
-            <a-menu-item key="sub2_2">Team 2</a-menu-item>
+          <router-link to="/Auction/request">
+            <a-menu-item key="sub2_2">单向竞价申请</a-menu-item>
           </router-link>
         </a-sub-menu>
 
