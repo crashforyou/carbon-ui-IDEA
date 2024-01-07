@@ -168,8 +168,7 @@
 
           <a-tab-pane key="6" tab="分笔">Content of Tab Pane 3</a-tab-pane>
         </a-tabs> -->
-        <div class="topView">市场</div>
-        <!-- <div class="bottomView">操作</div> -->
+        <TopView></TopView>
         <router-view class="bottomView"></router-view>
       </div>
     </a-layout-content>
@@ -190,8 +189,9 @@ import {
   ScheduleOutlined,
   SwitcherOutlined,
 } from "@ant-design/icons-vue";
-import Avatar from "@/views/Avatar.vue"
-import Announce from "@/views/Announce.vue"
+import Avatar from "@/views/Avatar.vue";
+import Announce from "@/views/Announce.vue";
+import TopView from "@/views/topViews/TopView.vue";
 import {Tabs, TabPane} from "ant-design-vue";
 import {ref} from "vue";
 

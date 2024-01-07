@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="main">
     <div class="button-group">
       <button @click="changeContent('BuyDeListing')">
         <a-icon type="buy"/>
@@ -56,16 +56,8 @@ const changeContent = (newContent) => {
 </script>
 
 <style scoped>
-.button-group > button {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-right: 1em;
+.main{
+  height: 47vh;
 }
 
-.display-area {
-  margin-top: 2em;
-  border: 1px solid #ccc;
-  padding: 1em;
-}
 </style>
