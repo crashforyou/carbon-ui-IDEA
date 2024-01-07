@@ -13,6 +13,9 @@ import BulkAgreementSelect from "@/views/bottomViews/HistoryQueryServiceView/Bul
 import ActionSelect from "@/views/bottomViews/HistoryQueryServiceView/ActionSelect";
 import ListingServiceIndex from "@/views/bottomViews/ListingServiceView/index.vue";
 import ReportSelect from "@/views/bottomViews/ReportServiceView/ReportSelect.vue";
+import CapitalAccountManage from "@/views/bottomViews/UserServiceView/CapitalAccountManage.vue";
+import QuotaAccountManage from "@/views/bottomViews/UserServiceView/QuotaAccountManage.vue";
+
 const routes = [
   {
     path: '/',
@@ -88,6 +91,16 @@ const routes = [
     path:'/report',
     name:'report',
     component:ReportSelect
+  },
+  {
+    path:'/account/CapitalAccountManage',
+    name:'CapitalAccountManage',
+    component: CapitalAccountManage
+  },
+  {
+    path:'/account/QuotaAccountManage',
+    name:'QuotaAccountManage',
+    component: QuotaAccountManage
   }
 ]
 

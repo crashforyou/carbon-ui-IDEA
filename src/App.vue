@@ -137,11 +137,14 @@
           <template #title>
             <span>
               <user-outlined/>
-              <span>用户信息管理</span>
+              <span>账户管理</span>
             </span>
           </template>
-          <router-link to="/">
-            <a-menu-item key="sub8_1">用户信息管理</a-menu-item>
+          <router-link to="/account/CapitalAccountManage">
+            <a-menu-item key="sub8_1">资金账户管理</a-menu-item>
+          </router-link>
+          <router-link to="/account/QuotaAccountManage">
+            <a-menu-item key="sub8_2">配额账户管理</a-menu-item>
           </router-link>
         </a-sub-menu>
       </a-menu>
