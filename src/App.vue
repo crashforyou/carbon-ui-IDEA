@@ -191,7 +191,7 @@ import {
 } from "@ant-design/icons-vue";
 import Avatar from "@/views/Avatar.vue";
 import Announce from "@/views/Announce.vue";
-import TopView from "@/views/topViews/TopView.vue";
+import TopView from "@/views/topViews/TopView";
 import {Tabs, TabPane} from "ant-design-vue";
 import {ref} from "vue";
 
