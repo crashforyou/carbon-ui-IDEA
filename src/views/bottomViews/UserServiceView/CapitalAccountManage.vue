@@ -2,12 +2,13 @@
   <div class="main">
     <div class="buttonGroup">
       <button :class="{ active: activeButton === 'button1' }" @click="activeButton = 'button1'">资金账号创建</button>
-      <button :class="{ active: activeButton === 'button2' }" @click="activeButton = 'button2'">银行卡号关联</button>
-      <button :class="{ active: activeButton === 'button3' }" @click="activeButton = 'button3'">资金账户删除</button>
+      <button :class="{ active: activeButton === 'button2' }" @click="activeButton = 'button2'">资金账户删除</button>
+      <button :class="{ active: activeButton === 'button3' }" @click="activeButton = 'button3'">银行卡号关联</button>
+
     </div>
     <CapitalAccountCreate v-if="activeButton === 'button1'"></CapitalAccountCreate>
-    <BindBankAccount v-if="activeButton === 'button2'"></BindBankAccount>
-    <CapitalAccountDelete v-if="activeButton === 'button3'"></CapitalAccountDelete>
+    <CapitalAccountDelete v-if="activeButton === 'button2'"></CapitalAccountDelete>
+    <BindBankAccount v-if="activeButton === 'button3'"></BindBankAccount>
   </div>
 </template>
 

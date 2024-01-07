@@ -1,5 +1,5 @@
 <template>
-  <div class="main">
+  <div>
     <div>
       <a-form @submit="handleSubmit" :label-col="{ span: 7 }" :wrapper-col="{ span: 10 }" class="form">
         <a-form-item label="资金账号">

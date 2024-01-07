@@ -1,5 +1,5 @@
 <template>
-  <div class="main">
+  <div>
     <div>
       <a-form @submit="handleSubmit" :label-col="{ span: 7 }" :wrapper-col="{ span: 10 }" class="form">
         <a-form-item label="配额账号">
@@ -64,7 +64,7 @@ const handleReset = () => {
 }
 .form{
   position: relative;
-  top: 1.5vh;
+  top: 10vh;
   width: 50%;
 }
 .second{
@@ -73,6 +73,7 @@ const handleReset = () => {
 }
 .buttonGroup{
   position: relative;
+  top: 8vh;
   left: 25vh;
 }
 button {

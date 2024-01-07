@@ -1,5 +1,5 @@
 <template>
-  <div class="main">
+  <div >
     <div>
       <a-form @submit="handleSubmit" :label-col="{ span: 7 }" :wrapper-col="{ span: 10 }" class="form">
         <a-form-item label="配额账号">
@@ -54,7 +54,7 @@ const handleReset = () => {
 <style scoped>
 .main{
   background: #eceff6;
-  border: 2px solid #a8b7d3;
+  border: none;
 }
 .spanTip{
   border-bottom: 2px solid #a8b7d3;
@@ -67,6 +67,7 @@ const handleReset = () => {
   position: relative;
   top: 1.5vh;
   width: 50%;
+  border: none;
 }
 .second{
   position: relative;
