@@ -55,8 +55,8 @@ const columns = [
   {title: "标的物名称", dataIndex: "name"},
   {title: "交易模式", dataIndex: "tradeMode"},
   {title: "操作类型", dataIndex: "operationType"},
-  {title: "划转数量（吨）", dataIndex: "transferAmount"},
-  {title: "持有数量（吨）", dataIndex: "holdAmount"},
+  {title: "划转数量（吨）", dataIndex: "transferAmount",width:120},
+  {title: "持有数量（吨）", dataIndex: "holdAmount",width:120},
   {title: "交易账号", dataIndex: "account"},
 ];
 const pagination = {pageSize: 10};
