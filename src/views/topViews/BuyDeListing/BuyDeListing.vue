@@ -22,6 +22,10 @@ const dataSource = ref([
     listingPrice: '10.00',
   },
 ]);
+const openForm = (record) => {
+  currentRecord.value = record;
+  showForm.value = true;
+};
 
 const columns = ref([
   {
@@ -65,15 +69,11 @@ const columns = ref([
     fixed: 'right',
     render: (text, record) => (
         <a-space size="middle">
-          <a>摘牌</a>
+          <a onClick={() => openForm(record)}>摘牌</a>
         </a-space>
     ),
   },
 ]);
 
 
-const openForm = (record) => {
-  currentRecord.value = record;
-  showForm.value = true;
-};
 </script>
