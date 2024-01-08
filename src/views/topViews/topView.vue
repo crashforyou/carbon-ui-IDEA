@@ -78,10 +78,11 @@ const changeContent = (newContent) => {
 <style scoped>
 .main{
   height: 47vh;
+  overflow: hidden;
   border-top: 2px solid #a8b7d3;
   border-left: 2px solid #a8b7d3;
   border-right: 2px solid #a8b7d3;
-  border-bottom: 2px solid #000000;
+  border-bottom: 3px solid #a8b7d3;
 }
 .top{
   background: #001c3a;

@@ -45,16 +45,15 @@
   </a-form>
 </template>
 
-<script setup>
-import {ref, toRefs} from 'vue';
-
-// const props = withDefaults(defineProps({
-//   record: Object,
-// }), {
-//   record: {},
-// });
-
-const {record} = toRefs(props);
+<script>
+import {ref, reactive} from 'vue';
+const {record} = reactive({
+  itemCode:"1",
+  itemName:"12",
+  listingQuantity: '100',
+  listingPrice: '10.00',
+  clientId:'1'
+});
 const accountType = ref('');
 const tradingAccount = ref('');
 const maxTradeVolume = ref('');

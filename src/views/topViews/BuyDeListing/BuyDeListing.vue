@@ -1,5 +1,11 @@
 <template>
-  <a-table :dataSource="dataSource" :columns="columns"/>
+  <a-table 
+    :dataSource="dataSource" 
+    :columns="columns"
+    :pagination="false"
+    size="small" 
+    :scroll="{ x:1900,y:247}"
+  ></a-table>
   <DelistingForm v-if="showForm" :record="currentRecord" @close="showForm = false"/>
 </template>
 
@@ -7,7 +13,7 @@
 import {ref} from 'vue';
 import DelistingForm from "@/views/topViews/BuyDeListing/components/DelistingForm.vue";
 
-const showForm = ref(false);
+const showForm = ref(true);
 const currentRecord = ref(null);
 
 const dataSource = ref([

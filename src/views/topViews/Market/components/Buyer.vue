@@ -1,11 +1,11 @@
 <template>
-  <div class="main">
+  <div>
     <a-table
         :dataSource="data"
-        :pagination="pagination"
+        :pagination="false"
         size="small" 
-        bordered
-        :scroll="{ x:1800,y:185}"
+        :scroll="{ x:1900,y:247}"
+        class="table"
     >
       <a-table-column title="序号" dataIndex="index" key="index" align="center"/>
       <a-table-column title="标的物代码" dataIndex="code" key="code"  align="center"/>
@@ -51,31 +51,29 @@ for (let i = 0; i < 100; i++) {
 
 </script>
 <style lang="less" scoped>
-.main{
-  position: relative;
-  left: -2%;
-  width: 102%;
-  // background: black;
+.table{
+  width: 64.9%;
+  background: #121212;
 }
-// ::v-deep {
-//   .ant-tabs-nav {
-//     writing-mode: vertical-rl;
-//     text-orientation: upright;
-//   }
-// }
-// ::v-deep {
-//   .ant-table-thead {
-//     tr > th {
-//       background: black;
-//       color: white;
-//     }
-//   }
 
-//   .ant-table-tbody {
-//     tr > td {
-//       background: rgb(34, 57, 150);
-//       color: white;
-//     }
-//   }
-// }
+::v-deep {
+  .ant-table-thead {
+    tr > th {
+      background: #121212;
+      color: #a3a8a9;
+    }
+  }
+  .ant-table-tbody {
+    tr > td {
+      background: #121212;
+      color: white;
+      transition: background-color 100s, color 100s; /* 添加过渡效果 */
+    }
+
+    tr:hover > td {
+      background: #121212 !important; /* 悬停时保持背景色不变 */
+      color: white !important; /* 悬停时保持文字颜色不变 */
+    }
+  }
+}
 </style>
