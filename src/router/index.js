@@ -84,7 +84,7 @@ const routes = [
     component: ActionSelect
   },
   {
-    path: '/listingService',
+    path: '/listingService/buy',
     name:'ListingServiceIndex',
     component: ListingServiceIndex
   },

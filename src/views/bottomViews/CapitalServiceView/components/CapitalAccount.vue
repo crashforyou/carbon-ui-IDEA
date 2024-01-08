@@ -63,7 +63,7 @@ const columns = [
     key: "available",
   },
   {
-    title: "可出资金",
+    title: "冻结资金",
     dataIndex: "withdrawable",
     key: "withdrawable",
   },

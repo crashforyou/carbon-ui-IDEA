@@ -14,7 +14,7 @@
               <span>挂牌交易</span>
             </span>
           </template>
-          <router-link to="/">
+          <router-link to="/listingService/buy">
             <a-menu-item key="sub0_1">挂牌交易</a-menu-item>
           </router-link>
         </a-sub-menu>
