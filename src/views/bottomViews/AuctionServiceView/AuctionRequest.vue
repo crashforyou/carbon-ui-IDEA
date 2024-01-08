@@ -1,7 +1,7 @@
 <template>
     <div class="main">
         <div style="border-bottom: 2px solid #a8b7d3;padding: 1.5vh;">
-            <span>单向竞价申请</span>
+            <span>单向竞价委托</span>
         </div>
         <div class="left">
             <a-form :model="directionalOfferFormModel" :label-col="{ span: 7 }" :wrapper-col="{ span: 15 }" >
@@ -11,24 +11,15 @@
                 <a-form-item label="标的物名称">
                     <a-input v-model="directionalOfferFormModel.name" disabled/>
                 </a-form-item>
-                <a-form-item label="账户类型">
+                <a-form-item label="配额账户">
                     <a-select v-model="directionalOfferFormModel.accountType">
                     <!-- 添加选项 -->
                     </a-select>
                 </a-form-item>
-                <a-form-item label="报价账号">
+                <a-form-item label="资金账户">
                     <a-select v-model="directionalOfferFormModel.offerAccount">
                         <!-- 添加选项 -->
                     </a-select>
-                </a-form-item>
-                <a-form-item label="买卖方向">
-                    <a-radio-group
-                        v-model:value="directionalOfferFormModel.flow"
-                        @change="updateFlow"
-                    >
-                        <a-radio value="卖出">卖出</a-radio>
-                        <a-radio value="买入">买入</a-radio>
-                    </a-radio-group>
                 </a-form-item>
                 <a-form-item
                     label="可用数量"
@@ -49,14 +40,11 @@
                     />
                 </a-form-item>
 
-                <a-form-item label="价格">
+                <a-form-item label="委托价格">
                     <a-input v-model="directionalOfferFormModel.price" suffix="元"/>
                 </a-form-item>
-                <a-form-item label="数量">
+                <a-form-item label="委托数量">
                     <a-input v-model="directionalOfferFormModel.Num" suffix="吨"/>
-                </a-form-item>
-                <a-form-item label="定向用户">
-                    <a-input v-model="directionalOfferFormModel.directionClient"/>
                 </a-form-item>
                 <div class="buttonGroup">
                     <button @click="submitForm">提交</button>

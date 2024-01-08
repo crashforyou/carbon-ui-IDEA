@@ -14,33 +14,21 @@
       >
       <template #bodyCell="{ column, record }">
         <template v-if="column.key === 'operation'">
-          <a v-if="record.inquiryStatus === '未询价'">洽谈</a>
-          <a v-if="record.inquiryStatus === '未询价'" style="margin-left: 5px">详情</a>
           <a v-if="record.inquiryStatus === '未询价'" style="margin-left: 5px">修改</a>
           <a v-if="record.inquiryStatus === '未询价'" style="margin-left: 5px">撤回</a>
-          <a v-if="record.inquiryStatus === '询价结束'">洽谈查询</a>
-          <a v-if="record.inquiryStatus === '询价结束'" style="margin-left: 5px">详情</a>
         </template>
       </template>
     </a-table>
   </div>
   <div v-if="activeButton === 'button2'">
     <a-table 
-      :columns="columns" 
-      :data-source="data" 
+      :columns="columns2"
+      :data-source="data2"
       :scroll="{y: 186}"  
       size="small" 
       bordered
       >
       <template #bodyCell="{ column, record }">
-        <template v-if="column.key === 'operation'">
-          <a v-if="record.inquiryStatus === '未询价'">洽谈</a>
-          <a v-if="record.inquiryStatus === '未询价'" style="margin-left: 5px">详情</a>
-          <a v-if="record.inquiryStatus === '未询价'" style="margin-left: 5px">修改</a>
-          <a v-if="record.inquiryStatus === '未询价'" style="margin-left: 5px">撤回</a>
-          <a v-if="record.inquiryStatus === '询价结束'">洽谈查询</a>
-          <a v-if="record.inquiryStatus === '询价结束'" style="margin-left: 5px">详情</a>
-        </template>
       </template>
     </a-table>
   </div>
@@ -61,32 +49,68 @@ const columns = [
     fixed: "left",
     align:'center'
   },
-  {title: "报价时间", dataIndex: "offerTime", key: "1", width: 150,align:'center'},
-  {title: "标的物代码", dataIndex: "subjectCode", key: "2", width: 150,align:'center'},
-  {title: "买卖方向", dataIndex: "direction", key: "3", width: 150,align:'center'},
-  {title: "初始报价价格", dataIndex: "initialOfferPrice", key: "4", width: 150,align:'center'},
-  {title: "初始报价数量", dataIndex: "initialOfferQuantity", key: "5", width: 150,align:'center'},
-  {title: "初始报价金额", dataIndex: "initialOfferAmount", key: "6", width: 150,align:'center'},
-  {title: "交易账号", dataIndex: "transactionAccount", key: "7", width: 150,align:'center'},
-  {title: "报价状态", dataIndex: "offerStatus", key: "8", width: 150,align:'center'},
-  {title: "询价状态", dataIndex: "inquiryStatus", key: "9", width: 150,align:'center'},
-  {title: "报价编号", dataIndex: "offerNumber", key: "10", width: 150,align:'center'},
+  {title: "委托日期", dataIndex: "orderDate", width: 100},
+  {title: "委托时间", dataIndex: "orderTime", width: 100},
+  {title: "操作员代码", dataIndex: "operatorCode", width: 100},
+  {title: "标的物代码", dataIndex: "code", width: 120},
+  {title: "标的物名称", dataIndex: "name", width: 120},
+  {title: "委托数量", dataIndex: "Amount", width: 100},
+  {title: "委托价格", dataIndex: "price", width: 100},
+  {title: "委托状态", dataIndex: "status", width: 100},
+  {title: "成交数量", dataIndex: "finallyAmount", width: 100},
+  {title: "成交金额", dataIndex: "finallyBalance", width: 100},
+  {title:"对方客户号",dataIndex: "directionOrGroupId",width: 100},
+  {title: "委托编号", dataIndex: "orderNumber", width: 100},
 ];
 
 const data = [];
 for (let i = 0; i < 100; i++) {
   data.push({
     key: i,
-    offerTime: "2021-06-01 12:00:00",
-    subjectCode: "100000",
-    direction: "买入",
-    initialOfferPrice: "100",
-    initialOfferQuantity: "100",
-    initialOfferAmount: "10000",
-    transactionAccount: "100000",
-    offerStatus: "已报价",
+    orderDate: "2021-06-01 ",
+    orderTime: "12:00:00",
+    code: "标的物",
+    name: "标的物名称",
+    operatorCode:"操作员代码",
+    direction: "买卖方向",
+    Amount:"委托数量",
+    price:"委托价格",
+    status:"委托状态",
+    finallyAmount: "10000",
+    finallyBalance: "100000",
+    directionOrGroupId: "对方",
     inquiryStatus: "未询价",
-    offerNumber: "100000",
+    orderNumber:"委托编号",
+  });
+}
+
+const columns2 = [
+  {title: "成交日期", dataIndex: "orderDate", width: 100},
+  {title: "成交时间", dataIndex: "orderTime", width: 100},
+  {title: "标的物代码", dataIndex: "code", width: 120},
+  {title: "标的物名称", dataIndex: "name", width: 120},
+  {title: "买卖方向", dataIndex: "direction", width: 100},
+  {title: "成交数量", dataIndex: "finallyAmount", width: 100},
+  {title: "成交金额", dataIndex: "finallyBalance", width: 100},
+  {title:"对方客户号",dataIndex: "directionOrGroupId",width: 100},
+  {title: "委托编号", dataIndex: "orderNumber", width: 100},
+
+];
+
+const data2 = [];
+for (let i = 0; i < 100; i++) {
+  data2.push({
+    key: i,
+    orderDate: "2021-06-01 ",
+    orderTime: "12:00:00",
+    code: "标的物",
+    name: "标的物名称",
+    direction: "买卖方向",
+    finallyAmount: "10000",
+    finallyBalance: "100000",
+    directionOrGroupId: "对方",
+    inquiryStatus: "未询价",
+    orderNumber:"委托编号",
   });
 }
 </script>
