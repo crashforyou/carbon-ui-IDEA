@@ -16,10 +16,10 @@
         <template v-if="column.key === 'operation'">
           <a v-if="record.status === '未成交'">洽谈</a>
 <!--          <a v-if="record.status === '未成交'" style="margin-left: 5px">详情</a>-->
-          <a v-if="record.status === '未成交'" style="margin-left: 5px">修改</a>
+          <a v-if="record.status === '未成交'" style="margin-left: 5px" @click="">修改</a>
           <a v-if="record.status === '未成交'" style="margin-left: 5px">撤回</a>
-          <a v-if="record.status === '询价结束'">洽谈查询</a>
-          <a v-if="record.status === '询价结束'" style="margin-left: 5px">详情</a>
+          <a v-if="record.status === '已成交'">洽谈查询</a>
+          <a v-if="record.status === '已成交'" style="margin-left: 5px">详情</a>
         </template>
       </template>
     </a-table>
@@ -121,6 +121,19 @@ for (let i=0;i<100;i++){
     delistingClient: "100000",
   });
 }
+const handleEdit = (record) => {
+  directionPostId.value = record.id;
+  axios.post(`http://localhost:8080/bulkAgreement/modifyDirectionOffer/${directionPostId}`, record)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+};
+const handleRevoke = (record) => {
+  console.log(record);
+};
 // onMounted(() => {
 //   let operatorCode = localStorage.getItem("operatorCode");
 //   let clientId = localStorage.getItem("clientId");
