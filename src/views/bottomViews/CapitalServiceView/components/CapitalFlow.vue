@@ -31,11 +31,6 @@ import axios from "axios";
 
 const columns = [
   {
-    title: "交易日期",
-    dataIndex: "tradeDate",
-    key: "tradeDate",
-  },
-  {
     title: "交易时间",
     dataIndex: "tradeTime",
     key: "tradeTime",
@@ -71,7 +66,7 @@ const columns = [
     key: "availableBalance",
   },
   {
-    title: "流水号",
+    title: "流水号",//就是出入金流水的id
     dataIndex: "serialNumber",
     key: "serialNumber",
   },
@@ -81,7 +76,6 @@ const data = ref([]); // 从后端获取数据
 for (let i = 0; i < 100; i++) {
   data.value.push({
     key: i,
-    tradeDate:"交易日期",
     tradeTime:"交易时间",
     account:"资金账号",
     operatorCode:"操作员",
