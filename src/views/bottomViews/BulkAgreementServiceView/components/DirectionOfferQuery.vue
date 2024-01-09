@@ -142,26 +142,26 @@ const handleRevoke = (record) => {
       });
   console.log(record);
 };
-// onMounted(() => {
-//   let operatorCode = localStorage.getItem("operatorCode");
-//   let clientId = localStorage.getItem("clientId");
-//   axios
-//       .get(`http://localhost:8080/bulkAgreement/selectDirectionOffer/${operatorCode}`)
-//       .then((res) => {
-//         data1.value = res.data;
-//       })
-//       .catch((err) => {
-//         console.log(err);
-//       });
-//   axios
-//       .get(`http://localhost:8080/bulkAgreement/selectDirectionDoneRecord/${clientId}`)
-//       .then((res) => {
-//         data2.value = res.data;
-//       })
-//       .catch((err) => {
-//         console.log(err);
-//       });
-// });
+onMounted(() => {
+  let operatorCode = localStorage.getItem("operatorCode");
+  let clientId = localStorage.getItem("clientId");
+  axios
+      .get(`http://localhost:8080/bulkAgreement/selectDirectionOffer/${operatorCode}`)
+      .then((res) => {
+        data1.value = res.data;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  axios
+      .get(`http://localhost:8080/bulkAgreement/selectDirectionDoneRecord/${clientId}`)
+      .then((res) => {
+        data2.value = res.data;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+});
 
 </script>
 <style scoped>

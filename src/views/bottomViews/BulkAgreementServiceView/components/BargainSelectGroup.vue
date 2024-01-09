@@ -46,7 +46,6 @@ const fetchData = async () => {
   data.value = response.data;
   pagination.value.total = response.data.total;
 };
-
 onMounted(() => {
   fetchData();
 });
