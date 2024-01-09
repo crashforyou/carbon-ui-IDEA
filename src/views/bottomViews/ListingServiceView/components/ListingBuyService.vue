@@ -3,26 +3,26 @@
     <span>买入挂牌</span>
   </div>
   <div class="left">
-    <a-form :model="directionalOfferFormModel" :label-col="{ span: 7 }" :wrapper-col="{ span: 15 }" >
+    <a-form :model="listingPost" :label-col="{ span: 7 }" :wrapper-col="{ span: 15 }" >
       <a-form-item label="标的物代码">
-        <a-input v-model="directionalOfferFormModel.code"/>
+        <a-input v-model="listingPost.subjectMatterCode"/>
       </a-form-item>
       <a-form-item label="标的物名称">
-        <a-input v-model="directionalOfferFormModel.name" disabled/>
+        <a-input v-model="listingPost.subjectMatterName" disabled/>
       </a-form-item>
       <a-form-item label="账户类型">
-        <a-select v-model="directionalOfferFormModel.accountType">
+        <a-select v-model="listingPost.accountType">
           <!-- 添加选项 -->
         </a-select>
       </a-form-item>
       <a-form-item label="库存账号">
-        <a-select v-model="directionalOfferFormModel.offerAccount">
+        <a-select v-model="listingPost.QuotaAccount">
           <!-- 添加选项 -->
         </a-select>
       </a-form-item>
       <a-form-item
           label="可用资金"
-          v-show="directionalOfferFormModel.flow === '买入'"
+          v-show="listingPost.flowType === '买入'"
       >
         <a-input
             v-model="directionalOfferFormModel.available"
@@ -31,10 +31,10 @@
       </a-form-item>
 
       <a-form-item label="委托价格">
-        <a-input v-model="directionalOfferFormModel.price" suffix="元"/>
+        <a-input v-model="listingPost.price" suffix="元"/>
       </a-form-item>
       <a-form-item label="委托数量">
-        <a-input v-model="directionalOfferFormModel.Num" suffix="吨"/>
+        <a-input v-model="listingPost.amount" suffix="吨"/>
       </a-form-item>
       <div class="buttonGroup">
         <button @click="submitForm">提交</button>
@@ -49,31 +49,50 @@
 <script setup>
 import {ref, nextTick} from "vue";
 import BuyListing from "./BuyListing.vue"
+import axios from "axios";
 
-const directionalOfferFormModel = ref({
-  code: "",
-  name: "",
+const listingPost = ref({
+  subjectMatterCode: "",
+  subjectMatterName: "",
   accountType: "",
-  offerAccount: "",
-  flow: "卖出",
-  available: "",
+  QuotaAccount: "",
+  flowType: "买入",
+  listingType: "",
   price: "",
-  Num: "",
+  amount: "",
   directionClient: "",
+  operatorCode:"",
+  status:"",
   // 其他表单项
 });
 
 const updateFlow = () => {
   nextTick(() => {
-    console.log("用户点击了" + directionalOfferFormModel.value.flow);
+    console.log("用户点击了" + listingPost.value.flowType);
   });
 };
 const submitForm = () => {
+  listingPost.value.status="未完成";
+  listingPost.value.operatorCode=localStorage.getItem("operatorCode");
   // 提交表单
+  axios
+      .post(`http://localhost:8800/listing/purchaser`,
+          //表单数据
+          listingPost.value
+      )
+      .then((res)=>{
+        console.log(res);
+      })
+      .catch((err)=>{
+        console.log(err);
+      })
 };
 
 const clearForm = () => {
   // 清空表单
+  for (let key in listingPost.value) {
+    listingPost.value[key] = "";
+  }
 };
 </script>
 
