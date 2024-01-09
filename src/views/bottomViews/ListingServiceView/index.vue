@@ -42,8 +42,8 @@
 <!--            bordered-->
 <!--            :scroll="{ y: 198 }"-->
 <!--        />-->
-        <ListingSellService v-if="selectedOption === 1"></ListingSellService>
-        <ListingBuyService v-if="selectedOption === 2"></ListingBuyService>
+        <ListingBuyService v-if="selectedOption === 1"></ListingBuyService>
+        <ListingSellService v-if="selectedOption === 2"></ListingSellService>
         <DeListingService v-if="selectedOption === 3"></DeListingService>
         <CapitalAccount v-if="selectedOption === 4"></CapitalAccount>
         <ListingDayCommission v-if="selectedOption === 5"></ListingDayCommission>

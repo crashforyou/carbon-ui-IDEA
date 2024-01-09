@@ -2,62 +2,53 @@
   <div style="border-bottom: 2px solid #a8b7d3;padding: 1.5vh;">
     <span>卖出挂牌</span>
   </div>
-    <div class="left">
-      <a-form :model="directionalOfferFormModel" :label-col="{ span: 7 }" :wrapper-col="{ span: 15 }" >
-        <a-form-item label="标的物代码">
-          <a-input v-model="directionalOfferFormModel.code"/>
-        </a-form-item>
-        <a-form-item label="标的物名称">
-          <a-input v-model="directionalOfferFormModel.name" disabled/>
-        </a-form-item>
-        <a-form-item label="配额账户">
-          <a-select v-model="directionalOfferFormModel.accountType">
-            <!-- 添加选项 -->
-          </a-select>
-        </a-form-item>
-        <a-form-item label="资金账户">
-          <a-select v-model="directionalOfferFormModel.offerAccount">
-            <!-- 添加选项 -->
-          </a-select>
-        </a-form-item>
-        <a-form-item
-            label="可用数量"
-            v-show="directionalOfferFormModel.flow === '卖出'"
-        >
-          <a-input
-              v-model="directionalOfferFormModel.available"
-              suffix="吨"
-          />
-        </a-form-item>
-        <a-form-item
-            label="可用资金"
-            v-show="directionalOfferFormModel.flow === '买入'"
-        >
-          <a-input
-              v-model="directionalOfferFormModel.available"
-              suffix="元"
-          />
-        </a-form-item>
+  <div class="left">
+    <a-form :model="directionalOfferFormModel" :label-col="{ span: 7 }" :wrapper-col="{ span: 15 }" >
+      <a-form-item label="标的物代码">
+        <a-input v-model="directionalOfferFormModel.code"/>
+      </a-form-item>
+      <a-form-item label="标的物名称">
+        <a-input v-model="directionalOfferFormModel.name" disabled/>
+      </a-form-item>
+      <a-form-item label="账户类型">
+        <a-select v-model="directionalOfferFormModel.accountType">
+          <!-- 添加选项 -->
+        </a-select>
+      </a-form-item>
+      <a-form-item label="库存账号">
+        <a-select v-model="directionalOfferFormModel.offerAccount">
+          <!-- 添加选项 -->
+        </a-select>
+      </a-form-item>
+      <a-form-item
+          label="可用库存"
+          v-show="directionalOfferFormModel.flow === '卖出'"
+      >
+        <a-input
+            v-model="directionalOfferFormModel.available"
+            suffix="吨"
+        />
+      </a-form-item>
 
-        <a-form-item label="委托价格">
-          <a-input v-model="directionalOfferFormModel.price" suffix="元"/>
-        </a-form-item>
-        <a-form-item label="委托数量">
-          <a-input v-model="directionalOfferFormModel.Num" suffix="吨"/>
-        </a-form-item>
-        <div class="buttonGroup">
-          <button @click="submitForm">提交</button>
-          <button @click="clearForm">清空</button>
-        </div>
-      </a-form>
-    </div>
-    <div class="right">
-      <SellListing></SellListing>
-    </div>
+      <a-form-item label="委托价格">
+        <a-input v-model="directionalOfferFormModel.price" suffix="元"/>
+      </a-form-item>
+      <a-form-item label="委托数量">
+        <a-input v-model="directionalOfferFormModel.Num" suffix="吨"/>
+      </a-form-item>
+      <div class="buttonGroup">
+        <button @click="submitForm">提交</button>
+        <button @click="clearForm">清空</button>
+      </div>
+    </a-form>
+  </div>
+  <div class="right">
+    <BuyListing></BuyListing>
+  </div>
 </template>
 <script setup>
 import {ref, nextTick} from "vue";
-import SellListing from "./SellListing.vue"
+import BuyListing from "./BuyListing.vue"
 
 const directionalOfferFormModel = ref({
   code: "",
@@ -93,8 +84,8 @@ const clearForm = () => {
 .left {
   float: left;
   height: 40.8vh;
-  width: 17vw;
   box-sizing: border-box;
+  width: 17vw;
   overflow: auto;
   background: #eceff6;
   border-right: 2px solid #a8b7d3;

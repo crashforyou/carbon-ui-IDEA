@@ -11,12 +11,12 @@
                 <a-form-item label="标的物名称">
                     <a-input v-model="directionalOfferFormModel.name" disabled/>
                 </a-form-item>
-                <a-form-item label="配额账户">
+                <a-form-item label="账户类型">
                     <a-select v-model="directionalOfferFormModel.accountType">
                     <!-- 添加选项 -->
                     </a-select>
                 </a-form-item>
-                <a-form-item label="资金账户">
+                <a-form-item label="配额账户">
                     <a-select v-model="directionalOfferFormModel.offerAccount">
                         <!-- 添加选项 -->
                     </a-select>
@@ -30,16 +30,6 @@
                         suffix="吨"
                     />
                 </a-form-item>
-                <a-form-item
-                    label="可用资金"
-                    v-show="directionalOfferFormModel.flow === '买入'"
-                >
-                    <a-input
-                        v-model="directionalOfferFormModel.available"
-                        suffix="元"
-                    />
-                </a-form-item>
-
                 <a-form-item label="委托价格">
                     <a-input v-model="directionalOfferFormModel.price" suffix="元"/>
                 </a-form-item>
