@@ -10,14 +10,6 @@
     <a-form-item label="成交日期">
       <a-range-picker v-model="dateRange" size="small"/>
     </a-form-item>
-    <a-form-item label="买卖方向">
-      <a-select v-model="direction" placeholder="请选择买卖方向" size="small" style="width: 150px">
-        <a-select-option value="all" checked>全部</a-select-option>
-        <a-select-option value="buy">买入</a-select-option>
-        <a-select-option value="sell">卖出</a-select-option>
-        <!-- 更多选项 -->
-      </a-select>
-    </a-form-item>
     <a-form-item>
       <button html-type="submit">搜索</button>
       <span>&nbsp;&nbsp;&nbsp;</span>
@@ -45,29 +37,26 @@ const data = [];
 const pagination = reactive({current: 1, pageSize: 10});
 
 const columns = [
-  {title: "成交日期", dataIndex: "orderDate", width: 100},
+  {title: "委托编号", dataIndex: "orderNumber", width: 100},
   {title: "成交时间", dataIndex: "orderTime", width: 100},
   {title: "标的物代码", dataIndex: "code", width: 120},
   {title: "标的物名称", dataIndex: "name", width: 120},
-  {title: "买卖方向", dataIndex: "direction", width: 100},
-  {title: "成交数量", dataIndex: "finallyAmount", width: 100},
   {title: "成交金额", dataIndex: "finallyBalance", width: 100},
-  {title:"对方客户号",dataIndex: "directionOrGroupId",width: 100},
-  {title: "委托编号", dataIndex: "orderNumber", width: 100},
+  {title:"卖方客户",dataIndex: "requestClient",width: 100},
+  {title:"买方客户",dataIndex: "purchaserClient",width: 100},
+
 ];
 
 for (let i = 0; i < 100; i++) {
   data.push({
     key:i,
-    orderDate: `成交日期${i + 1}`,
+    orderNumber: `委托编号${i + 1}`,
     orderTime: `成交时间${i + 1}`,
     code: `标的物代码${i + 1}`,
     name: `标的物名称${i + 1}`,
-    finallyAmount:`最终数量${i+1}`,
-    finallyBalance:`最终金额${i+1}`,
-    direction: `买卖方向${i + 1}`,
-    directionOrGroupId:`对方${i + 1}`,
-    orderNumber: `委托编号${i + 1}`,
+    finallyBalance:`最终报价金额${i+1}`,
+    requestClient:`卖方客户${i+1}`,
+    purchaserClient:`买方客户${i+1}`,
   });
 }
 

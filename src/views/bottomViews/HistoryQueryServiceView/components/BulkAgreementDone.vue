@@ -45,41 +45,41 @@ const data = [];
 const pagination = reactive({current: 1, pageSize: 10});
 
 const columns = [
-  {title: "成交日期", dataIndex: "orderDate", width: 100},
+  {title: "委托编号", dataIndex: "orderNumber", width: 100},
   {title: "成交时间", dataIndex: "orderTime", width: 100},
-  {title: "操作员代码", dataIndex: "operatorCode", width: 120},
   {title: "标的物代码", dataIndex: "code", width: 120},
   {title: "标的物名称", dataIndex: "name", width: 120},
+  {title: "买卖方向", dataIndex: "direction", width: 100},
   {title: "初始单价", dataIndex: "firstPrice", width: 100},
   {title: "初始数量", dataIndex: "firstAmount", width: 100},
   {title: "初始报价金额", dataIndex: "firstBalance", width: 120},
-  {title: "买卖方向", dataIndex: "direction", width: 100},
   {title: "成交单价", dataIndex: "finallyPrice", width: 100},
   {title: "成交数量", dataIndex: "finallyAmount", width: 100},
   {title: "成交金额", dataIndex: "finallyBalance", width: 100},
-  {title: "交易账号", dataIndex: "account", width: 100},
-  {title:"对方",dataIndex: "directionOrGroupId",width: 100},
-  {title: "委托编号", dataIndex: "orderNumber", width: 100},
+  {title: "群组ID", dataIndex: "groupId", width: 100},
+  {title: "发起方", dataIndex: "listingClient", width: 100},
+  {title: "接受方",dataIndex: "delistingClient",width: 100},
 ];
 
 for (let i = 0; i < 100; i++) {
   data.push({
     key:i,
-    orderDate: `成交日期${i + 1}`,
+    orderNumber: `委托编号${i + 1}`,
     orderTime: `成交时间${i + 1}`,
-    operatorCode: `操作员代码${i + 1}`,
     code: `标的物代码${i + 1}`,
     name: `标的物名称${i + 1}`,
+    direction: `买卖方向${i + 1}`,
     firstPrice:`初始单价${i+1}`,
     firstAmount:`初始数量${i+1}`,
     firstBalance:`初始金额${i+1}`,
     finallyPrice:`最终单价${i+1}`,
     finallyAmount:`最终数量${i+1}`,
     finallyBalance:`最终金额${i+1}`,
-    direction: `买卖方向${i + 1}`,
-    account: `交易账号${i + 1}`,
+    listingClient:`发起方${i + 1}`,
+    delistingClient:`接受方${i + 1}`,
+    groupId:`群组Id${i + 1}`,//群组报价有 定向报价无
     directionOrGroupId:`对方${i + 1}`,
-    orderNumber: `委托编号${i + 1}`,
+
   });
 }
 

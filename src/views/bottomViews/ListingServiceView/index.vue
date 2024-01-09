@@ -73,8 +73,8 @@ import {reactive, ref} from "vue";
     NotificationOutlined,
   } from "@ant-design/icons-vue";
 
-// 使用 ref 创建响应式数据 selectedOption，并初始化为 null
-const selectedOption = ref(null);
+// 使用 ref 创建响应式数据 selectedOption，并初始化为 1
+const selectedOption = ref("1");
 
 // 更新右侧内容的方法
 const updateContent = (option) => {
@@ -91,6 +91,8 @@ const dateRange = ref([]);
 const direction = ref(null);
 const data = [];
 const pagination = reactive({current: 1, pageSize: 10});
+
+
 
 const columns = [
   {title: "委托日期", dataIndex: "orderDate", width: 100},

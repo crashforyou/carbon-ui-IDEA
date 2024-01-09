@@ -37,33 +37,32 @@ const data = [];
 const pagination = reactive({current: 1, pageSize: 10});
 
 const columns = [
-  {title: "委托日期", dataIndex: "orderDate", width: 100},
+  {title: "委托编号", dataIndex: "orderNumber", width: 100},
   {title: "委托时间", dataIndex: "orderTime", width: 100},
-  {title: "操作员代码", dataIndex: "operatorCode", width: 100},
   {title: "标的物代码", dataIndex: "code", width: 120},
   {title: "标的物名称", dataIndex: "name", width: 120},
-  {title: "委托数量", dataIndex: "Amount", width: 100},
+  {title: "账户类型", dataIndex: "accountType", width: 120},
+  {title: "配额账户", dataIndex: "quotaAccount", width: 120},
   {title: "委托价格", dataIndex: "price", width: 100},
+  {title: "委托数量", dataIndex: "Amount", width: 100},
+  {title: "操作员代码", dataIndex: "operatorCode", width: 100},
   {title: "委托状态", dataIndex: "status", width: 100},
-  {title: "成交金额", dataIndex: "finallyBalance", width: 100},
-  {title:"对方客户号",dataIndex: "directionOrGroupId",width: 100},
-  {title: "委托编号", dataIndex: "orderNumber", width: 100},
+
 ];
 
 for (let i = 0; i < 100; i++) {
   data.push({
     key:i,
-    orderDate: `委托日期${i + 1}`,
+    orderNumber: `委托编号${i + 1}`,
     orderTime: `委托时间${i + 1}`,
-    operatorCode: `操作员代码${i + 1}`,
     code: `标的物代码${i + 1}`,
     name: `标的物名称${i + 1}`,
+    accountType:`账户类型${i + 1}`,
+    quotaAccount:`配额账户`,
     Amount:`委托数量${i+1}`,
     price:`委托价格${i+1}`,
+    operatorCode: `操作员代码${i + 1}`,
     status: `委托状态${i + 1}`,
-    finallyBalance: `成交金额${i + 1}`,
-    directionOrGroupId:`对方客户号${i + 1}`,
-    orderNumber: `委托编号${i + 1}`,
   });
 }
 
