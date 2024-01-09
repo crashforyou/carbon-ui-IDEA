@@ -42,37 +42,35 @@ const data = [];
 const pagination = reactive({current: 1, pageSize: 10});
 
 const columns = [
-  {title: "报价日期", dataIndex: "orderDate", width: 100},
+  {title: "报价编号", dataIndex: "orderNumber", width: 100},
   {title: "报价时间", dataIndex: "orderTime", width: 100},
-  {title: "操作员代码", dataIndex: "operatorCode", width: 120},
   {title: "标的物代码", dataIndex: "code", width: 120},
   {title: "标的物名称", dataIndex: "name", width: 120},
+  {title: "账户类型", dataIndex: "accountType", width: 120},
+  {title: "账户", dataIndex: "account", width: 120},
   {title: "买卖方向", dataIndex: "direction", width: 100},
   {title: "报价价格", dataIndex: "orderPrice", width: 100},
   {title: "报价数量", dataIndex: "orderQuantity", width: 100},
-  // {title: "成交金额", dataIndex: "transactionAmount", width: 100},可阉割
-  // {title: "成交量", dataIndex: "transactionQuantity", width: 100},可阉割
-  {title: "交易账号", dataIndex: "account", width: 100},
+  {title: "群组或定向客户", dataIndex: "GroupOrDirection", width: 140},
+  {title: "操作员代码", dataIndex: "operatorCode", width: 120},
   {title: "报价状态", dataIndex: "status", width: 100},
-  {title: "报价编号", dataIndex: "orderNumber", width: 100},
 ];
 
 for (let i = 0; i < 100; i++) {
   data.push({
     key:i,
-    orderDate: `委托日期${i + 1}`,
+    orderNumber: `委托编号${i + 1}`,
     orderTime: `委托时间${i + 1}`,
-    operatorCode: `操作员代码${i + 1}`,
     code: `标的物代码${i + 1}`,
     name: `标的物名称${i + 1}`,
-    direction: `买卖方向${i + 1}`,
-    orderQuantity: `委托数量${i + 1}`,
-    orderPrice: `委托价格${i + 1}`,
-    // transactionAmount: `成交金额${i + 1}`,
-    // transactionQuantity: `成交量${i + 1}`,
+    accountType:"账户类型",
     account: `交易账号${i + 1}`,
+    direction: `买卖方向${i + 1}`,
+    orderPrice: `委托价格${i + 1}`,
+    orderQuantity: `委托数量${i + 1}`,
+    GroupOrDirection:"群组或定向客户",
+    operatorCode: `操作员代码${i + 1}`,
     status: `状态${i + 1}`,
-    orderNumber: `委托编号${i + 1}`,
   });
 }
 
