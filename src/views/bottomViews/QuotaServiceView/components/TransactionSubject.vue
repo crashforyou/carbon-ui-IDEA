@@ -30,21 +30,22 @@ const data = ref([]);
 for (let i = 0; i < 100; i++) {
   data.value.push({
     key: i,
-    marketName:"时长名称",
+    quotaAccountId:`配额账户Id`,
+    code:`标的物代码`,
+    name:`标的物名称`,
+    holdAmount:`持有数量`,
+    availableAmount:`可用数量`,
+    frozenAmount:`冻结数量`,
+
   });
 }
 const columns = [
-  {title: "市场名称", dataIndex: "marketName"},
+  {title: "配额账户Id", dataIndex: "quotaAccountId"},
   {title: "标的物代码", dataIndex: "code"},
   {title: "标的物名称", dataIndex: "name"},
   {title: "持有数量(吨)", dataIndex: "holdAmount"},
   {title: "可用数量(吨)", dataIndex: "availableAmount"},
   {title: "冻结数量(吨)", dataIndex: "frozenAmount"},
-  {title: "买入数量(吨)", dataIndex: "buyAmount"},
-  {title: "卖出数量(吨)", dataIndex: "sellAmount"},
-  {title: "转入申请数量(吨)", dataIndex: "transferInAmount" ,width:130},
-  {title: "转出申请数量(吨)", dataIndex: "transferOutAmount",width:130},
-  {title: "交易账号", dataIndex: "account"},
 ];
 const pagination = {pageSize: 10};
 

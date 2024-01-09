@@ -41,22 +41,22 @@ const data = ref([]);
 for (let i = 0; i < 100; i++) {
   data.value.push({
     key: i,
-    tradeDate:"交易日期",
+    tradeTime:"交易时间",
   });
 }
 const columns = [
-  {title: "交易日期", dataIndex: "tradeDate" , width: 120},
   {title: "交易时间", dataIndex: "tradeTime", width: 120},
   {title: "客户号", dataIndex: "customerNumber",width: 120},
   {title: "客户名称", dataIndex: "customerName",width: 120},
   {title: "操作员代码", dataIndex: "operatorCode",width: 120},
   {title: "买卖方向", dataIndex: "tradeDirection",width: 120},
   {title: "标的物代码", dataIndex: "code",width: 120},
+  {title: "标的物名称", dataIndex: "name",width: 120},
   {title: "划转数量（吨）", dataIndex: "transferAmount",width: 120},
   {title: "持有数量（吨）", dataIndex: "holdAmount",width: 120},
   {title: "可用数量（吨）", dataIndex: "availableAmount",width: 120},
-  {title: "划入划出状态", dataIndex: "transferStatus",width: 120},
   {title: "交易账号", dataIndex: "account",width: 120},
+  {title: "划入划出状态", dataIndex: "transferStatus",width: 120},
   {title: "备注", dataIndex: "remark",width: 120},
 ];
 const pagination = {pageSize: 10};
