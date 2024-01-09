@@ -1,150 +1,54 @@
 <template>
-  <a-table :data-source="data" :columns="columns">
-    <template #headerCell="{ column }">
-      <template v-if="column.key === 'name'">
-        <span style="color: #1890ff">Name</span>
-      </template>
-    </template>
-    <template
-        #customFilterDropdown="{ setSelectedKeys, selectedKeys, confirm, clearFilters, column }"
-    >
-      <div style="padding: 8px">
-        <a-input
-            ref="searchInput"
-            :placeholder="`Search ${column.dataIndex}`"
-            :value="selectedKeys[0]"
-            style="width: 188px; margin-bottom: 8px; display: block"
-            @change="e => setSelectedKeys(e.target.value ? [e.target.value] : [])"
-            @pressEnter="handleSearch(selectedKeys, confirm, column.dataIndex)"
-        />
-        <a-button
-            type="primary"
-            size="small"
-            style="width: 90px; margin-right: 8px"
-            @click="handleSearch(selectedKeys, confirm, column.dataIndex)"
-        >
-          <template #icon>
-            <SearchOutlined/>
-          </template>
-          Search
-        </a-button>
-        <a-button size="small" style="width: 90px" @click="handleReset(clearFilters)">
-          Reset
-        </a-button>
-      </div>
-    </template>
-    <template #customFilterIcon="{ filtered }">
-      <search-outlined :style="{ color: filtered ? '#108ee9' : undefined }"/>
-    </template>
-    <template #bodyCell="{ text, column }">
-      <span v-if="state.searchText && state.searchedColumn === column.dataIndex">
-        <template
-            v-for="(fragment, i) in text
-            .toString()
-            .split(new RegExp(`(?<=${state.searchText})|(?=${state.searchText})`, 'i'))"
-        >
-          <mark
-              v-if="fragment.toLowerCase() === state.searchText.toLowerCase()"
-              :key="i"
-              class="highlight"
-          >
-            {{ fragment }}
-          </mark>
-          <template v-else>{{ fragment }}</template>
-        </template>
-      </span>
-    </template>
-  </a-table>
+  <a-table
+      :dataSource="data"
+      :columns="columns"
+      :rowKey="record => record.id"
+      :pagination="pagination"
+      :scroll="{ y: 240 }"
+  />
 </template>
+
 <script setup>
-import {SearchOutlined} from '@ant-design/icons-vue';
-import {reactive, ref} from 'vue';
+import {onMounted, ref} from 'vue';
+import axios from 'axios';
 
-const data = [
-  {
-    key: '1',
-    name: 'John Brown',
-    age: 32,
-    address: 'New York No. 1 Lake Park',
-  },
-  {
-    key: '2',
-    name: 'Joe Black',
-    age: 42,
-    address: 'London No. 1 Lake Park',
-  },
-  {
-    key: '3',
-    name: 'Jim Green',
-    age: 32,
-    address: 'Sidney No. 1 Lake Park',
-  },
-  {
-    key: '4',
-    name: 'Jim Red',
-    age: 32,
-    address: 'London No. 2 Lake Park',
-  },
-];
-
-const state = reactive({
-  searchText: '',
-  searchedColumn: '',
+const data = ref([]);
+const columns = ref([
+  {title: '交易编号', dataIndex: 'id', key: 'id'},
+  {title: '成交时间', dataIndex: 'time', key: 'time'},
+  {title: '标的物代码', dataIndex: 'subjectMatterCode', key: 'subjectMatterCode'},
+  {title: '标的物名称', dataIndex: 'subjectMatterName', key: 'subjectMatterName'},
+  {title: '买卖方向', dataIndex: 'flowType', key: 'flowType'},
+  {title: '初始报价单价', dataIndex: 'firstPrice', key: 'firstPrice'},
+  {title: '初始报价数量', dataIndex: 'firstAmount', key: 'firstAmount'},
+  {title: '初始报价金额', dataIndex: 'firstBalance', key: 'firstBalance'},
+  {title: '最终报价单价', dataIndex: 'finallyPrice', key: 'finallyPrice'},
+  {title: '最终报价数量', dataIndex: 'finallyAmount', key: 'finallyAmount'},
+  {title: '最终报价金额', dataIndex: 'finallyBalance', key: 'finallyBalance'},
+  {title: '挂牌方', dataIndex: 'listingClient', key: 'listingClient'},
+  {title: '摘牌方', dataIndex: 'delistingClient', key: 'delistingClient'},
+]);
+const pagination = ref({
+  current: 1,
+  pageSize: 10,
+  total: 0,
 });
 
-const searchInput = ref();
-
-const columns = [
-  {
-    title: 'Name',
-    dataIndex: 'name',
-    key: 'name',
-    customFilterDropdown: true,
-    onFilter: (value, record) => record.name.toString().toLowerCase().includes(value.toLowerCase()),
-    onFilterDropdownOpenChange: visible => {
-      if (visible) {
-        setTimeout(() => {
-          searchInput.value.focus();
-        }, 100);
-      }
+const fetchData = async () => {
+  let clientId = localStorage.getItem('clientId');
+  const response = await axios.get(`http://localhost:8080/bulkAgreement/selectGroupDoneRecord/${clientId}`, {
+    params: {
+      page: pagination.value.current,
+      pageSize: pagination.value.pageSize,
     },
-  },
-  {
-    title: 'Age',
-    dataIndex: 'age',
-    key: 'age',
-  },
-  {
-    title: 'Address',
-    dataIndex: 'address',
-    key: 'address',
-    customFilterDropdown: true,
-    onFilter: (value, record) =>
-        record.address.toString().toLowerCase().includes(value.toLowerCase()),
-    onFilterDropdownOpenChange: visible => {
-      if (visible) {
-        setTimeout(() => {
-          searchInput.value.focus();
-        }, 100);
-      }
-    },
-  },
-];
+  });
 
-const handleSearch = (selectedKeys, confirm, dataIndex) => {
-  confirm();
-  state.searchText = selectedKeys[0];
-  state.searchedColumn = dataIndex;
+  data.value = response.data;
+  pagination.value.total = response.data.total;
 };
 
-const handleReset = clearFilters => {
-  clearFilters({confirm: true});
-  state.searchText = '';
-};
+onMounted(() => {
+  fetchData();
+});
+
 </script>
-<style scoped>
-.highlight {
-  background-color: rgb(255, 192, 105);
-  padding: 0px;
-}
-</style>
