@@ -1,18 +1,21 @@
 <!--大宗协议询价-->
 <!--协议洽谈-->
 <template>
+  <div class="mainer">
   <a-layout>
-    <a-layout-header
-        style="display: flex; justify-content: flex-end; align-items: center"
-    >
-      <a-button type="primary" @click="goBack">返回</a-button>
-    </a-layout-header>
     <a-layout-content>
+      <div style="border-bottom: 2px solid #a8b7d3;padding: 1.5vh;font-weight: bold;">
+        <span>交易信息</span>
+      </div>
       <a-table
           :dataSource="transactionData"
           :columns="transactionColumns"
+          :pagination="false"
       ></a-table>
-      <a-table :dataSource="quoteData" :columns="quoteColumns"></a-table>
+      <div style="border-bottom: 2px solid #a8b7d3;padding: 1.5vh;font-weight: bold;">
+        <span>报价记录</span>
+      </div>
+      <a-table :dataSource="quoteData" :columns="quoteColumns"  :pagination="false"></a-table>
       <a-form @submit="handleSubmit">
         <a-row gutter="16">
           <a-col :span="4">
@@ -50,6 +53,7 @@
       </a-form>
     </a-layout-content>
   </a-layout>
+  </div>
 </template>
 
 <script setup>
@@ -63,7 +67,12 @@ const availableQuota = ref(""); // 这里可以填写可用配额
 const transactionData = ref([
   // 在这里添加交易数据
 ]);
-
+for (let i = 0; i < 2; i++) {
+  transactionData.value.push({
+    key: i,
+    quoteId:"报价编号"
+  });
+}
 const transactionColumns = ref([
   { title: "报价编号", dataIndex: "quoteId", key: "quoteId" },
   { title: "标的物编号", dataIndex: "itemId", key: "itemId" },
@@ -90,7 +99,12 @@ const transactionColumns = ref([
 const quoteData = ref([
   // 在这里添加报价记录数据
 ]);
-
+for (let i = 0; i < 2; i++) {
+  quoteData.value.push({
+    key: i,
+    index:"序号"
+  });
+}
 const quoteColumns = ref([
   { title: "序号", dataIndex: "index", key: "index" },
   { title: "操作", dataIndex: "operation", key: "operation" },
@@ -102,9 +116,7 @@ const quoteColumns = ref([
   { title: "协议备注", dataIndex: "agreedNote", key: "agreedNote" },
 ]);
 
-const goBack = () => {
-  // 在这里添加返回上级页面的代码
-};
+
 const handleSubmit = () => {
   // 在这里添加出价的代码
 };
@@ -113,3 +125,12 @@ const terminate = () => {
   // 在这里添加终止的代码
 };
 </script>
+
+<style scoped>
+.mainer{
+  background: #eceff6;
+  height: 86%;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+</style>
