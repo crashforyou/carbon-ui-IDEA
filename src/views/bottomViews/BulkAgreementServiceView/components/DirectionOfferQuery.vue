@@ -16,8 +16,8 @@
         <template v-if="column.key === 'operation'">
           <a v-if="record.status === '未成交'">洽谈</a>
 <!--          <a v-if="record.status === '未成交'" style="margin-left: 5px">详情</a>-->
-          <a v-if="record.status === '未成交'" style="margin-left: 5px" @click="">修改</a>
-          <a v-if="record.status === '未成交'" style="margin-left: 5px">撤回</a>
+          <a v-if="record.status === '未成交'" style="margin-left: 5px" @click="handleEdit(record)">修改</a>
+          <a v-if="record.status === '未成交'" style="margin-left: 5px" @click="handleRevoke(record)">撤回</a>
           <a v-if="record.status === '已成交'">洽谈查询</a>
           <a v-if="record.status === '已成交'" style="margin-left: 5px">详情</a>
         </template>
@@ -122,7 +122,7 @@ for (let i=0;i<100;i++){
   });
 }
 const handleEdit = (record) => {
-  directionPostId.value = record.id;
+  let directionPostId = record.key[9];
   axios.post(`http://localhost:8080/bulkAgreement/modifyDirectionOffer/${directionPostId}`, record)
       .then((res) => {
         console.log(res);
@@ -132,6 +132,14 @@ const handleEdit = (record) => {
       });
 };
 const handleRevoke = (record) => {
+  let directionPostId = record.key[9];
+  axios.post(`http://localhost:8080/bulkAgreement/deleteDirectionOffer/${directionPostId}`, record)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   console.log(record);
 };
 // onMounted(() => {

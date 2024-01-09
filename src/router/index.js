@@ -17,6 +17,7 @@ import AuctionTrade from "@/views/bottomViews/AuctionServiceView/AuctionTrade.vu
 import AuctionRequest from "@/views/bottomViews/AuctionServiceView/AuctionRequest.vue";
 import CapitalAccountManage from "@/views/bottomViews/UserServiceView/CapitalAccountManage.vue"
 import QuotaAccountManage from "@/views/bottomViews/UserServiceView/QuotaAccountManage.vue"
+import BulkAgreementGroupQueryView from "@/views/bottomViews/BulkAgreementServiceView/GroupQuery.vue"
 const routes = [
   {
     path: '/',
@@ -37,6 +38,16 @@ const routes = [
     path: '/bulkAgreement/Query',
     name:'BulkAgreementQuery',
     component: BulkAgreementQueryView
+  },
+  {
+    path: '/bulkAgreement/QueryGroup',
+    name:'BulkAgreementGroupQuery',
+    component:BulkAgreementGroupQueryView,
+  },
+  {
+    path:'/bulkAgreement/Components/NegotiationPage',
+    name:'NegotiationPage',
+    component:()=>import('@/views/bottomViews/BulkAgreementServiceView/components/NegotiationPage.vue')
   },
   {
     path: '/capital/Query',

@@ -30,10 +30,13 @@
             <a-menu-item key="sub1_1">大宗协议报价</a-menu-item>
           </router-link>
           <router-link to="/bulkAgreement/Query">
-            <a-menu-item key="sub1_2">大宗协议询价</a-menu-item>
+            <a-menu-item key="sub1_2">定向询价</a-menu-item>
+          </router-link>
+          <router-link to="/bulkAgreement/QueryGroup">
+            <a-menu-item ker="sub1-3">群组询价</a-menu-item>
           </router-link>
           <router-link to="/bulkAgreement/Group">
-            <a-menu-item key="sub1_3">群组管理</a-menu-item>
+            <a-menu-item key="sub1_4">群组管理</a-menu-item>
           </router-link>
         </a-sub-menu>
 

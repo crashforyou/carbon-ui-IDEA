@@ -5,7 +5,7 @@
     <button :class="{ active: activeButton === 'button2' }" @click="activeButton = 'button2'">群组报价</button>
 
     <div v-if="activeButton === 'button1'">
-      <OfferDirect></OfferDirect>
+      <OfferDirect ></OfferDirect>
     </div>
 
     <div v-if="activeButton === 'button2'">

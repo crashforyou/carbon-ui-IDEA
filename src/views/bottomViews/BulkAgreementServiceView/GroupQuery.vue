@@ -1,25 +1,19 @@
-<!--大宗协议询价-->
+<!--大宗协议群组询价-->
 <template>
-  <!-- <a-tabs v-model:activeKey="activeKey">
-    <a-tab-pane key="1" tab="询价查询" @click="showQuerySelect">
-      <QuerySelect datasrc="queryResult1"/>
-    </a-tab-pane>
-    <a-tab-pane key="2" tab="成交查询" @click="showBargainSelect" force-render>
-      <BargainSelect datasrc="queryResult2"/>
-    </a-tab-pane>
-  </a-tabs> -->
   <div class="main">
     <div class="butttonGroup">
       <button :class="{ active: activeButton === 'button1' }" @click="activeButton = 'button1'">询价查询</button>
       <button :class="{ active: activeButton === 'button2' }" @click="activeButton = 'button2'">成交查询</button>
     </div>
-    <QuerySelect  v-if="activeButton === 'button1'"/>
-    <BargainSelect v-if="activeButton === 'button2'"/>
+    <QuerySelectGroup  v-if="activeButton === 'button1'"/>
+    <BargainSelectGroup v-if="activeButton === 'button2'"/>
   </div>
 </template>
 
 <script setup>
 import {ref} from "vue";
+import QuerySelectGroup from "@/views/bottomViews/BulkAgreementServiceView/components/QuerySelectGroup.vue";
+import BargainSelectGroup from "@/views/bottomViews/BulkAgreementServiceView/components/BargainSelectGroup.vue";
 import QuerySelect from "@/views/bottomViews/BulkAgreementServiceView/components/QuerySelect.vue";
 import BargainSelect from "@/views/bottomViews/BulkAgreementServiceView/components/BargainSelect.vue";
 
