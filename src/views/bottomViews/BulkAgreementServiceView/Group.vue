@@ -1,4 +1,4 @@
-<template>
+ <template>
   <div class="main">
     <div class="butttonGroup">
       <button type="primary" @click="addGroup">添加</button>
@@ -87,6 +87,7 @@ import {DownOutlined} from "@ant-design/icons-vue";
 
 const columns = [
   {title: "群组名称", dataIndex: "name", key: "name",align:"center"},
+  {title: "群组Id", dataIndex: "groupId", key: "key",align:"center"},
   {title: "创建时间", dataIndex: "createdAt", key: "createdAt",align:"center"},
   {title: "修改时间", dataIndex: "updatedAt", key: "updatedAt",align:"center"},
   {title: "操作", key: "operation",align:"center"},
@@ -95,10 +96,7 @@ const columns = [
 const data = [];
 for (let i = 0; i < 100; ++i) {
   data.push({
-    key: i,
-    name: `Group ${i + 1}`,
-    createdAt: "2021-10-01 10:00:00",
-    updatedAt: "2021-10-02 11:00:00",
+
   });
 }
 
