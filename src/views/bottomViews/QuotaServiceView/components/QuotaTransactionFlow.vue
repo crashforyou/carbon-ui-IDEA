@@ -43,11 +43,10 @@ const data = ref([]);
 for (let i = 0; i < 100; i++) {
   data.value.push({
     key: i,
-    tradeDate:"交易日期",
+    tradeTime:`交易时间`,
   });
 }
 const columns = [
-  {title: "交易日期", dataIndex: "tradeDate"},
   {title: "交易时间", dataIndex: "tradeTime"},
   {title: "客户号", dataIndex: "customerNumber"},
   {title: "客户名称", dataIndex: "customerName"},
