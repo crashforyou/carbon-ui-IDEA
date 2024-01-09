@@ -15,7 +15,7 @@
       <template #bodyCell="{ column, record }">
         <template v-if="column.key === 'operation'">
           <a v-if="record.status === '未成交'">洽谈</a>
-<!--          <a v-if="record.status === '未成交'" style="margin-left: 5px">详情</a>-->
+          <!--          <a v-if="record.status === '未成交'" style="margin-left: 5px">详情</a>-->
           <a v-if="record.status === '未成交'" style="margin-left: 5px">修改</a>
           <a v-if="record.status === '未成交'" style="margin-left: 5px">撤回</a>
           <a v-if="record.status === '询价结束'">洽谈查询</a>
@@ -66,10 +66,10 @@ const columns1 = [
   {title: "标的物代码", dataIndex: "subjectMatterCode", key: "2", width: 150, align: 'center'},
   {title: "标的物名称", dataIndex: "subjectMatterName", key: "3", width: 150, align: 'center'},
   {title: "买卖方向", dataIndex: "flowType", key: "4", width: 150, align: 'center'},
-  {title: "初始报价价格", dataIndex: "price", key: "5", width: 150, align: 'center'},
-  {title: "初始报价数量", dataIndex: "amount", key: "6", width: 150, align: 'center'},
+  {title: "委托价格", dataIndex: "price", key: "5", width: 150, align: 'center'},
+  {title: "委托数量", dataIndex: "amount", key: "6", width: 150, align: 'center'},
   // {title: "初始报价金额", dataIndex: "initialOfferAmount", key: "6", width: 150, align: 'center'},
-  {title: "交易账号", dataIndex: "account", key: "7", width: 150, align: 'center'},
+  {title: "群组Id", dataIndex: "groupId", key: "7", width: 150, align: 'center'},
   {title: "报价状态", dataIndex: "status", key: "8", width: 150, align: 'center'},
   // {title: "询价状态", dataIndex: "status", key: "9", width: 150, align: 'center'},
   {title: "报价编号", dataIndex: "id", key: "9", width: 150, align: 'center'},
@@ -92,25 +92,26 @@ const columns2 = [
 
 let data1 = ref([]);
 let data2 = ref([]);
-for (let i=0;i<100;i++){
+for (let i = 0; i < 100; i++) {
   data1.value.push({
     key: i,
-    time: "2021-10-01 10:00:00",
+    time: "2021-01-01 10:00:00",
     subjectMatterCode: "100000",
     subjectMatterName: "标的物名称",
-    flowType: "买",
+    flowType: "买入",
     price: "100",
     amount: "100",
-    account: "100000",
+    // initialOfferAmount: "100",
+    groupId: "100000",
     status: "未成交",
     id: "100000",
   });
   data2.value.push({
     key: i,
-    time: "2021-10-01 10:00:00",
+    time: "2021-01-01 10:00:00",
     subjectMatterCode: "100000",
     subjectMatterName: "标的物名称",
-    flowType: "买",
+    flowType: "买入",
     firstPrice: "100",
     firstAmount: "100",
     firstBalance: "100",
@@ -121,26 +122,26 @@ for (let i=0;i<100;i++){
     delistingClient: "100000",
   });
 }
-// onMounted(() => {
-//   let operatorCode = localStorage.getItem("operatorCode");
-//   let clientId = localStorage.getItem("clientId");
-//   axios
-//       .get(`http://localhost:8080/bulkAgreement/selectDirectionOffer/${operatorCode}`)
-//       .then((res) => {
-//         data1.value = res.data;
-//       })
-//       .catch((err) => {
-//         console.log(err);
-//       });
-//   axios
-//       .get(`http://localhost:8080/bulkAgreement/selectDirectionDoneRecord/${clientId}`)
-//       .then((res) => {
-//         data2.value = res.data;
-//       })
-//       .catch((err) => {
-//         console.log(err);
-//       });
-// });
+onMounted(() => {
+  let operatorCode = localStorage.getItem("operatorCode");
+  let clientId = localStorage.getItem("clientId");
+  axios
+      .get(`http://localhost:8080/bulkAgreement/selectDirectionOffer/${operatorCode}`)
+      .then((res) => {
+        data1.value = res.data;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  axios
+      .get(`http://localhost:8080/bulkAgreement/selectDirectionDoneRecord/${clientId}`)
+      .then((res) => {
+        data2.value = res.data;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+});
 
 </script>
 <style scoped>

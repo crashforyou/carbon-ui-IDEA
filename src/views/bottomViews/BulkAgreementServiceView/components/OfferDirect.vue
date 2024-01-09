@@ -97,7 +97,7 @@ const submitForm = () => {
   directionalOfferFormModel.value.operatorCode = localStorage.getItem("operatorCode");
   // 提交表单
   axios
-      .post("http://localhost:8080/bulkAgreement/directionOffer",
+      .post(`http://localhost:8080/bulkAgreement/directionOffer`,
           // 表单数据
           directionalOfferFormModel.value
       )

@@ -2,10 +2,10 @@
   <div class="left">
         <a-form :model="groupOfferFormModel" :label-col="{ span: 7 }" :wrapper-col="{ span: 15 }">
           <a-form-item label="标的物代码">
-            <a-input v-model="groupOfferFormModel.code"/>
+            <a-input v-model="groupOfferFormModel.subjectMatterCode"/>
           </a-form-item>
           <a-form-item label="标的物名称">
-            <a-input v-model="groupOfferFormModel.name" disabled/>
+            <a-input v-model="groupOfferFormModel.subjectMatterName" disabled/>
           </a-form-item>
           <a-form-item label="账户类型">
             <a-select v-model="groupOfferFormModel.accountType">
@@ -13,13 +13,13 @@
             </a-select>
           </a-form-item>
           <a-form-item label="报价账号">
-            <a-select v-model="groupOfferFormModel.offerAccount">
+            <a-select v-model="groupOfferFormModel.account">
               <!-- 添加选项 -->
             </a-select>
           </a-form-item>
           <a-form-item label="买卖方向">
             <a-radio-group
-                v-model:value="groupOfferFormModel.flow"
+                v-model:value="groupOfferFormModel.flowType"
                 @change="updateFlow"
             >
               <a-radio value="卖出">卖出</a-radio>
@@ -28,7 +28,7 @@
           </a-form-item>
           <a-form-item
               label="可用数量"
-              v-show="groupOfferFormModel.flow === '卖出'"
+              v-show="groupOfferFormModel.flowType === '卖出'"
           >
             <a-input
                 v-model="groupOfferFormModel.available"
@@ -37,7 +37,7 @@
           </a-form-item>
           <a-form-item
               label="可用资金"
-              v-show="groupOfferFormModel.flow === '买入'"
+              v-show="groupOfferFormModel.flowType === '买入'"
           >
             <a-input
                 v-model="groupOfferFormModel.available"
@@ -49,10 +49,10 @@
             <a-input v-model="groupOfferFormModel.price" suffix="元"/>
           </a-form-item>
           <a-form-item label="数量">
-            <a-input v-model="groupOfferFormModel.Num" suffix="吨"/>
+            <a-input v-model="groupOfferFormModel.amount" suffix="吨"/>
           </a-form-item>
           <a-form-item label="选择群组">
-            <a-input v-model="groupOfferFormModel.directionGroup"/>
+            <a-input v-model="groupOfferFormModel.groupId"/>
           </a-form-item>
           <div class="buttonGroup">
             <button @click="submitForm">提交</button>
@@ -61,30 +61,44 @@
         </a-form>
     </div>
     <div class="right">
-
+      <GroupOfferQuery></GroupOfferQuery>
     </div>
 </template>
 <script setup>
 import {ref, nextTick} from "vue";
+import GroupOfferQuery from "@/views/bottomViews/BulkAgreementServiceView/components/GroupOfferQuery.vue";
+import axios from "axios";
 const groupOfferFormModel = ref({
-  code: "",
-  name: "",
+  time: "",
+  subjectMatterCode: "",
+  subjectMatterName: "",
   accountType: "",
-  offerAccount: "",
-  flow: "卖出",
-  available: "",
+  flowType: "卖出",
+  account: "",
   price: "",
-  Num: "",
-  directionGroup: "",
+  amount: "",
+  available: "",
+  groupId: "",
+  operatorCode: "",
+  status: "",
   // 其他表单项
 });
 const updateFlow = () => {
   nextTick(() => {
-    console.log("用户点击了" + directionalOfferFormModel.value.flow);
+    console.log("用户点击了" + groupOfferFormModel.value.flowType);
   });
 };
 const submitForm = () => {
+  groupOfferFormModel.value.status = "未成交";
+  groupOfferFormModel.value.operatorCode= localStorage.getItem("operatorCode");
   // 提交表单
+  axios.post(`http://localhost:8080/bulkAgreement/groupOffer`, groupOfferFormModel.value)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
 };
 
 const clearForm = () => {
