@@ -102,7 +102,7 @@ for (let i=0;i<100;i++){
     price: "100",
     amount: "100",
     account: "100000",
-    status: "未成交",
+    status: "已成交",
     id: "100000",
   });
   data2.value.push({

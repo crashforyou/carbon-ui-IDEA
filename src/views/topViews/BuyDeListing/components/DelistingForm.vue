@@ -45,7 +45,7 @@
   </a-form>
 </template>
 
-<script>
+<script setup>
 import {ref, reactive} from 'vue';
 const {record} = reactive({
   itemCode:"1",
