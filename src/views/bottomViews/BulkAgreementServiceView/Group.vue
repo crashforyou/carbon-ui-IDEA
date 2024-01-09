@@ -82,38 +82,29 @@
   </a-modal>
 </template>
 <script  setup>
-import {ref} from "vue";
+import {onMounted, ref} from "vue";
 import {DownOutlined} from "@ant-design/icons-vue";
+import axios from "axios";
 
 const columns = [
-  {title: "群组名称", dataIndex: "name", key: "name",align:"center"},
   {title: "群组Id", dataIndex: "groupId", key: "key",align:"center"},
+  {title: "群组名称", dataIndex: "name", key: "name",align:"center"},
   {title: "创建时间", dataIndex: "createdAt", key: "createdAt",align:"center"},
   {title: "修改时间", dataIndex: "updatedAt", key: "updatedAt",align:"center"},
   {title: "操作", key: "operation",align:"center"},
 ];
 
-const data = [];
-for (let i = 0; i < 100; ++i) {
-  data.push({
+const data = ref([]);
 
-  });
-}
 
 const innerColumns = [
   {title: "序号", dataIndex: "index", key: "index",align:"center"},
+  {title: "客户ID", dataIndex: "id", key: "id",align:"center"},
   {title: "客户名称", dataIndex: "name", key: "name",align:"center"},
   {title: "操作", dataIndex: "operation",key: "operation",align:"center"},
 ];
 
-const innerData = [];
-for (let i = 0; i < 3; ++i) {
-  innerData.push({
-    key: i,
-    index: i + 1,
-    name: `Customer ${i + 1}`,
-  });
-}
+const innerData = ref([]);
 
 const groupModalVisible = ref(false);
 const customerModalVisible = ref(false);
@@ -149,88 +140,162 @@ const addCustomer = (record) => {
   currentGroup.value = record;
 };
 
-const handleGroupOk = () => {
-  if (currentGroup.value) {
-    const index = data.findIndex((item) => item.key === currentGroup.value.key);
-    if (index > -1) {
-      data[index].name = groupForm.value.name;
-      data[index].updatedAt = new Date().toLocaleString();
-    }
-  } else {
-    const key = data.length;
-    data.push({
-      key,
-      name: groupForm.value.name,
-      createdAt: new Date().toLocaleString(),
-      updatedAt: new Date().toLocaleString(),
-    });
-  }
+const handleGroupOk = () => {//新建群组
+  let groupName=groupForm.value.name;
+  let clientId=localStorage.getItem("clientId");
+  axios
+      .post(`http://localhost:8080/bulkAgreement/createGroup/${groupName}/${clientId}`)
+      .then((res)=>{
+        console.log(res);
+      })
+      .catch((err)=>{
+        console.log(err);
+      })
+  refreshData();
   groupModalVisible.value = false;
   groupForm.value.name = "";
   currentGroup.value = null;
 };
 
-const handleGroupCancel = () => {
+const handleGroupCancel = () => {//取消新建群组
   groupModalVisible.value = false;
   groupForm.value.name = "";
   currentGroup.value = null;
 };
 
-const handleCustomerOk = () => {
-  const index = innerData.findIndex(
-      (item) => item.key === currentCustomer.value.key
-  );
-  if (index > -1) {
-    innerData[index].name = customerForm.value.name;
-  }
+const handleCustomerOk = () => {//修改群组名称
+
+  let groupId=currentGroup.value.id;
+  let newGroupName=customerForm.value.name
+  let clientId=localStorage.getItem("clientId")
+  axios
+      .post(`http://localhost:8800/bulkAgreement/modifyGroup/${groupId}/${newGroupName}/${clientId}`)
+      .then((res)=>{
+        console.log(res);
+      })
+      .catch((err)=>{
+        console.log(err);
+      })
+  refreshData();
   customerModalVisible.value = false;
   customerForm.value.name = "";
   currentCustomer.value = null;
 };
 
-const handleCustomerCancel = () => {
+const handleCustomerCancel = () => {//取消修改群组名称
   customerModalVisible.value = false;
   customerForm.value.name = "";
   currentCustomer.value = null;
 };
 
-const handleAddCustomerOk = () => {
-  const key = innerData.length;
-  const index = key + 1;
-  innerData.push({
-    key,
-    index,
-    name: addCustomerForm.value.name,
-  });
+const handleAddCustomerOk = () => {//添加群组成员
+  // const key = innerData.length;
+  // const index = key + 1;
+  let groupId=currentGroup.value.id;
+  let memberName=addCustomerForm.value.name;
+  let clientId=localStorage.getItem("clientId");
+  axios
+      .post(`http://localhost:8080/bulkAgreement/addMember/${groupId}/${memberName}/${clientId}`)
+      .then((res)=>{
+        console.log(res);
+      })
+      .catch((err)=>{
+        console.log(err);
+      })
+  refreshData();
   addCustomerModalVisible.value = false;
   addCustomerForm.value.name = "";
 };
-const handleAddCustomerCancel = () => {
+const handleAddCustomerCancel = () => {//取消添加群组成员
   addCustomerModalVisible.value = false;
   addCustomerForm.value.name = "";
   currentCustomer.value = null;
 };
-const refreshData = () => {
-  data.splice(0, data.length);
-  innerData.splice(0, innerData.length);
+const refreshData = () => {//刷新
+  //清除数据
+  data.value.splice(0, data.value.length);
+  innerData.value.splice(0, innerData.value.length);
 
-  for (let i = 0; i < 3; ++i) {
-    data.push({
-      key: i,
-      name: `Group ${i + 1}`,
-      createdAt: new Date().toLocaleString(),
-      updatedAt: new Date().toLocaleString(),
-    });
-  }
+  let clientId=localStorage.getItem("clientId");
+  axios
+      .get(`http://localhost:8800/bulkAgreement/selectGroup/${clientId}`)
+      .then((res)=>{
+        data.value=res.data;
+        // 遍历 data.value
+        for(let i=0;i<data.value.length;i++){
+          let groupId = data.value[i].groupId;
+          // 根据 groupId 查询 innerData
+          axios
+              .get(`http://localhost:8800/bulkAgreement/selectClient/${groupId}`)
+              .then((res)=>{
+                // 遍历 res.data
+                // 遍历 res.data
+                // 遍历 res.data
+                for (let i = 0; i < res.data.length; ++i) {
+                  let item = res.data[i];
 
-  for (let i = 0; i < 3; ++i) {
-    innerData.push({
-      key: i,
-      index: i + 1,
-      name: `Customer ${i + 1}`,
-    });
-  }
+                  // 创建一个新的对象，只包含 key, index 和 name 属性
+                  let newItem = {
+                    key: i,
+                    index: i + 1,
+                    id:item.id,
+                    name: item.name,
+                  };
+
+                  // 将新的对象添加到 innerData.value 中
+                  innerData.value.push(newItem);
+                }
+                })
+              .catch((err)=>{
+                console.log(err);
+              })
+        }
+      })
+      .catch((err)=>{
+        console.log(err)
+      })
 };
+
+onMounted(()=>{
+  let clientId=localStorage.getItem("clientId");
+  axios
+      .get(`http://localhost:8800/bulkAgreement/selectGroup/${clientId}`)
+      .then((res)=>{
+        data.value=res.data;
+        // 遍历 data.value
+        for(let i=0;i<data.value.length;i++){
+          let groupId = data.value[i].groupId;
+          // 根据 groupId 查询 innerData
+          axios
+              .get(`http://localhost:8800/bulkAgreement/selectClient/${groupId}`)
+              .then((res)=>{
+                // 遍历 res.data
+                // 遍历 res.data
+                // 遍历 res.data
+                for (let i = 0; i < res.data.length; ++i) {
+                  let item = res.data[i];
+
+                  // 创建一个新的对象，只包含 key, index 和 name 属性
+                  let newItem = {
+                    key: i,
+                    index: i + 1,
+                    id:item.id,
+                    name: item.name,
+                  };
+
+                  // 将新的对象添加到 innerData.value 中
+                  innerData.value.push(newItem);
+                }
+              })
+              .catch((err)=>{
+                console.log(err);
+              })
+        }
+      })
+      .catch((err)=>{
+        console.log(err)
+      })
+});
 
 </script>
 <style scoped>
