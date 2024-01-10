@@ -30,8 +30,8 @@
 </template>
 
 <script setup>
-import {ref} from "vue";
-import axios from "core-js/internals/queue";
+import {onMounted, ref} from "vue";
+import axios from "axios";
 
 const accounts = ref([
   {label: "账号1", value: "1"},
@@ -98,6 +98,18 @@ const search = () => {
         console.error(error);
       });
 };
+
+onMounted(() => {
+  let clientId= localStorage.getItem("clientId");
+  axios.get(`http://localhost:8800/capital/selectCapitalAccount/${clientId}`)
+      .then((res) => {
+        data.value = res.data;
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+});
 </script>
 
 <style scoped>
@@ -114,4 +126,5 @@ button:hover{
   background-color: #17294f;
   cursor: pointer;
 }
+
 </style>
