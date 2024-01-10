@@ -8,7 +8,7 @@
   >
     <template #bodyCell="{ column, record }">
       <template v-if="column.key === 'operation'">
-        <a @click="delisting">摘牌</a>
+        <a @click="delisting(record)">摘牌</a>
       </template>
     </template>
   </a-table>
@@ -23,40 +23,40 @@
     <a-form :model="form">
       <!-- 表单字段 -->
       <a-form-item label="标的物代码">
-        <a-input v-model="form.subjectMatterCode" disabled/>
+        <a-input v-model:value="form.subjectMatterCode" disabled/>
       </a-form-item>
       <a-form-item label="标的物名称">
-        <a-input v-model="form.subjectMatterName" disabled/>
+        <a-input v-model:value="form.subjectMatterName" disabled/>
       </a-form-item>
       <a-form-item label="挂牌数量">
-        <a-input v-model="form.amount" disabled/>
+        <a-input v-model:value="form.amount" disabled/>
       </a-form-item>
       <a-form-item label="挂牌价格">
-        <a-input v-model="form.price" disabled/>
+        <a-input v-model:value="form.price" disabled/>
       </a-form-item>
       <a-form-item label="对手方客户号">
-        <a-input v-model="form.clientId" disabled/>
+        <a-input v-model:value="form.clientId" disabled/>
       </a-form-item>
       <a-form-item label="账户类型">
-        <a-select v-model="form.accountType" disabled>
+        <a-select v-model:value="form.accountType" disabled>
           <a-select-option value="1">账户1</a-select-option>
           <a-select-option value="2">账户2</a-select-option>
         </a-select>
       </a-form-item>
       <a-form-item label="交易账号">
-        <a-select v-model="form.account" disabled>
+        <a-select v-model:value="form.account" disabled>
           <a-select-option value="1">交易账号1</a-select-option>
           <a-select-option value="2">交易账号2</a-select-option>
         </a-select>
       </a-form-item>
       <a-form-item label="最大可交易量">
-        <a-input v-model="form.maxTradeVolume" disabled/>
+        <a-input v-model:value="form.maxTradeVolume" disabled/>
       </a-form-item>
       <a-form-item label="最小交易量">
-        <a-input v-model="form.minTradeVolume" disabled/>
+        <a-input v-model:value="form.minTradeVolume" disabled/>
       </a-form-item>
       <a-form-item label="摘牌数量">
-        <a-input-number v-model="form.deAmount" min="1"/>
+        <a-input-number v-model:value="form.deAmount" min="1"/>
       </a-form-item>
     </a-form>
   </a-modal>
@@ -64,9 +64,9 @@
 
 <script setup>
 import {ref} from "vue";
+import axios from "axios";
 
 let groupModalVisible = ref(false);
-const record = ref(null);
 const columns = [
   {
     title: '挂牌时间',
@@ -142,8 +142,18 @@ const delisting = (record) => {
   form.value.amount=record.listingQuantity;
   form.value.price=record.listingPrice;
   groupModalVisible.value = true;
+  console.log(record);
+  alert(record.orderNumber+"摘牌成功"+record.listingQuantity+"股");
 };
+
 const handleGroupOk = () => {
+  axios.post(`http://localhost:8800/listing/depurchaser`)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   groupModalVisible.value = false;
 };
 const handleGroupCancel = () => {
