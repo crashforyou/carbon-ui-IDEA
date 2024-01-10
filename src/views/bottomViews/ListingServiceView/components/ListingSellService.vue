@@ -25,7 +25,7 @@
           v-show="listingPost.flowType === '卖出'"
       >
         <a-input
-            v-model="directionalOfferFormModel.available"
+            v-model="listingPost.available"
             suffix="吨"
         />
       </a-form-item>

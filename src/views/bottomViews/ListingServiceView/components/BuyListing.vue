@@ -9,8 +9,8 @@
     >
       <template #bodyCell="{ column, record }">
         <template v-if="column.key === 'operation'">
-          <a v-if="record.inquiryStatus === '未询价'" style="margin-left: 5px">修改</a>
-          <a v-if="record.inquiryStatus === '未询价'" style="margin-left: 5px">撤回</a>
+          <a v-if="record.status === '未询价'" style="margin-left: 5px">修改</a>
+          <a v-if="record.status === '未询价'" style="margin-left: 5px">撤回</a>
         </template>
       </template>
     </a-table>
@@ -18,7 +18,8 @@
 </template>
 
 <script setup>
-import {ref,nextTick} from "vue";
+import {ref, nextTick, onMounted} from "vue";
+import axios from "axios";
 
 const activeButton = ref('button1')
 const isOfferQuery = ref(true);
@@ -32,41 +33,53 @@ const columns = [
     fixed: "left",
     align:'center'
   },
-  {title: "委托编号", dataIndex: "orderNumber", width: 100},
-  {title: "委托时间", dataIndex: "orderTime", width: 100},
-  {title: "标的物代码", dataIndex: "code", width: 120},
-  {title: "标的物名称", dataIndex: "name", width: 120},
+  {title: "委托编号", dataIndex: "id", width: 100},
+  {title: "委托时间", dataIndex: "time", width: 100},
+  {title: "标的物代码", dataIndex: "subjectMatterCode", width: 120},
+  {title: "标的物名称", dataIndex: "subjectMatterName", width: 120},
   {title: "账户类型", dataIndex: "accountType", width: 100},
-  {title: "库存账号", dataIndex: "account", width: 100},
-  {title: "买卖方向", dataIndex: "direction", width: 100},
-  {title: "挂牌方式", dataIndex: "listingMode", width: 100},
-  {title: "委托价格", dataIndex: "orderPrice", width: 100},
-  {title: "委托数量", dataIndex: "orderQuantity", width: 100},
+  {title: "库存账号", dataIndex: "QuotaAccount", width: 100},
+  {title: "买卖方向", dataIndex: "flowType", width: 100},
+  {title: "挂牌方式", dataIndex: "listingType", width: 100},
+  {title: "委托价格", dataIndex: "price", width: 100},
+  {title: "委托数量", dataIndex: "amount", width: 100},
   {title: "操作员代码", dataIndex: "operatorCode", width: 120},
   {title: "状态", dataIndex: "status", width: 100},
-  {title: "撤牌时间", dataIndex: "cancelTime", width: 100},
+  {title: "撤牌时间", dataIndex: "delistingTime", width: 100},
 ];
 
-const data = [];
+const data = ref([]);
 for (let i = 0; i < 100; i++) {
-  data.push({
+  data.value.push({
     key: i,
-    orderNumber: `委托编号${i + 1}`,
-    orderTime: `委托时间${i + 1}`,
-    code: `标的物代码${i + 1}`,
-    name: `标的物名称${i + 1}`,
+    id: `委托编号${i + 1}`,
+    time: `委托时间${i + 1}`,
+    subjectMatterCode: `标的物代码${i + 1}`,
+    subjectMatterName: `标的物名称${i + 1}`,
     accountType: "账户类型",
-    account:"库存账号",
+    QuotaAccount:"库存账号",
     operatorCode: `操作员代码${i + 1}`,
-    direction: `买卖方向${i + 1}`,
-    listingMode: `挂牌方式${i + 1}`,
-    orderQuantity: `委托数量${i + 1}`,
-    orderPrice: `委托价格${i + 1}`,
-    cancelTime: `撤单时间${i + 1}`,
-    status: `状态${i + 1}`,
-    inquiryStatus: "未询价",
+    flowType: `买卖方向${i + 1}`,
+    listingType: `挂牌方式${i + 1}`,
+    amount: `委托数量${i + 1}`,
+    price: `委托价格${i + 1}`,
+    delistingTime: `撤单时间${i + 1}`,
+    status: `未询价`,
   });
 }
+
+onMounted(()=>{
+  let clientId=localStorage.getItem("clientId");
+  axios
+      .get(`http://localhost:8800/listing/entrustInfo/${clientId}`)
+      .then((res)=>{
+        data.value=res.data;
+        console.log(res);
+      })
+      .catch((err)=>{
+        console.log(err);
+      })
+})
 
 </script>
 <style scoped>
