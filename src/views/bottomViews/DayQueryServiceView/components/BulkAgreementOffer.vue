@@ -32,8 +32,9 @@
 </template>
 
 <script setup>
-import {reactive, ref} from "vue";
+import {onMounted, reactive, ref} from "vue";
 import {Form, Select, Button, Table, DatePicker, message} from "ant-design-vue";
+import axios from "axios";
 
 const targetCode = ref(null);
 const dateRange = ref([]);
@@ -59,8 +60,8 @@ const columns = [
 for (let i = 0; i < 100; i++) {
   data.push({
     key:i,
-    orderNumber: `委托编号${i + 1}`,
-    orderTime: `委托时间${i + 1}`,
+    orderNumber: `报价编号${i + 1}`,
+    orderTime: `报价时间${i + 1}`,
     code: `标的物代码${i + 1}`,
     name: `标的物名称${i + 1}`,
     accountType:"账户类型",
@@ -101,6 +102,25 @@ const handleReset = () => {
   dateRange.value = [];
   direction.value = null;
 };
+onMounted(() => {
+  let clientId= localStorage.getItem("clientId");
+  axios.get(`http://localhost:8800/bulkAgreement/selectDayDirectionOfferInfo/${clientId}`)
+      .then((res) => {
+        data.value = data.value.concat(res.data);
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  axios.get(`http://localhost:8800/bulkAgreement/selectDayGroupOfferInfo/${clientId}`)
+      .then((res) => {
+        data.value = data.value.concat(res.data);
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+});
 </script>
 <style scoped>
 button {
