@@ -2,20 +2,16 @@
   <div class="left">
         <a-form :model="groupOfferFormModel" :label-col="{ span: 7 }" :wrapper-col="{ span: 15 }">
           <a-form-item label="标的物代码">
-            <a-input v-model="groupOfferFormModel.subjectMatterCode"/>
+            <a-input v-model:value="groupOfferFormModel.subjectMatterCode"/>
           </a-form-item>
           <a-form-item label="标的物名称">
-            <a-input v-model="groupOfferFormModel.subjectMatterName" disabled/>
+            <a-input v-model:value="groupOfferFormModel.subjectMatterName" />
           </a-form-item>
           <a-form-item label="账户类型">
-            <a-select v-model="groupOfferFormModel.accountType">
-              <!-- 添加选项 -->
-            </a-select>
+            <a-input v-model:value="groupOfferFormModel.accountType"/>
           </a-form-item>
           <a-form-item label="报价账号">
-            <a-select v-model="groupOfferFormModel.account">
-              <!-- 添加选项 -->
-            </a-select>
+           <a-input v-model:value="groupOfferFormModel.account"/>
           </a-form-item>
           <a-form-item label="买卖方向">
             <a-radio-group
@@ -26,33 +22,33 @@
               <a-radio value="买入">买入</a-radio>
             </a-radio-group>
           </a-form-item>
-          <a-form-item
-              label="可用数量"
-              v-show="groupOfferFormModel.flowType === '卖出'"
-          >
-            <a-input
-                v-model="groupOfferFormModel.available"
-                suffix="吨"
-            />
-          </a-form-item>
-          <a-form-item
-              label="可用资金"
-              v-show="groupOfferFormModel.flowType === '买入'"
-          >
-            <a-input
-                v-model="groupOfferFormModel.available"
-                suffix="元"
-            />
-          </a-form-item>
+<!--          <a-form-item-->
+<!--              label="可用数量"-->
+<!--              v-show="groupOfferFormModel.flowType === '卖出'"-->
+<!--          >-->
+<!--            <a-input-->
+<!--                v-model="groupOfferFormModel.available"-->
+<!--                suffix="吨"-->
+<!--            />-->
+<!--          </a-form-item>-->
+<!--          <a-form-item-->
+<!--              label="可用资金"-->
+<!--              v-show="groupOfferFormModel.flowType === '买入'"-->
+<!--          >-->
+<!--            <a-input-->
+<!--                v-model="groupOfferFormModel.available"-->
+<!--                suffix="元"-->
+<!--            />-->
+<!--          </a-form-item>-->
 
           <a-form-item label="价格">
-            <a-input v-model="groupOfferFormModel.price" suffix="元"/>
+            <a-input v-model:value="groupOfferFormModel.price" suffix="元"/>
           </a-form-item>
           <a-form-item label="数量">
-            <a-input v-model="groupOfferFormModel.amount" suffix="吨"/>
+            <a-input v-model:value="groupOfferFormModel.amount" suffix="吨"/>
           </a-form-item>
           <a-form-item label="选择群组">
-            <a-input v-model="groupOfferFormModel.groupId"/>
+            <a-input v-model:value="groupOfferFormModel.groupId"/>
           </a-form-item>
           <div class="buttonGroup">
             <button @click="submitForm">提交</button>
@@ -68,6 +64,7 @@
 import {ref, nextTick} from "vue";
 import GroupOfferQuery from "@/views/bottomViews/BulkAgreementServiceView/components/GroupOfferQuery.vue";
 import axios from "axios";
+import AxiosInstance from "@/utils/axiosInstance";
 const groupOfferFormModel = ref({
   time: "",
   subjectMatterCode: "",
@@ -92,8 +89,9 @@ const submitForm = () => {
   groupOfferFormModel.value.status = "未成交";
   groupOfferFormModel.value.operatorCode= localStorage.getItem("operatorCode");
   // 提交表单
-  axios.post(`http://localhost:8080/bulkAgreement/groupOffer`, groupOfferFormModel.value)
+  AxiosInstance.post(`/bulkAgreement/groupOffer`, groupOfferFormModel.value)
       .then((res) => {
+        alert(res.data.message)
         console.log(res);
       })
       .catch((err) => {
@@ -103,6 +101,9 @@ const submitForm = () => {
 
 const clearForm = () => {
   // 清空表单
+  for (let key in groupOfferFormModel.value) {
+    groupOfferFormModel.value[key] = "";
+  }
 };
 </script>
 

@@ -16,8 +16,8 @@
         <template v-if="column.key === 'operation'">
           <a v-if="record.status === '未成交'">洽谈</a>
           <!--          <a v-if="record.status === '未成交'" style="margin-left: 5px">详情</a>-->
-          <a v-if="record.status === '未成交'" style="margin-left: 5px">修改</a>
-          <a v-if="record.status === '未成交'" style="margin-left: 5px">撤回</a>
+          <a v-if="record.status === '未成交'" style="margin-left: 5px" @click="handleEdit(record)">修改</a>
+          <a v-if="record.status === '未成交'" style="margin-left: 5px" @click="handleRevoke(record)">撤回</a>
           <a v-if="record.status === '询价结束'">洽谈查询</a>
           <a v-if="record.status === '询价结束'" style="margin-left: 5px">详情</a>
         </template>
@@ -49,6 +49,7 @@
 <script setup>
 import {ref, nextTick, onMounted} from "vue";
 import axios from "axios";
+import AxiosInstance from "@/utils/axiosInstance";
 
 const activeButton = ref('button1')
 const isOfferQuery = ref(true);
@@ -92,55 +93,53 @@ const columns2 = [
 
 let data1 = ref([]);
 let data2 = ref([]);
-for (let i = 0; i < 100; i++) {
-  data1.value.push({
-    key: i,
-    time: "2021-01-01 10:00:00",
-    subjectMatterCode: "100000",
-    subjectMatterName: "标的物名称",
-    flowType: "买入",
-    price: "100",
-    amount: "100",
-    // initialOfferAmount: "100",
-    groupId: "100000",
-    status: "未成交",
-    id: "100000",
-  });
-  data2.value.push({
-    key: i,
-    time: "2021-01-01 10:00:00",
-    subjectMatterCode: "100000",
-    subjectMatterName: "标的物名称",
-    flowType: "买入",
-    firstPrice: "100",
-    firstAmount: "100",
-    firstBalance: "100",
-    finallyPrice: "100",
-    finallyAmount: "100",
-    finallyBalance: "100",
-    listingClient: "100000",
-    delistingClient: "100000",
-  });
-}
-onMounted(() => {
+
+const fetchData=()=>{
   let operatorCode = localStorage.getItem("operatorCode");
   let clientId = localStorage.getItem("clientId");
-  axios
-      .get(`http://localhost:8080/bulkAgreement/selectDirectionOffer/${operatorCode}`)
+  AxiosInstance
+      .get(`/bulkAgreement/selectGroupOffer/${operatorCode}`)
       .then((res) => {
-        data1.value = res.data;
+        data1.value = res.data.data;
       })
       .catch((err) => {
         console.log(err);
       });
-  axios
-      .get(`http://localhost:8080/bulkAgreement/selectDirectionDoneRecord/${clientId}`)
+  AxiosInstance
+      .get(`/bulkAgreement/selectGroupDoneRecord/${clientId}`)
       .then((res) => {
-        data2.value = res.data;
+        data2.value = res.data.data;
       })
       .catch((err) => {
         console.log(err);
       });
+}
+const handleEdit = (record) => {
+  let groupPostId = record.groupId;
+  AxiosInstance.post(`/bulkAgreement/modifyGroupOffer/${groupPostId}`, record)
+      .then((res) => {
+        alert(res.data.message);
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  fetchData();
+};
+const handleRevoke = (record) => {
+  let groupPostId = record.groupId;
+  AxiosInstance.post(`/bulkAgreement/deleteGroupOffer/${groupPostId}`, record)
+      .then((res) => {
+        alert(res.data.message);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  fetchData();
+};
+
+onMounted(() => {
+  fetchData();
 });
 
 </script>
