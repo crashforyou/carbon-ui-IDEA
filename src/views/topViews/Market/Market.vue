@@ -38,7 +38,7 @@
   writing-mode: vertical-rl;
   text-orientation: mixed;
   font-size: 15px;
-  height: 38.7%;
+  height: 38.2%;
   padding: 10px 4px;
   border: none; 
   color: #a3a8a9;

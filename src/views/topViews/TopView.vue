@@ -14,7 +14,7 @@
           <ShoppingOutlined style="font-size: 20px;"/><br>
           <span>市场</span>
         </button>
-        <button  :class="{ active: activeButton === 'button4' }" @click="activeButton = 'button4'">
+        <button  :class="{ active: activeButton === 'button4' }" >
           <LineChartOutlined style="font-size: 20px;"/><br>
           <span>分时</span>
         </button>
@@ -22,7 +22,7 @@
           <SlidersOutlined style="font-size: 20px;"/><br>
           <span>K线</span>
         </button>
-        <button  :class="{ active: activeButton === 'button6' }" @click="activeButton = 'button6'">
+        <button  :class="{ active: activeButton === 'button6' }" >
           <UnorderedListOutlined style="font-size: 20px;"/><br>
           <span>分笔</span>
         </button>
@@ -123,5 +123,7 @@ const changeContent = (newContent) => {
   background-image: linear-gradient(to top, #1973a4, #1a386e);
   cursor: pointer;
 }
-
+.button-group2 button:hover{
+  cursor: pointer;
+}
 </style>
