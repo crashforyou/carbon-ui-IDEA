@@ -35,29 +35,25 @@
 <script setup>
 import {onMounted, ref} from "vue";
 import axios from "axios";
+import AxiosInstance from "@/utils/axiosInstance";
 
 const selectedCode = ref(null);
 const selectedOperation = ref(null);
 const codes = ref(["代码1", "代码2", "代码3"]);
 const operations = ref(["操作1", "操作2", "操作3"]);
 const data = ref([]);
-for (let i = 0; i < 100; i++) {
-  data.value.push({
-    key: i,
-    tradeTime:`交易时间`,
-  });
-}
+
 const columns = [
-  {title: "交易时间", dataIndex: "tradeTime"},
-  {title: "客户号", dataIndex: "customerNumber"},
-  {title: "客户名称", dataIndex: "customerName"},
-  {title: "标的物代码", dataIndex: "code"},
-  {title: "标的物名称", dataIndex: "name"},
-  {title: "交易模式", dataIndex: "tradeMode"},
-  {title: "操作类型", dataIndex: "operationType"},
-  {title: "划转数量（吨）", dataIndex: "transferAmount",width:120},
-  {title: "持有数量（吨）", dataIndex: "holdAmount",width:120},
-  {title: "交易账号", dataIndex: "account"},
+  {title: "交易时间", dataIndex: "time"},
+  {title: "客户号", dataIndex: "clientId"},
+  {title: "客户名称", dataIndex: "clientName"},
+  {title: "标的物代码", dataIndex: "subjectMatterCode"},
+  {title: "标的物名称", dataIndex: "subjectMatterName"},
+  {title: "交易模式", dataIndex: "tradeType"},
+  {title: "操作类型", dataIndex: "operate"},
+  {title: "划转数量（吨）", dataIndex: "actualAmount",width:120},
+  {title: "持有数量（吨）", dataIndex: "possessAmount",width:120},
+  {title: "交易账号", dataIndex: "quotaAccount"},
 ];
 const pagination = {pageSize: 10};
 
@@ -73,9 +69,9 @@ const clear = () => {
 
 onMounted(() => {
   let clientId= localStorage.getItem("clientId");
-  axios.get(`http://localhost:8800/quota/selectQuotaTradeRecord/${clientId}`)
+  AxiosInstance.get(`http://localhost:8800/quota/selectQuotaTradeRecord/${clientId}`)
       .then((res) => {
-        data.value = res.data;
+        data.value = res.data.data;
         console.log(res);
       })
       .catch((err) => {

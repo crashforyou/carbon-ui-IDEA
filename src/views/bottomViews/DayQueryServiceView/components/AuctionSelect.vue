@@ -27,7 +27,8 @@
   import {onMounted, reactive, ref} from "vue";
   import {Form, Select, Button, Table, DatePicker, message} from "ant-design-vue";
   import axios from "axios";
-  
+  import AxiosInstance from "@/utils/axiosInstance";
+
   const targetCode = ref(null);
   const dateRange = ref([]);
   const direction = ref(null);
@@ -35,33 +36,15 @@
   const pagination = reactive({current: 1, pageSize: 10});
   
   const columns = [
-    {title: "委托编号", dataIndex: "orderNumber", width: 100},
-    {title: "委托时间", dataIndex: "orderTime", width: 100},
-    {title: "标的物代码", dataIndex: "code", width: 120},
-    {title: "标的物名称", dataIndex: "name", width: 120},
-    {title: "账户类型", dataIndex: "accountType", width: 120},
-    {title: "配额账户", dataIndex: "quotaAccount", width: 120},
-    {title: "委托价格", dataIndex: "price", width: 100},
-    {title: "委托数量", dataIndex: "Amount", width: 100},
+    {title: "委托编号", dataIndex: "id", width: 100},
+    {title: "委托时间", dataIndex: "time", width: 100},
+    {title: "商品编号", dataIndex: "auctionQuotaId", width: 100},
+    {title: "标的物代码", dataIndex: "subjectMatterCode", width: 120},
+    {title: "标的物名称", dataIndex: "subjectMatterName", width: 120},
+    {title: "委托价格", dataIndex: "Amount", width: 100},
     {title: "操作员代码", dataIndex: "operatorCode", width: 100},
-    {title: "委托状态", dataIndex: "status", width: 100},
   ];
-  
-  for (let i = 0; i < 100; i++) {
-    data.push({
-      key:i,
-      orderNumber: `委托编号${i + 1}`,
-      orderTime: `委托时间${i + 1}`,
-      code: `标的物代码${i + 1}`,
-      name: `标的物名称${i + 1}`,
-      accountType:`账户类型${i + 1}`,
-      quotaAccount:`配额账户`,
-      Amount:`委托数量${i+1}`,
-      price:`委托价格${i+1}`,
-      operatorCode: `操作员代码${i + 1}`,
-      status: `委托状态${i + 1}`,
-    });
-  }
+
   
   const handleSubmit = async () => {
     try {
@@ -93,9 +76,9 @@
 
   onMounted(() => {
     let clientId= localStorage.getItem("clientId");
-    axios.get(`http://localhost:8800/auction/selectDayAuctionPost/${clientId}`)
+    AxiosInstance.get(`http://localhost:8800/auction/selectDayAuctionPost/${clientId}`)
         .then((res) => {
-          data.value = res.data;
+          data.value = res.data.data;
           console.log(res);
         })
         .catch((err) => {

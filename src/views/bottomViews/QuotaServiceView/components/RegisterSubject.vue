@@ -24,25 +24,17 @@
   <script setup>
   import {onMounted, ref} from "vue";
   import axios from "axios";
-
+  import AxiosInstance from "@/utils/axiosInstance";
   const groupForm = ref({name: ""});
 
   const codes = ref(["代码1", "代码2", "代码3"]);
   const data = ref([]);
-  for (let i = 0; i < 100; i++) {
-    data.value.push({
-      key: i,
-      ClientId:`客户Id`,
-      code:`标的物代码`,
-      name:`标的物名称`,
-      Amount:`持有数量`,
-    });
-  }
+
   const columns = [
-    {title: "客户Id", dataIndex: "ClientId",width: 120},
-    {title: "标的物代码", dataIndex: "code",width: 120},
-    {title: "标的物名称", dataIndex: "name",width: 120},
-    {title: "持有数量(吨)", dataIndex: "Amount",width: 120},
+    {title: "客户Id", dataIndex: "clientId",width: 120},
+    {title: "标的物代码", dataIndex: "subjectMatterCode",width: 120},
+    {title: "标的物名称", dataIndex: "subjectMatterName",width: 120},
+    {title: "持有数量(吨)", dataIndex: "amount",width: 120},
   ];
   const pagination = {pageSize: 10};
   
@@ -58,11 +50,9 @@
   const subjectMatterCode = ref(null);
   onMounted(() => {
     let clientId= localStorage.getItem("clientId");
-    const subjectMatterCode = groupForm.value.name; // 获取输入框的值
-    console.log(subjectMatterCode);
-    axios.get(`http://localhost:8800/quota/selectRegisterQuota//${clientId}}/${subjectMatterCode}`)
+    AxiosInstance.get(`http://localhost:8800/quota/selectRegisterQuota/${clientId}`)
         .then((res) => {
-          data.value = res.data;
+          data.value = res.data.data;
           console.log(res);
         })
         .catch((err) => {

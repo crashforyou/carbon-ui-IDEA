@@ -24,29 +24,19 @@
 <script setup>
 import {onMounted, ref} from "vue";
 import axios from "axios";
+import AxiosInstance from "@/utils/axiosInstance";
 
 const groupForm = ref({name: ""});
 const codes = ref(["代码1", "代码2", "代码3"]);
 const data = ref([]);
-for (let i = 0; i < 100; i++) {
-  data.value.push({
-    key: i,
-    quotaAccountId:`配额账户Id`,
-    code:`标的物代码`,
-    name:`标的物名称`,
-    holdAmount:`持有数量`,
-    availableAmount:`可用数量`,
-    frozenAmount:`冻结数量`,
 
-  });
-}
 const columns = [
   {title: "配额账户Id", dataIndex: "quotaAccountId"},
-  {title: "标的物代码", dataIndex: "code"},
-  {title: "标的物名称", dataIndex: "name"},
-  {title: "持有数量(吨)", dataIndex: "holdAmount"},
-  {title: "可用数量(吨)", dataIndex: "availableAmount"},
-  {title: "冻结数量(吨)", dataIndex: "frozenAmount"},
+  {title: "标的物代码", dataIndex: "subjectMatterCode"},
+  {title: "标的物名称", dataIndex: "subjectMatterName"},
+  {title: "持有数量(吨)", dataIndex: "amount"},
+  {title: "可用数量(吨)", dataIndex: "availableQuotaAmount"},
+  {title: "冻结数量(吨)", dataIndex: "unavailableQuotaAmount"},
 ];
 const pagination = {pageSize: 10};
 
@@ -62,11 +52,9 @@ const subjectMatterCode = ref(null);
 
 onMounted(() => {
   let clientId= localStorage.getItem("clientId");
-  const subjectMatterCode = groupForm.value.name; // 获取输入框的值
-  console.log(subjectMatterCode);
-  axios.get(`http://localhost:8800/quota/selectTradeQuota/${clientId}}/${subjectMatterCode}`)
+  AxiosInstance.get(`http://localhost:8800/quota/selectTradeQuota/${clientId}`)
       .then((res) => {
-        data.value = res.data;
+        data.value = res.data.data;
         console.log(res);
       })
       .catch((err) => {
@@ -77,11 +65,11 @@ onMounted(() => {
 const refreshData = () => {//刷新
   //清除数据
   data.value.splice(0, data.value.length);
+  let clientId= localStorage.getItem("clientId");
   const subjectMatterCode = groupForm.value.name; // 获取输入框的值
-  console.log(subjectMatterCode);
-  axios.get(`http://localhost:8800/quota/selectTradeQuota/${clientId}}/${subjectMatterCode}`)
+  AxiosInstance.get(`http://localhost:8800/quota/selectTradeQuota/${clientId}}/${subjectMatterCode}`)
       .then((res) => {
-        data.value = res.data;
+        data.value = res.data.data;
         console.log(res);
       })
       .catch((err) => {

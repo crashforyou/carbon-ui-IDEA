@@ -35,6 +35,7 @@
 import {onMounted, reactive, ref} from "vue";
 import {Form, Select, Button, Table, DatePicker, message} from "ant-design-vue";
 import axios from "axios";
+import AxiosInstance from "@/utils/axiosInstance";
 
 const targetCode = ref(null);
 const dateRange = ref([]);
@@ -43,31 +44,18 @@ const data = [];
 const pagination = reactive({current: 1, pageSize: 10});
 
 const columns = [
-  {title: "委托编号", dataIndex: "orderNumber", width: 100},
-  {title: "委托时间", dataIndex: "orderTime", width: 100},
-  {title: "标的物代码", dataIndex: "code", width: 120},
-  {title: "标的物名称", dataIndex: "name", width: 120},
-  {title: "买卖方向", dataIndex: "direction", width: 100},
-  {title: "委托价格", dataIndex: "orderPrice", width: 100},
-  {title: "委托数量", dataIndex: "orderQuantity", width: 100},
-  {title: "群组或定向客户", dataIndex: "DirectionOrGroupId", width: 140},
+  {title: "委托编号", dataIndex: "id", width: 100},
+  {title: "委托时间", dataIndex: "time", width: 100},
+  {title: "标的物代码", dataIndex: "subjectMatterCode", width: 120},
+  {title: "标的物名称", dataIndex: "subjectMatterName", width: 120},
+  {title: "买卖方向", dataIndex: "flowType", width: 100},
+  {title: "委托价格", dataIndex: "price", width: 100},
+  {title: "委托数量", dataIndex: "amount", width: 100},
+  {title: "定向客户", dataIndex: "directionClient", width: 100},
+  {title: "群组", dataIndex: "groupId", width: 100},
   {title: "操作员代码", dataIndex: "operatorCode", width: 120},
 ];
 
-for (let i = 0; i < 100; i++) {
-  data.push({
-    key:i,
-    orderNumber: `委托编号${i + 1}`,
-    orderTime: `委托时间${i + 1}`,
-    code: `标的物代码${i + 1}`,
-    name: `标的物名称${i + 1}`,
-    direction: `买卖方向${i + 1}`,
-    orderPrice: `委托价格${i + 1}`,
-    orderQuantity: `委托数量${i + 1}`,
-    DirectionOrGroupId: `群组或定向客户${i + 1}`,
-    operatorCode: `操作员代码${i + 1}`,
-  });
-}
 
 const handleSubmit = async () => {
   try {
@@ -98,8 +86,8 @@ const handleReset = () => {
 };
 
 onMounted(() => {
-  let operatorCode= localStorage.getItem("clientId");
-  axios.get(`http://localhost:8800/bulkAgreement/selectDayDirectionOfferEnquiry/${clientId}`)
+  let clientId= localStorage.getItem("clientId");
+  AxiosInstance.get(`http://localhost:8800/bulkAgreement/selectDayDirectionOfferEnquiry/${clientId}`)
       .then((res) => {
         data.value = data.value.concat(res.data);
         console.log(res);
@@ -107,7 +95,7 @@ onMounted(() => {
       .catch((err) => {
         console.log(err);
       });
-  axios.get(`http://localhost:8800/bulkAgreement/selectDayGroupOfferEnquiry/${clientId}`)
+  AxiosInstance.get(`http://localhost:8800/bulkAgreement/selectDayGroupOfferEnquiry/${clientId}`)
       .then((res) => {
         data.value = data.value.concat(res.data);
         console.log(res);

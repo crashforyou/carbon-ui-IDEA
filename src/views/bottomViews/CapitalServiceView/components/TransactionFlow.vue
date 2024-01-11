@@ -34,12 +34,12 @@
 <script setup>
 import {onMounted, ref} from "vue";
 import axios from "axios";
-
+import AxiosInstance from "@/utils/axiosInstance";
 const columns = [
   {
     title: "交易时间",
-    dataIndex: "tradeTime",
-    key: "tradeTime",
+    dataIndex: "time",
+    key: "time",
   },
   {
     title: "操作员代码",
@@ -48,50 +48,38 @@ const columns = [
   },
   {
     title: "资金账号",
-    dataIndex: "account",
-    key: "account",
+    dataIndex: "capitalAccount",
+    key: "capitalAccount",
   },
   {
     title: "划转类型",
-    dataIndex: "transferType",
-    key: "transferType",
+    dataIndex: "type",
+    key: "type",
   },
   {
     title: "发生金额",
-    dataIndex: "amount",
-    key: "amount",
+    dataIndex: "actualAmount",
+    key: "actualAmount",
   },
   {
     title: "期后余额",
-    dataIndex: "balance",
-    key: "balance",
+    dataIndex: "endingBalance",
+    key: "endingBalance",
   },
   {
     title: "期后可用余额",
-    dataIndex: "availableBalance",
-    key: "availableBalance",
+    dataIndex: "endingAvailableBalance",
+    key: "endingAvailableBalance",
   },
   {
     title: "流水号",
-    dataIndex: "serialNumber",
-    key: "serialNumber",
+    dataIndex: "id",
+    key: "id",
   },
 ];
 
 const data = ref([]); // 从后端获取数据
-for (let i = 0; i < 100; i++) {
-  data.value.push({
-    key: i,
-    tradeTime:"交易时间",
-    operatorCode:"操作员代码",
-    account:"资金账号",
-    transferType:"划转类型",
-    amount:"发生金额",
-    balance:"期后余额",
-    availableBalance:"期后可用余额",
-    serialNumber:"流水号",
-  });
-}
+
 // 在组件创建后立即执行
 const fetchData = async () => {
   try {
@@ -103,9 +91,9 @@ const fetchData = async () => {
 };
 onMounted(() => {
   let operatorCode= localStorage.getItem("operatorCode");
-  axios.get(`http://localhost:8800/capital/selectCapitalTradeRecord/${operatorCode}`)
+  AxiosInstance.get(`http://localhost:8800/capital/selectCapitalTradeRecord/${operatorCode}`)
       .then((res) => {
-        data.value = res.data;
+        data.value = res.data.data;
         console.log(res);
       })
       .catch((err) => {
