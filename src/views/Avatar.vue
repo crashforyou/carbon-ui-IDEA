@@ -5,7 +5,7 @@
         </a-avatar>
         <div class="info">
             <label>客户号：<span>{{ clientId }}</span></label><!-- 7位 -->
-            <label>操作员代码：<span>{{ operatorCode }}</span></label><!-- 5位 -->
+            <label>操作员：<span>{{ operatorCode }}</span></label><!-- 5位 -->
         </div>
     </div>
     <button @click="quit">退出</button>
@@ -17,6 +17,7 @@ import AxiosInstance from '@/utils/axiosInstance';
 
 export default {
   name: "Avatar",
+  components:{UserOutlined},
   data(){
     return{
       clientId:"",

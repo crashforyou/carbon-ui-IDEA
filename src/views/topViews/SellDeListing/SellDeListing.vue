@@ -2,18 +2,19 @@
   <a-table
       :columns="columns"
       :data-source="data"
-      :scroll="{y: 232}"
+      :scroll="{y: 241}"
       size="small"
-      bordered
+      class="table"
+      :pagination="false"
   >
     <template #bodyCell="{ column, record }">
       <template v-if="column.key === 'operation'">
-        <a @click="delisting">摘牌</a>
+        <a @click="delisting(record)">摘牌</a>
       </template>
     </template>
   </a-table>
   <a-modal
-      v-model:visible="groupModalVisible"
+      v-model:open="groupModalVisible"
       title="我要卖出"
       ok-text="确定"
       cancel-text="取消"
@@ -73,45 +74,53 @@ const columns = [
     title: '挂牌时间',
     dataIndex: 'listingTime',
     key: 'listingTime',
+    align:"center"
   },
   {
     title: '委托编号',
     dataIndex: 'orderNumber',
     key: 'orderNumber',
+    align:"center"
   },
   {
     title: '标的物代码',
     dataIndex: 'itemCode',
     key: 'itemCode',
+    align:"center"
   },
   {
     title: '标的物名称',
     dataIndex: 'itemName',
     key: 'itemName',
+    align:"center"
   },
   {
     title: '客户号',
     dataIndex: 'customerNumber',
     key: 'customerNumber',
+    align:"center"
   },
   {
     title: '挂牌数量',
     dataIndex: 'listingQuantity',
     key: 'listingQuantity',
+    align:"center"
   },
   {
     title: '挂牌价格',
     dataIndex: 'listingPrice',
     key: 'listingPrice',
+    align:"center"
   },
   {
     title: '操作',
     dataIndex: 'operation',
     key: 'operation',
+    align:"center"
   },
 ];
 const data = ref([]);
-for (let i = 0; i < 2; i++) {
+for (let i = 0; i < 100; i++) {
   data.value.push({
     key: i,
     listingTime: '2022-01-01',
@@ -159,3 +168,28 @@ const handleGroupCancel = () => {
   groupModalVisible.value = false;
 };
 </script>
+<style lang="less" scoped>
+.table{
+  background: #121212;
+}
+::v-deep {
+  .ant-table-thead {
+    tr > th {
+      background: #121212;
+      color: #a3a8a9;
+    }
+  }
+  .ant-table-tbody {
+    tr > td {
+      background: #121212;
+      color: white;
+      transition: background-color 100s, color 100s; /* 添加过渡效果 */
+    }
+
+    tr:hover > td {
+      background: #121212 !important; /* 悬停时保持背景色不变 */
+      color: white !important; /* 悬停时保持文字颜色不变 */
+    }
+  }
+}
+</style>

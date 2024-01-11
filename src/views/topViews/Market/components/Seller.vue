@@ -4,7 +4,7 @@
         :dataSource="data"
         :pagination="false"
         size="small" 
-        :scroll="{ x:1900,y:247}"
+        :scroll="{ x:1900,y:241}"
         class="table"
     >
       <a-table-column title="序号" dataIndex="index" key="index" align="center"/>
