@@ -45,9 +45,9 @@
       <BuyDeListing v-if="activeButton === 'button1'"></BuyDeListing>
       <SellDeListing v-if="activeButton === 'button2'"></SellDeListing>
       <Market v-if="activeButton === 'button3'"></Market>
-      <Time-sharing v-if="activeButton === 'button4'"></Time-sharing>
+      <TimeDivison v-if="activeButton === 'button4'"></TimeDivison>
       <KLine v-if="activeButton === 'button5'"></KLine>
-      <Part-by-Part v-if="activeButton === 'button6'"></Part-by-Part>
+      <DealDivision v-if="activeButton === 'button6'"></DealDivision>
     </div>
   </div>
 </template>
@@ -58,6 +58,8 @@ import Market from "@/views/topViews/Market/Market.vue";
 import KLine from "@/views/topViews/KLine/KLine.vue";
 import BuyDeListing from "@/views/topViews/BuyDeListing/BuyDeListing.vue";
 import SellDeListing from "@/views/topViews/SellDeListing/SellDeListing.vue";
+import TimeDivison from './TimeDivision/TimeDivison.vue';
+import DealDivision from './DealDivision/DealDivision.vue';
 import {
   UnorderedListOutlined,
   DownloadOutlined,

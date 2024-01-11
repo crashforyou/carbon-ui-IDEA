@@ -2,7 +2,7 @@
   <div class="AppContainer">
     <a-layout>
     <!--侧边栏-->
-    <a-layout-sider v-model:collapsed="collapsed"  class="AppMenu">
+    <a-layout-sider :collapsed="collapsed"  class="AppMenu">
       <div class="logo">
         <Avatar></Avatar>
       </div>
@@ -207,6 +207,7 @@ const selectedKeys = ref(["1"]);
 .AppContainer{
   width: 100%;
   height: 94vh;
+  overflow: hidden;
 }
 .logo {
   height: 16vh;
@@ -218,7 +219,6 @@ const selectedKeys = ref(["1"]);
   overflow: auto;
   height: 94vh;
 }
-.content{}
 .topView{
   background: #d69c9c;
   height: 47vh;
