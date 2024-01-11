@@ -15,7 +15,7 @@
       <template #bodyCell="{ column, record }">
         <template v-if="column.key === 'operation'">
           <a v-if="record.status === '未成交'">洽谈</a>
-<!--          <a v-if="record.status === '未成交'" style="margin-left: 5px">详情</a>-->
+          <!--          <a v-if="record.status === '未成交'" style="margin-left: 5px">详情</a>-->
           <a v-if="record.status === '未成交'" style="margin-left: 5px" @click="handleEdit(record)">修改</a>
           <a v-if="record.status === '未成交'" style="margin-left: 5px" @click="handleRevoke(record)">撤回</a>
           <a v-if="record.status === '已成交'">洽谈查询</a>
@@ -32,16 +32,6 @@
         size="small"
         bordered
     >
-      <!--      <template #bodyCell="{ column, record }">-->
-      <!--        <template v-if="column.key === 'operation'">-->
-      <!--          <a v-if="record.status === '未成交'">洽谈</a>-->
-      <!--          <a v-if="record.status === '未成交'" style="margin-left: 5px">详情</a>-->
-      <!--          <a v-if="record.status === '未成交'" style="margin-left: 5px">修改</a>-->
-      <!--          <a v-if="record.status === '未成交'" style="margin-left: 5px">撤回</a>-->
-      <!--          <a v-if="record.status === '询价结束'">洽谈查询</a>-->
-      <!--          <a v-if="record.status === '询价结束'" style="margin-left: 5px">详情</a>-->
-      <!--        </template>-->
-      <!--      </template>-->
     </a-table>
   </div>
 </template>
@@ -49,6 +39,7 @@
 <script setup>
 import {ref, nextTick, onMounted} from "vue";
 import axios from "axios";
+import AxiosInstance from "@/utils/axiosInstance";
 
 const activeButton = ref('button1')
 const isOfferQuery = ref(true);
@@ -92,38 +83,10 @@ const columns2 = [
 
 let data1 = ref([]);
 let data2 = ref([]);
-for (let i=0;i<100;i++){
-  data1.value.push({
-    key: i,
-    time: "2021-10-01 10:00:00",
-    subjectMatterCode: "100000",
-    subjectMatterName: "标的物名称",
-    flowType: "买",
-    price: "100",
-    amount: "100",
-    account: "100000",
-    status: "已成交",
-    id: "100000",
-  });
-  data2.value.push({
-    key: i,
-    time: "2021-10-01 10:00:00",
-    subjectMatterCode: "100000",
-    subjectMatterName: "标的物名称",
-    flowType: "买",
-    firstPrice: "100",
-    firstAmount: "100",
-    firstBalance: "100",
-    finallyPrice: "100",
-    finallyAmount: "100",
-    finallyBalance: "100",
-    listingClient: "100000",
-    delistingClient: "100000",
-  });
-}
+
 const handleEdit = (record) => {
   let directionPostId = record.key[9];
-  axios.post(`http://localhost:8080/bulkAgreement/modifyDirectionOffer/${directionPostId}`, record)
+  AxiosInstance.post(`/bulkAgreement/modifyDirectionOffer/${directionPostId}`, record)
       .then((res) => {
         console.log(res);
       })
@@ -145,22 +108,29 @@ const handleRevoke = (record) => {
 onMounted(() => {
   let operatorCode = localStorage.getItem("operatorCode");
   let clientId = localStorage.getItem("clientId");
-  axios
-      .get(`http://localhost:8080/bulkAgreement/selectDirectionOffer/${operatorCode}`)
+  AxiosInstance.get(`/bulkAgreement/selectDirectionOffer/${operatorCode}`)
       .then((res) => {
-        data1.value = res.data;
+        data1.value = res.data.data;
+
+        // data1.value = res.data;
+        // console.log(res.data);
+        // alert(res.data)
       })
       .catch((err) => {
         console.log(err);
       });
-  axios
-      .get(`http://localhost:8080/bulkAgreement/selectDirectionDoneRecord/${clientId}`)
+  AxiosInstance
+      .get(`/bulkAgreement/selectDirectionDoneRecord/${clientId}`)
       .then((res) => {
         data2.value = res.data;
       })
       .catch((err) => {
         console.log(err);
       });
+});
+onMounted(async () => {
+  await nextTick();
+  console.log(data1.value);
 });
 
 </script>
