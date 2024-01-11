@@ -40,7 +40,7 @@ import AxiosInstance from "@/utils/axiosInstance";
 const targetCode = ref(null);
 const dateRange = ref([]);
 const direction = ref(null);
-const data = [];
+const data = ref([]);
 const pagination = reactive({current: 1, pageSize: 10});
 
 const columns = [

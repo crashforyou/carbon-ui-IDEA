@@ -40,7 +40,7 @@
   const targetCode = ref(null);
   const dateRange = ref([]);
   const direction = ref(null);
-  const data = [];
+  const data = ref([]);
   const pagination = reactive({current: 1, pageSize: 10});
   
   const columns = [
@@ -88,7 +88,6 @@
     AxiosInstance.get(`http://localhost:8800/auction/selectDayAuctionDoneRecord/${clientId}`)
         .then((res) => {
           data.value = res.data.data;
-          alert(data)
         })
         .catch((err) => {
           console.log(err);

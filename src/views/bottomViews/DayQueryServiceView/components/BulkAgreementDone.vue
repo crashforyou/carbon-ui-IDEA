@@ -41,7 +41,7 @@ import AxiosInstance from "@/utils/axiosInstance";
 const targetCode = ref(null);
 const dateRange = ref([]);
 const direction = ref(null);
-const data = [];
+const data = ref([]);
 const pagination = reactive({current: 1, pageSize: 10});
 
 const columns = [
@@ -94,7 +94,7 @@ onMounted(() => {
   let clientId= localStorage.getItem("clientId");
   AxiosInstance.get(`http://localhost:8800/bulkAgreement/selectDayDirectionDoneRecord/${clientId}`)
       .then((res) => {
-        data.value = data.value.concat(res.data);
+        data.value = data.value.concat(res.data.data);
         console.log(res);
       })
       .catch((err) => {
@@ -102,7 +102,7 @@ onMounted(() => {
       });
   AxiosInstance.get(`http://localhost:8800/bulkAgreement/selectDayGroupDoneRecord/${clientId}`)
       .then((res) => {
-        data.value = data.value.concat(res.data);
+        data.value = data.value.concat(res.data.data);
         console.log(res);
       })
       .catch((err) => {
