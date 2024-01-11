@@ -172,7 +172,7 @@
           <a-tab-pane key="6" tab="分笔">Content of Tab Pane 3</a-tab-pane>
         </a-tabs> -->
         <TopView></TopView>
-        <router-view class="bottomView"></router-view>
+        <router-view name="buttomView" class="bottomView"></router-view>
       </div>
     </a-layout-content>
     </a-layout>

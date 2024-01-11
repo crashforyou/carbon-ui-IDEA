@@ -26,120 +26,166 @@ const routes = [
     redirect: '/login' // 默认重定向到登录页面
   },
   {
-    path: '/index',
-    name: 'Main',
-    component:Main
-  },
-  {
     path: '/login',
     name: 'Login',
-    component:Login
+    components:{
+      default:Login
+    }
   },
   {
-    path: '/listing',
-    name: 'Listing',
-    component:ListingServiceIndex
+    path: '/index',
+    name: 'Main',
+    component:Main,
+    children:[
+      {
+        path: '/listing',
+        name: 'Listing',
+        components:{
+          buttomView:ListingServiceIndex
+        }
+      },
+      {
+        path: '/bulkAgreement/Offer',
+        name:'BulkAgreementOffer',
+        components:{
+          buttomView:BulkAgreementOfferView
+        }
+      },
+      {
+        path: '/bulkAgreement/Group',
+        name:'BulkAgreementGroup',
+        components:{ 
+          buttomView:BulkAgreementGroupView
+        }
+      },
+      {
+        path: '/bulkAgreement/Query',
+        name:'BulkAgreementQuery',
+        components:{ 
+          buttomView:BulkAgreementQueryView
+        }
+      },
+      {
+        path: '/bulkAgreement/QueryGroup',
+        name:'BulkAgreementGroupQuery',
+        components:{
+          buttomView:BulkAgreementGroupQueryView
+        }
+      },
+      {
+        path:'/bulkAgreement/Components/NegotiationPage',
+        name:'NegotiationPage',
+        components:{
+          buttomView:()=>import('@/views/bottomViews/BulkAgreementServiceView/components/NegotiationPage.vue')
+        }
+      },
+      {
+        path: '/capital/Query',
+        name:'CapitalQuery',
+        components:{
+          buttomView:CapitalQuery
+        }
+      },
+      {
+        path: '/capital/InOrOut',
+        name:'InOrOut',
+        components: {
+          buttomView:InOrOut
+        }
+      },
+      {
+        path: '/quota/Query',
+        name:'QuotaQuery',
+        components:{ 
+          buttomView:QuotaQuery
+        }
+      },
+      {
+        path: '/quota/InOrOut',
+        name:'QuotaInOrOut',
+        components:{ 
+          buttomView:QuotaInOrOut
+        }
+      },
+      {
+        path: '/dayQuery/BargainSelect',
+        name:'DayBargainSelect',
+        components:{ 
+          buttomView:DayBargainSelect
+        }
+      },
+      {
+        path: '/dayQuery/CommissionSelect',
+        name:'DayCommissionSelect',
+        components:{ 
+          buttomView:DayCommissionSelect
+        }
+      },
+      {
+        path: '/historyQuery/ListingSelect',
+        name:'ListingSelect',
+        components:{ 
+          buttomView:ListingSelect
+        }
+      },
+      {
+        path: '/historyQuery/BulkAgreementSelect',
+        name:'BulkAgreementSelect',
+        components:{ 
+          buttomView:BulkAgreementSelect
+        }
+      },
+      {
+        path: '/historyQuery/ActionSelect',
+        name:'ActionSelect',
+        components:{ 
+          buttomView:ActionSelect
+        }
+      },
+      {
+        path: '/listingService/buy',
+        name:'ListingServiceIndex',
+        components:{ 
+          buttomView:ListingServiceIndex
+        }
+      },
+      {
+        path:'/report',
+        name:'report',
+        components:{
+          buttomView:ReportSelect
+        }
+      },
+      {
+        path:'/Auction/trade',
+        name:'trade',
+        components:{
+          buttomView:AuctionTrade
+        }
+      },
+      {
+        path:'/Auction/request',
+        name:'request',
+        components:{
+          buttomView:AuctionRequest
+        }
+      },
+      {
+        path:'/Account/CapitalAccountManage',
+        name:'CapitalAccountManage',
+        components:{
+          buttomView:CapitalAccountManage
+        }
+      },
+      {
+        path:'/Account/QuotaAccountManage',
+        name:'QuotaAccountManage',
+        component:{
+        buttomView:QuotaAccountManage
+        }
+      }
+    ]
   },
-  {
-    path: '/bulkAgreement/Offer',
-    name:'BulkAgreementOffer',
-    component:BulkAgreementOfferView
-  },
-  {
-    path: '/bulkAgreement/Group',
-    name:'BulkAgreementGroup',
-    component: BulkAgreementGroupView
-  },
-  {
-    path: '/bulkAgreement/Query',
-    name:'BulkAgreementQuery',
-    component: BulkAgreementQueryView
-  },
-  {
-    path: '/bulkAgreement/QueryGroup',
-    name:'BulkAgreementGroupQuery',
-    component:BulkAgreementGroupQueryView,
-  },
-  {
-    path:'/bulkAgreement/Components/NegotiationPage',
-    name:'NegotiationPage',
-    component:()=>import('@/views/bottomViews/BulkAgreementServiceView/components/NegotiationPage.vue')
-  },
-  {
-    path: '/capital/Query',
-    name:'CapitalQuery',
-    component: CapitalQuery
-  },
-  {
-    path: '/capital/InOrOut',
-    name:'InOrOut',
-    component: InOrOut
-  },
-  {
-    path: '/quota/Query',
-    name:'QuotaQuery',
-    component: QuotaQuery
-  },
-  {
-    path: '/quota/InOrOut',
-    name:'QuotaInOrOut',
-    component: QuotaInOrOut
-  },
-  {
-    path: '/dayQuery/BargainSelect',
-    name:'DayBargainSelect',
-    component: DayBargainSelect
-  },
-  {
-    path: '/dayQuery/CommissionSelect',
-    name:'DayCommissionSelect',
-    component: DayCommissionSelect
-  },
-  {
-    path: '/historyQuery/ListingSelect',
-    name:'ListingSelect',
-    component: ListingSelect
-  },
-  {
-    path: '/historyQuery/BulkAgreementSelect',
-    name:'BulkAgreementSelect',
-    component: BulkAgreementSelect
-  },
-  {
-    path: '/historyQuery/ActionSelect',
-    name:'ActionSelect',
-    component: ActionSelect
-  },
-  {
-    path: '/listingService/buy',
-    name:'ListingServiceIndex',
-    component: ListingServiceIndex
-  },
-  {
-    path:'/report',
-    name:'report',
-    component:ReportSelect
-  },
-  {
-    path:'/Auction/trade',
-    name:'trade',
-    component:AuctionTrade
-  },
-  {
-    path:'/Auction/request',
-    name:'request',
-    component:AuctionRequest
-  },
-  {
-    path:'/Account/CapitalAccountManage',
-    name:'CapitalAccountManage',
-    component:CapitalAccountManage
-  },
-  {
-    path:'/Account/QuotaAccountManage',
-    name:'QuotaAccountManage',
-    component:QuotaAccountManage
-  }
 ]
 
 const router = createRouter({
