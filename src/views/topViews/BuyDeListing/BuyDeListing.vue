@@ -39,22 +39,10 @@
         <a-input v-model:value="form.clientId" disabled/>
       </a-form-item>
       <a-form-item label="账户类型">
-        <a-select v-model:value="form.accountType" disabled>
-          <a-select-option value="1">账户1</a-select-option>
-          <a-select-option value="2">账户2</a-select-option>
-        </a-select>
+        <a-input v-model:value="form.accountType" disabled/>
       </a-form-item>
       <a-form-item label="交易账号">
-        <a-select v-model:value="form.account" disabled>
-          <a-select-option value="1">交易账号1</a-select-option>
-          <a-select-option value="2">交易账号2</a-select-option>
-        </a-select>
-      </a-form-item>
-      <a-form-item label="最大可交易量">
-        <a-input v-model:value="form.maxTradeVolume" disabled/>
-      </a-form-item>
-      <a-form-item label="最小交易量">
-        <a-input v-model:value="form.minTradeVolume" disabled/>
+        <a-input v-model:value="form.account" disabled/>
       </a-form-item>
       <a-form-item label="摘牌数量">
         <a-input-number v-model:value="form.deAmount" min="1"/>
@@ -64,100 +52,98 @@
 </template>
 
 <script setup>
-import {ref} from "vue";
+import {onMounted, ref} from "vue";
 import axios from "axios";
+import AxiosInstance from "@/utils/axiosInstance";
 
 let groupModalVisible = ref(false);
 const columns = [
   {
     title: '挂牌时间',
-    dataIndex: 'listingTime',
-    key: 'listingTime',
-    align:"center"
+    dataIndex: 'time',
+    key: 'time',
+    align: "center"
   },
   {
     title: '委托编号',
-    dataIndex: 'orderNumber',
-    key: 'orderNumber',
-    align:"center"
+    dataIndex: 'id',
+    key: 'id',
+    align: "center"
   },
   {
     title: '标的物代码',
-    dataIndex: 'itemCode',
-    key: 'itemCode',
-    align:"center"
+    dataIndex: 'subjectMatterCode',
+    key: 'subjectMatterCode',
+    align: "center"
   },
   {
     title: '标的物名称',
-    dataIndex: 'itemName',
-    key: 'itemName',
-    align:"center"
+    dataIndex: 'subjectMatterName',
+    key: 'subjectMatterName',
+    align: "center"
   },
+  {title: '账户类型', dataIndex: 'accountType', key: 'accountType', align: "center"},
+  {title: '库存账号', dataIndex: 'quotaAccount', key: 'quotaAccount', align: "center"},
+  {title: '交易方向', dataIndex: 'flowType', key: 'flowType', align: "center"},
   {
     title: '客户号',
-    dataIndex: 'customerNumber',
-    key: 'customerNumber',
-    align:"center"
+    dataIndex: 'operatorCode',
+    key: 'operatorCode',
+    align: "center"
   },
   {
     title: '挂牌数量',
-    dataIndex: 'listingQuantity',
-    key: 'listingQuantity',
-    align:"center"
+    dataIndex: 'amount',
+    key: 'amount',
+    align: "center"
   },
   {
     title: '挂牌价格',
-    dataIndex: 'listingPrice',
-    key: 'listingPrice',
-    align:"center"
+    dataIndex: 'price',
+    key: 'price',
+    align: "center"
   },
   {
     title: '操作',
     dataIndex: 'operation',
     key: 'operation',
-    align:"center"
+    align: "center"
   },
 ];
 const data = ref([]);
-for (let i = 0; i < 50; i++) {
-  data.value.push({
-    key: i,
-    listingTime: '2022-01-02',
-    orderNumber: '123456',
-    itemCode: 'ABC',
-    itemName: 'Item 1',
-    customerNumber: 'C001',
-    listingQuantity: '100',
-    listingPrice: '10.00',
-  });
-}
+
 const form = ref({
-  id: '',
+  listingId: '',
   subjectMatterCode: '',
   subjectMatterName: '',
   amount: '',
   price: '',
   clientId: '',
   accountType: '',
-  account: '',
+  quotaAccount: '',
   maxTradeVolume: '',
   minTradeVolume: '',
   deAmount: '',
 });
 const delisting = (record) => {
-  form.value.id=record.orderNumber;
-  form.value.subjectMatterCode=record.itemCode;
-  form.value.subjectMatterName=record.itemName;
-  form.value.amount=record.listingQuantity;
-  form.value.price=record.listingPrice;
+  form.value.listingId = record.id;
+  form.value.subjectMatterCode = record.subjectMatterCode;
+  form.value.subjectMatterName = record.subjectMatterName;
+  form.value.amount = record.amount;
+  form.value.price = record.price;
+  form.value.clientId = record.operatorCode;
+  form.value.accountType = record.accountType;
+  form.value.quotaAccount = record.quotaAccount;
+
   groupModalVisible.value = true;
   console.log(record);
-  alert(record.orderNumber+"摘牌成功"+record.listingQuantity+"股");
 };
 
 const handleGroupOk = () => {
-  axios.post(`http://localhost:8800/listing/depurchaser`)
+
+  AxiosInstance.post(`/listing/depurchaser`, form.value)
       .then((res) => {
+        alert(res.data.message)
         console.log(res);
       })
       .catch((err) => {
@@ -165,14 +151,25 @@ const handleGroupOk = () => {
       });
   groupModalVisible.value = false;
 };
+onMounted(() => {
+  AxiosInstance.get(`/listing/selectSeller`)
+      .then((res) => {
+        console.log(res);
+        data.value = res.data.data;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+});
 const handleGroupCancel = () => {
   groupModalVisible.value = false;
 };
 </script>
 <style lang="less" scoped>
-.table{
+.table {
   background: #121212;
 }
+
 ::v-deep {
   .ant-table-thead {
     tr > th {
@@ -180,6 +177,7 @@ const handleGroupCancel = () => {
       color: #a3a8a9;
     }
   }
+
   .ant-table-tbody {
     tr > td {
       background: #121212;
