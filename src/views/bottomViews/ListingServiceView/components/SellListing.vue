@@ -9,8 +9,8 @@
     >
       <template #bodyCell="{ column, record }">
         <template v-if="column.key === 'operation'">
-          <a @click="revokePost(record)" v-if="record.status === '未询价'" style="margin-left: 5px">修改</a>
-          <a @click="editPost(record)" v-if="record.status === '未询价'" style="margin-left: 5px">撤回</a>
+          <a @click="revokePost(record)" v-if="record.status === '未成交'" style="margin-left: 5px">修改</a>
+          <a @click="editPost(record)" v-if="record.status === '未成交'" style="margin-left: 5px">撤回</a>
         </template>
       </template>
     </a-table>
