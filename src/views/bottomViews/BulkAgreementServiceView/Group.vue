@@ -14,8 +14,9 @@
       <template #bodyCell="{ column ,record}">
         <template v-if="column.key === 'operation'">
           <a @click="editGroup(record)">修改</a>
-          <a>删除</a>
+          <a @click="deleteGroup(record)">删除</a>
           <a @click="addCustomer(record)">新增成员</a>
+          <a @click="deleteCustomer(record)">删除成员</a>
           <!-- 添加新增成员的链接，绑定 addCustomer 函数 -->
         </template>
       </template>
@@ -27,9 +28,9 @@
             size="small" 
             bordered
         >
-          <template #bodyCell="{ column }">
+          <template #bodyCell="{ column,record }">
             <template v-if="column.key === 'operation'">
-              <a>删除</a>
+              <a @click="deleteCustomer(record)">删除</a>
             </template>
           </template>
         </a-table>
@@ -47,7 +48,7 @@
   >
     <a-form :model="groupForm" :rules="groupRules">
       <a-form-item label="群组名称" name="name">
-        <a-input placeholder="请输入群组名称"></a-input>
+        <a-input placeholder="请输入群组名称" v-model:value="groupForm.name"></a-input>
       </a-form-item>
     </a-form>
   </a-modal>
@@ -61,7 +62,7 @@
   >
     <a-form :model="customerForm" :rules="customerRules">
       <a-form-item label="群组名称" name="name">
-        <a-input placeholder="请输入新的群组名称"></a-input>
+        <a-input placeholder="请输入新的群组名称" v-model:value="customerForm.name"></a-input>
       </a-form-item>
     </a-form>
   </a-modal>
@@ -76,34 +77,42 @@
     <a-form :model="addCustomerForm" :rules="addCustomerRules">
       <!-- 新增成员的表单数据和验证规则 -->
       <a-form-item label="客户名称" name="name">
-        <a-input placeholder="请输入客户名称"></a-input>
+        <a-input placeholder="请输入客户名称" v-model:value="addCustomerForm.name"></a-input>
       </a-form-item>
     </a-form>
   </a-modal>
+   <a-modal
+       v-model:visible="deleteCustomerModalVisible"
+       title="删除成员"
+       ok-text="确定"
+       cancel-text="取消"
+       @ok="handleDeleteCustomerOk"
+       @cancel="handleDeleteCustomerCancel"
+   >
+     <a-form :model="deleteCustomerForm" :rules="deleteCustomerRules">
+       <!-- 新增成员的表单数据和验证规则 -->
+       <a-form-item label="客户名称" name="name">
+         <a-input placeholder="请输入客户名称" v-model:value="deleteCustomerForm.name"></a-input>
+       </a-form-item>
+     </a-form>
+   </a-modal>
 </template>
+
+
 <script  setup>
 import {onMounted, ref} from "vue";
 import {DownOutlined} from "@ant-design/icons-vue";
-import axios from "axios";
+import AxiosInstance from "@/utils/axiosInstance";
 
 const columns = [
-  {title: "群组Id", dataIndex: "groupId", key: "groupId",align:"center"},
+  {title: "群组Id", dataIndex: "id", key: "groupId",align:"center"},
   {title: "群组名称", dataIndex: "name", key: "name",align:"center"},
-  {title: "创建时间", dataIndex: "createdAt", key: "createdAt",align:"center"},
-  {title: "修改时间", dataIndex: "updatedAt", key: "updatedAt",align:"center"},
+  {title: "创建时间", dataIndex: "createTime", key: "createTime",align:"center"},
+  {title: "修改时间", dataIndex: "updateTime", key: "updateTime",align:"center"},
   {title: "操作", key: "operation",align:"center"},
 ];
 
-const data = ref([]);
-for (let i = 0; i < 100; i++) {
-  data.value.push({
-    key: i,
-    groupId: i + 1,
-    name: `group+${i + 1}`,
-    createdAt: "2021-06-01 12:00:00",
-    updatedAt: "2021-09-03 12:00:00",
-  });
-}
+let data = ref([]);
 
 
 const innerColumns = [
@@ -118,9 +127,11 @@ const innerData = ref([]);
 const groupModalVisible = ref(false);
 const customerModalVisible = ref(false);
 const addCustomerModalVisible = ref(false);
+const deleteCustomerModalVisible = ref(false);
 const groupForm = ref({name: ""});
 const customerForm = ref({name: ""});
 const addCustomerForm = ref({name: ""});
+const deleteCustomerForm = ref({name: ""});
 const groupRules = ref({
   name: [{required: true, message: "请输入群组名称"}],
 });
@@ -130,11 +141,14 @@ const customerRules = ref({
 const addCustomerRules = ref({
   name: [{required: true, message: "请输入客户名称"}],
 });
+const deleteCustomerRules = ref({
+  name: [{required: true, message: "请输入客户名称"}],
+});
 const currentGroup = ref({
-  groupId:"",
+  id:"",
   name:"",
-  createdAt:"",
-  updatedAt:"",
+  createTime:"",
+  updateTime:"",
 });
 const currentCustomer = ref(null);
 
@@ -145,23 +159,41 @@ const addGroup = () => {
 const editGroup = (record) => {
   customerModalVisible.value = true;
   currentGroup.value = record;
-  alert(currentGroup.value.groupId+"aaaa");
-
   groupForm.value.name = record.name;
 };
 
+const deleteGroup =(record) =>{
+  currentGroup.value=record;
+  let groupId=currentGroup.value.id;
+  let clientId=localStorage.getItem("clientId");
+  AxiosInstance
+      .post(`/bulkAgreement/deleteGroup/${groupId}/${clientId}`)
+      .then((res)=>{
+        alert(res.data.message);
+        console.log(res);
+      })
+      .catch((err)=>{
+        console.log(err);
+      })
+}
 
 const addCustomer = (record) => {
   addCustomerModalVisible.value = true;
   currentGroup.value = record;
 };
 
+const deleteCustomer=(record)=>{
+  deleteCustomerModalVisible.value = true;
+  currentGroup.value = record;
+}
+
 const handleGroupOk = () => {//新建群组
   let groupName=groupForm.value.name;
   let clientId=localStorage.getItem("clientId");
-  axios
-      .post(`http://localhost:8080/bulkAgreement/createGroup/${groupName}/${clientId}`)
+  AxiosInstance
+      .post(`/bulkAgreement/createGroup/${groupName}/${clientId}`)
       .then((res)=>{
+        alert(res.data.message)
         console.log(res);
       })
       .catch((err)=>{
@@ -181,12 +213,13 @@ const handleGroupCancel = () => {//取消新建群组
 
 const handleCustomerOk = () => {//修改群组名称
 
-  let groupId=currentGroup.value.groupId;
+  let groupId=currentGroup.value.id;
   let newGroupName=customerForm.value.name
   let clientId=localStorage.getItem("clientId")
-  axios
-      .post(`http://localhost:8800/bulkAgreement/modifyGroup/${groupId}/${newGroupName}/${clientId}`)
+  AxiosInstance
+      .post(`/bulkAgreement/modifyGroup/${groupId}/${newGroupName}/${clientId}`)
       .then((res)=>{
+        alert(res.data.message);
         console.log(res);
       })
       .catch((err)=>{
@@ -205,15 +238,15 @@ const handleCustomerCancel = () => {//取消修改群组名称
 };
 
 const handleAddCustomerOk = () => {//添加群组成员
-  // const key = innerData.length;
-  // const index = key + 1;
-  let groupId=currentGroup.value.groupId;
+  let groupId=currentGroup.value.id;
   let memberName=addCustomerForm.value.name;
   let clientId=localStorage.getItem("clientId");
-  axios
-      .post(`http://localhost:8080/bulkAgreement/addMember/${groupId}/${memberName}/${clientId}`)
+  AxiosInstance
+      .post(`/bulkAgreement/addMember/${groupId}/${memberName}/${clientId}`)
       .then((res)=>{
-        console.log(res);
+        let a =JSON.stringify(res.data.message);
+        alert(a);
+        console.log(res.data);
       })
       .catch((err)=>{
         console.log(err);
@@ -227,41 +260,49 @@ const handleAddCustomerCancel = () => {//取消添加群组成员
   addCustomerForm.value.name = "";
   currentCustomer.value = null;
 };
+
+const handleDeleteCustomerOk = () => {//删除群组成员
+  let groupId=currentGroup.value.id;
+  let memberName=deleteCustomerForm.value.name;
+  let clientId=localStorage.getItem("clientId");
+  AxiosInstance
+      .post(`/bulkAgreement/deleteMember/${groupId}/${memberName}/${clientId}`)
+      .then((res)=>{
+        let a =JSON.stringify(res.data.message);
+        alert(a);
+        console.log(res.data);
+      })
+      .catch((err)=>{
+        console.log(err);
+      })
+  refreshData();
+  deleteCustomerModalVisible.value = false;
+  deleteCustomerForm.value.name = "";
+};
+const handleDeleteCustomerCancel = () => {//取消删除群组成员
+  deleteCustomerModalVisible.value = false;
+  deleteCustomerForm.value.name = "";
+  currentCustomer.value = null;
+};
+
 const refreshData = () => {//刷新
   //清除数据
-  data.value.splice(0, data.value.length);
-  innerData.value.splice(0, innerData.value.length);
-
+  data.value=[];
+  innerData.value=[];
   let clientId=localStorage.getItem("clientId");
-  axios
-      .get(`http://localhost:8800/bulkAgreement/selectGroup/${clientId}`)
+  AxiosInstance
+      .get(`/bulkAgreement/selectGroup/${clientId}`)
       .then((res)=>{
-        data.value=res.data;
+        data.value=res.data.data;
         // 遍历 data.value
         for(let i=0;i<data.value.length;i++){
-          let groupId = data.value[i].groupId;
+          let groupId = data.value[i].id;
           // 根据 groupId 查询 innerData
-          axios
-              .get(`http://localhost:8800/bulkAgreement/selectClient/${groupId}`)
+          AxiosInstance
+              .get(`/bulkAgreement/selectClient/${groupId}`)
               .then((res)=>{
-                // 遍历 res.data
-                // 遍历 res.data
-                // 遍历 res.data
-                for (let i = 0; i < res.data.length; ++i) {
-                  let item = res.data[i];
-
-                  // 创建一个新的对象，只包含 key, index 和 name 属性
-                  let newItem = {
-                    key: i,
-                    index: i + 1,
-                    id:item.id,
-                    name: item.name,
-                  };
-
-                  // 将新的对象添加到 innerData.value 中
-                  innerData.value.push(newItem);
-                }
-                })
+                innerData.value=res.data.data;
+              })
               .catch((err)=>{
                 console.log(err);
               })
@@ -274,33 +315,18 @@ const refreshData = () => {//刷新
 
 onMounted(()=>{
   let clientId=localStorage.getItem("clientId");
-  axios
-      .get(`http://localhost:8800/bulkAgreement/selectGroup/${clientId}`)
+  AxiosInstance
+      .get(`/bulkAgreement/selectGroup/${clientId}`)
       .then((res)=>{
-        data.value=res.data;
+        data.value=res.data.data;
         // 遍历 data.value
         for(let i=0;i<data.value.length;i++){
-          let groupId = data.value[i].groupId;
+          let groupId = data.value[i].id;
           // 根据 groupId 查询 innerData
-          axios
-              .get(`http://localhost:8800/bulkAgreement/selectClient/${groupId}`)
+          AxiosInstance
+              .get(`/bulkAgreement/selectClient/${groupId}`)
               .then((res)=>{
-                // 遍历 res.data
-                // 遍历 res.data
-                // 遍历 res.data
-                for (let i = 0; i < res.data.length; ++i) {
-                  let item = res.data[i];
-                  // 创建一个新的对象，只包含 key, index 和 name 属性
-                  let newItem = {
-                    key: i,
-                    index: i + 1,
-                    id:item.id,
-                    name: item.name,
-                  };
-
-                  // 将新的对象添加到 innerData.value 中
-                  innerData.value.push(newItem);
-                }
+                innerData.value=res.data.data;
               })
               .catch((err)=>{
                 console.log(err);
