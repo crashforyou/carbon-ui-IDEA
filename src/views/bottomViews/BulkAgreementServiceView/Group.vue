@@ -11,11 +11,11 @@
         size="small" 
         bordered
     >
-      <template #bodyCell="{ column }">
+      <template #bodyCell="{ column ,record}">
         <template v-if="column.key === 'operation'">
-          <a @click="editGroup">修改</a>
+          <a @click="editGroup(record)">修改</a>
           <a>删除</a>
-          <a @click="addCustomer">新增成员</a>
+          <a @click="addCustomer(record)">新增成员</a>
           <!-- 添加新增成员的链接，绑定 addCustomer 函数 -->
         </template>
       </template>
@@ -87,7 +87,7 @@ import {DownOutlined} from "@ant-design/icons-vue";
 import axios from "axios";
 
 const columns = [
-  {title: "群组Id", dataIndex: "groupId", key: "key",align:"center"},
+  {title: "群组Id", dataIndex: "groupId", key: "groupId",align:"center"},
   {title: "群组名称", dataIndex: "name", key: "name",align:"center"},
   {title: "创建时间", dataIndex: "createdAt", key: "createdAt",align:"center"},
   {title: "修改时间", dataIndex: "updatedAt", key: "updatedAt",align:"center"},
@@ -95,6 +95,15 @@ const columns = [
 ];
 
 const data = ref([]);
+for (let i = 0; i < 100; i++) {
+  data.value.push({
+    key: i,
+    groupId: i + 1,
+    name: `group+${i + 1}`,
+    createdAt: "2021-06-01 12:00:00",
+    updatedAt: "2021-09-03 12:00:00",
+  });
+}
 
 
 const innerColumns = [
@@ -121,7 +130,12 @@ const customerRules = ref({
 const addCustomerRules = ref({
   name: [{required: true, message: "请输入客户名称"}],
 });
-const currentGroup = ref(null);
+const currentGroup = ref({
+  groupId:"",
+  name:"",
+  createdAt:"",
+  updatedAt:"",
+});
 const currentCustomer = ref(null);
 
 const addGroup = () => {
@@ -131,6 +145,8 @@ const addGroup = () => {
 const editGroup = (record) => {
   customerModalVisible.value = true;
   currentGroup.value = record;
+  alert(currentGroup.value.groupId+"aaaa");
+
   groupForm.value.name = record.name;
 };
 
@@ -165,7 +181,7 @@ const handleGroupCancel = () => {//取消新建群组
 
 const handleCustomerOk = () => {//修改群组名称
 
-  let groupId=currentGroup.value.id;
+  let groupId=currentGroup.value.groupId;
   let newGroupName=customerForm.value.name
   let clientId=localStorage.getItem("clientId")
   axios
@@ -191,7 +207,7 @@ const handleCustomerCancel = () => {//取消修改群组名称
 const handleAddCustomerOk = () => {//添加群组成员
   // const key = innerData.length;
   // const index = key + 1;
-  let groupId=currentGroup.value.id;
+  let groupId=currentGroup.value.groupId;
   let memberName=addCustomerForm.value.name;
   let clientId=localStorage.getItem("clientId");
   axios
@@ -274,7 +290,6 @@ onMounted(()=>{
                 // 遍历 res.data
                 for (let i = 0; i < res.data.length; ++i) {
                   let item = res.data[i];
-
                   // 创建一个新的对象，只包含 key, index 和 name 属性
                   let newItem = {
                     key: i,

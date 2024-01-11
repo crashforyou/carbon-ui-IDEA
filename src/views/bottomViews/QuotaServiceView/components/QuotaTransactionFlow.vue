@@ -33,7 +33,8 @@
 </template>
 
 <script setup>
-import {ref} from "vue";
+import {onMounted, ref} from "vue";
+import axios from "axios";
 
 const selectedCode = ref(null);
 const selectedOperation = ref(null);
@@ -69,5 +70,17 @@ const clear = () => {
   selectedOperation.value = null;
   data.value = [];
 };
+
+onMounted(() => {
+  let clientId= localStorage.getItem("clientId");
+  axios.get(`http://localhost:8800/quota/selectQuotaTradeRecord/${clientId}`)
+      .then((res) => {
+        data.value = res.data;
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+});
 </script>
 

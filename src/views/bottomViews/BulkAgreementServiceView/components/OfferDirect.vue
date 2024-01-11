@@ -2,18 +2,18 @@
   <div class="left">
     <a-form :model="directionalOfferFormModel" :label-col="{ span: 7 }" :wrapper-col="{ span: 15 }">
       <a-form-item label="标的物代码">
-        <a-input v-model="directionalOfferFormModel.subjectMatterCode"/>
+        <a-input v-model:value="directionalOfferFormModel.subjectMatterCode"/>
       </a-form-item>
       <a-form-item label="标的物名称">
-        <a-input v-model="directionalOfferFormModel.subjectMatterName" disabled/>
+        <a-input v-model:value="directionalOfferFormModel.subjectMatterName" disabled/>
       </a-form-item>
       <a-form-item label="账户类型">
-        <a-select v-model="directionalOfferFormModel.accountType">
+        <a-select v-model:value="directionalOfferFormModel.accountType">
           <!-- 添加选项 -->
         </a-select>
       </a-form-item>
       <a-form-item label="报价账号">
-        <a-select v-model="directionalOfferFormModel.account">
+        <a-select v-model:value="directionalOfferFormModel.account">
           <!-- 添加选项 -->
         </a-select>
       </a-form-item>
@@ -41,20 +41,20 @@
           v-show="directionalOfferFormModel.flowType === '买入'"
       >
         <a-input
-            v-model="directionalOfferFormModel.available"
+            v-model:value="directionalOfferFormModel.available"
             suffix="元"
             disabled
         />
       </a-form-item>
 
       <a-form-item label="价格">
-        <a-input v-model="directionalOfferFormModel.price" suffix="元"/>
+        <a-input v-model:value="directionalOfferFormModel.price" suffix="元"/>
       </a-form-item>
       <a-form-item label="数量">
-        <a-input v-model="directionalOfferFormModel.amount" suffix="吨"/>
+        <a-input v-model:value="directionalOfferFormModel.amount" suffix="吨"/>
       </a-form-item>
       <a-form-item label="定向用户">
-        <a-input v-model="directionalOfferFormModel.directionClient"/>
+        <a-input v-model:value="directionalOfferFormModel.directionClient"/>
       </a-form-item>
       <div class="buttonGroup">
         <button @click="submitForm">提交</button>

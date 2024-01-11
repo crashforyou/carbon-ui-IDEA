@@ -25,7 +25,7 @@
           v-show="listingPost.flowType === '买入'"
       >
         <a-input
-            v-model="directionalOfferFormModel.available"
+            v-model="listingPost.available"
             suffix="元"
         />
       </a-form-item>

@@ -26,7 +26,7 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import {onMounted, ref} from "vue";
 import axios from "axios";
 
 const columns = [
@@ -95,6 +95,18 @@ const fetchData = async () => {
     console.error(error);
   }
 };
+
+onMounted(() => {
+  let operatorCode= localStorage.getItem("operatorCode");
+  axios.get(`http://localhost:8800/capital/selectDepositAndWithdrawalRecord/${operatorCode}`)
+      .then((res) => {
+        data.value = res.data;
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+});
 
 fetchData();
 </script>

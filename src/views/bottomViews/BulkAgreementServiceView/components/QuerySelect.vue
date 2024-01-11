@@ -35,9 +35,9 @@ const columns = ref([
 ]);
 
 const goToNegotiationPage = (record) => {
+  localStorage.setItem('record', JSON.stringify(record));
   //使用Vue Router进行页面跳转
   this.$router.push({name: 'NegotiationPage', params: record});
-  console.log(`跳转到${record.key}的洽谈页面`);
 };
 
 const data = ref([]);
@@ -51,7 +51,7 @@ for (let i = 0; i < 100; i++) {
     price: "100",
     amount: "100",
     account: "123456789",
-    status: "未成交",
+    status: "未询价",
     id: "123456789",
   });
 }

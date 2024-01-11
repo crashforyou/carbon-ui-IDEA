@@ -33,7 +33,8 @@
 </template>
 
 <script setup>
-import {ref} from "vue";
+import {onMounted, ref} from "vue";
+import axios from "axios";
 
 const selectedCode = ref(null);
 const codes = ref(["代码1", "代码2", "代码3"]);
@@ -69,4 +70,16 @@ const clear = () => {
   selectedCode.value = null;
   data.value = [];
 };
+
+onMounted(() => {
+  let clientId= localStorage.getItem("clientId");
+  axios.get(`http://localhost:8800/quota/selectInOrOutQuotaRecord/${clientId}`)
+      .then((res) => {
+        data.value = res.data;
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+});
 </script>

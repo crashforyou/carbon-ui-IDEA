@@ -32,8 +32,9 @@
 </template>
 
 <script setup>
-import {reactive, ref} from "vue";
+import {onMounted, reactive, ref} from "vue";
 import {Form, Select, Button, Table, DatePicker, message} from "ant-design-vue";
+import axios from "axios";
 
 const targetCode = ref(null);
 const dateRange = ref([]);
@@ -95,6 +96,26 @@ const handleReset = () => {
   dateRange.value = [];
   direction.value = null;
 };
+
+onMounted(() => {
+  let operatorCode= localStorage.getItem("clientId");
+  axios.get(`http://localhost:8800/bulkAgreement/selectDayDirectionOfferEnquiry/${clientId}`)
+      .then((res) => {
+        data.value = data.value.concat(res.data);
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  axios.get(`http://localhost:8800/bulkAgreement/selectDayGroupOfferEnquiry/${clientId}`)
+      .then((res) => {
+        data.value = data.value.concat(res.data);
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+});
 </script>
 <style scoped>
 button {
