@@ -9,8 +9,8 @@
     >
       <template #bodyCell="{ column, record }">
         <template v-if="column.key === 'operation'">
-          <a v-if="record.status === '未询价'" style="margin-left: 5px">修改</a>
-          <a v-if="record.status === '未询价'" style="margin-left: 5px">撤回</a>
+          <a @click="revokePost(record)" v-if="record.status === '未成交'" style="margin-left: 5px">修改</a>
+          <a @click="editPost(record)" v-if="record.status === '未成交'" style="margin-left: 5px">撤回</a>
         </template>
       </template>
     </a-table>
@@ -20,6 +20,8 @@
 <script setup>
 import {ref, nextTick, onMounted} from "vue";
 import axios from "axios";
+
+import AxiosInstance from "@/utils/axiosInstance";
 
 const activeButton = ref('button1')
 const isOfferQuery = ref(true);
@@ -38,7 +40,7 @@ const columns = [
   {title: "标的物代码", dataIndex: "subjectMatterCode", width: 120},
   {title: "标的物名称", dataIndex: "subjectMatterName", width: 120},
   {title: "账户类型", dataIndex: "accountType", width: 100},
-  {title: "库存账号", dataIndex: "QuotaAccount", width: 100},
+  {title: "库存账号", dataIndex: "quotaAccount", width: 100},
   {title: "买卖方向", dataIndex: "flowType", width: 100},
   {title: "挂牌方式", dataIndex: "listingType", width: 100},
   {title: "委托价格", dataIndex: "price", width: 100},
@@ -49,31 +51,37 @@ const columns = [
 ];
 
 const data = ref([]);
-for (let i = 0; i < 100; i++) {
-  data.value.push({
-    key: i,
-    id: `委托编号${i + 1}`,
-    time: `委托时间${i + 1}`,
-    subjectMatterCode: `标的物代码${i + 1}`,
-    subjectMatterName: `标的物名称${i + 1}`,
-    accountType: "账户类型",
-    QuotaAccount:"库存账号",
-    operatorCode: `操作员代码${i + 1}`,
-    flowType: `买卖方向${i + 1}`,
-    listingType: `挂牌方式${i + 1}`,
-    amount: `委托数量${i + 1}`,
-    price: `委托价格${i + 1}`,
-    delistingTime: `撤单时间${i + 1}`,
-    status: `未询价`,
-  });
+
+const revokePost = (record) =>{
+  let listingId=record.id
+  AxiosInstance
+      .get(`/listing/cancel/${listingId}`)
+      .then((res)=>{
+        alert(res.data.message);
+      })
+      .catch((err)=>{
+        console.log(err);
+      })
+}
+const editPost = (record) =>{
+  let listingId=record.id
+  AxiosInstance
+      .get(`/listing/cancel/${listingId}`)
+      .then((res)=>{
+        alert(res.data.message);
+      })
+      .catch((err)=>{
+        console.log(err);
+      })
 }
 
 onMounted(()=>{
   let clientId=localStorage.getItem("clientId");
-  axios
-      .get(`http://localhost:8800/listing/entrustInfo/${clientId}`)
+  AxiosInstance
+      .get(`/listing/entrustInfo/${clientId}`)
       .then((res)=>{
-        data.value=res.data;
+        data.value=res.data.data;
+        // alert(res.data.message);
         console.log(res);
       })
       .catch((err)=>{
