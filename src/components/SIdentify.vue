@@ -1,165 +1,80 @@
 <template>
-  <div class="s-canvas">
-    <canvas
-        id="s-canvas"
-        :width="contentWidth"
-        :height="contentHeight"
-    ></canvas>
+  <div class="ValidCode disabled-select" :style="`width:${width}; height:${height}`" @click="refreshCode">
+    <span v-for="(item, index) in codeList" :key="index" :style="getStyle(item)">{{item.code}}</span>
   </div>
 </template>
+
 <script>
 export default {
-  name: "SIdentify",
+  name: 'validCode',
   props: {
-    identifyCode: {
+    width: {
       type: String,
-      default: "1234",
+      default: '100px'
     },
-    fontSizeMin: {
+    height: {
+      type: String,
+      default: '48px'
+    },
+    length: {
       type: Number,
-      default: 25,
-    },
-    fontSizeMax: {
-      type: Number,
-      default: 30,
-    },
-    backgroundColorMin: {
-      type: Number,
-      default: 255,
-    },
-    backgroundColorMax: {
-      type: Number,
-      default: 255,
-    },
-    colorMin: {
-      type: Number,
-      default: 0,
-    },
-    colorMax: {
-      type: Number,
-      default: 160,
-    },
-    lineColorMin: {
-      type: Number,
-      default: 100,
-    },
-    lineColorMax: {
-      type: Number,
-      default: 255,
-    },
-    dotColorMin: {
-      type: Number,
-      default: 0,
-    },
-    dotColorMax: {
-      type: Number,
-      default: 255,
-    },
-    contentWidth: {
-      type: Number,
-      default: 112,
-    },
-    contentHeight: {
-      type: Number,
-      default: 31,
-    },
+      default: 4
+    }
+  },
+  data () {
+    return {
+      codeList: []
+    }
+  },
+  mounted () {
+    this.createdCode()
   },
   methods: {
-    // 生成一个随机数
-    randomNum(min, max) {
-      return Math.floor(Math.random() * (max - min) + min);
+    //刷新验证码的方法
+    refreshCode () {
+      this.createdCode()
     },
-    // 生成一个随机的颜色
-    randomColor(min, max) {
-      let r = this.randomNum(min, max);
-      let g = this.randomNum(min, max);
-      let b = this.randomNum(min, max);
-      return "rgb(" + r + "," + g + "," + b + ")";
-    },
-    drawPic() {
-      let canvas = document.getElementById("s-canvas");
-      let ctx = canvas.getContext("2d");
-      ctx.textBaseline = "bottom";
-      // 绘制背景
-      ctx.fillStyle = this.randomColor(
-          this.backgroundColorMin,
-          this.backgroundColorMax
-      );
-      ctx.fillRect(0, 0, this.contentWidth, this.contentHeight);
-      // 绘制文字
-      for (let i = 0; i < this.identifyCode.length; i++) {
-        this.drawText(ctx, this.identifyCode[i], i);
+    // 生成验证码的方法
+    createdCode () {
+      let len = this.length,
+        codeList = [],
+        chars = 'ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz0123456789',
+        charsLen = chars.length
+      // 生成
+      for (let i = 0; i < len; i++) {
+        let rgb = [Math.round(Math.random() * 220), Math.round(Math.random() * 240), Math.round(Math.random() * 200)]
+        codeList.push({
+          code: chars.charAt(Math.floor(Math.random() * charsLen)),
+          color: `rgb(${rgb})`,
+          fontSize: `1${[Math.floor(Math.random() * 10)]}px`,
+          padding: `${[Math.floor(Math.random() * 10)]}px`,
+          transform: `rotate(${Math.floor(Math.random() * 90) - Math.floor(Math.random() * 90)}deg)`
+        })
       }
-      this.drawLine(ctx);
-      this.drawDot(ctx);
+      // 指向
+      this.codeList = codeList;
+      // 将当前数据派发出去
+      // this.$emit('update:value', codeList.map(item => item.code).join(''))
+      this.$emit('sendData', codeList.map(item => item.code).join(''));
+      //this.$emit('暴露给父组件的方法名',携带的参数); //记住你命名的这个方法
     },
-    drawText(ctx, txt, i) {
-      ctx.fillStyle = this.randomColor(this.colorMin, this.colorMax);
-      ctx.font =
-          this.randomNum(this.fontSizeMin, this.fontSizeMax) + "px SimHei";
-      let x = (i + 1) * (this.contentWidth / (this.identifyCode.length + 1));
-      let y = this.randomNum(this.fontSizeMax, this.contentHeight - 5);
-      var deg = this.randomNum(-45, 45);
-      // 修改坐标原点和旋转角度
-      ctx.translate(x, y);
-      ctx.rotate((deg * Math.PI) / 180);
-      ctx.fillText(txt, 0, 0);
-      // 恢复坐标原点和旋转角度
-      ctx.rotate((-deg * Math.PI) / 180);
-      ctx.translate(-x, -y);
-    },
-    drawLine(ctx) {
-      // 绘制干扰线
-      for (let i = 0; i < 5; i++) {
-        ctx.strokeStyle = this.randomColor(
-            this.lineColorMin,
-            this.lineColorMax
-        );
-        ctx.beginPath();
-        ctx.moveTo(
-            this.randomNum(0, this.contentWidth),
-            this.randomNum(0, this.contentHeight)
-        );
-        ctx.lineTo(
-            this.randomNum(0, this.contentWidth),
-            this.randomNum(0, this.contentHeight)
-        );
-        ctx.stroke();
-      }
-    },
-    drawDot(ctx) {
-      // 绘制干扰点
-      for (let i = 0; i < 80; i++) {
-        ctx.fillStyle = this.randomColor(0, 255);
-        ctx.beginPath();
-        ctx.arc(
-            this.randomNum(0, this.contentWidth),
-            this.randomNum(0, this.contentHeight),
-            1,
-            0,
-            2 * Math.PI
-        );
-        ctx.fill();
-      }
-    },
-  },
-  watch: {
-    identifyCode() {
-      this.drawPic();
-    },
-  },
-  mounted() {
-    this.drawPic();
-  },
-};
+    // 每个元素生成动态的样式
+    getStyle (data) {
+      return `color: ${data.color}; font-size: ${data.fontSize}; padding: ${data.padding}; transform: ${data.transform}`
+    }
+  }
+}
 </script>
-<style scoped>
-.s-canvas {
-  height: 38px;
-}
 
-.s-canvas canvas {
-  margin-top: 1px;
-  margin-left: 8px;
-}
+<style scoped>
+  .ValidCode{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    background: #bdbdbd;
+    span{
+      display: inline-block;
+    }
+  }
 </style>

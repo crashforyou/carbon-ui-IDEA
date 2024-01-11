@@ -1,4 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import Main from "@/views/Main.vue"
+import Login from "@/views/Login.vue"
 import BulkAgreementGroupView from '@/views/bottomViews/BulkAgreementServiceView/Group.vue'
 import BulkAgreementOfferView from '@/views/bottomViews/BulkAgreementServiceView/Offer.vue'
 import BulkAgreementQueryView from '@/views/bottomViews/BulkAgreementServiceView/Query.vue'
@@ -21,6 +23,20 @@ import BulkAgreementGroupQueryView from "@/views/bottomViews/BulkAgreementServic
 const routes = [
   {
     path: '/',
+    redirect: '/login' // 默认重定向到登录页面
+  },
+  {
+    path: '/index',
+    name: 'Main',
+    component:Main
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component:Login
+  },
+  {
+    path: '/listing',
     name: 'Listing',
     component:ListingServiceIndex
   },
@@ -130,5 +146,19 @@ const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
 })
+
+router.beforeEach((to, from, next) => {
+  // 在进入任何路由之前检查用户是否已登录
+  const token = localStorage.getItem('token');
+
+  // 如果用户未登录且要访问的页面不是登录页面，则重定向到登录页面
+  if (!token && to.path !== '/login') {
+    next('/login');
+    alert("请先登陆！")
+  } else {
+    // 用户已登录或访问的是登录页面，允许进入
+    next();
+  }
+});
 
 export default router

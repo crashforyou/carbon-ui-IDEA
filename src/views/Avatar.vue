@@ -4,15 +4,41 @@
             <UserOutlined class="user"/>
         </a-avatar>
         <div class="info">
-            <label>客户号：<span>1213333</span></label><!-- 7位 -->
-            <label>操作员代码：<span>12311</span></label><!-- 5位 -->
+            <label>客户号：<span>{{ clientId }}</span></label><!-- 7位 -->
+            <label>操作员代码：<span>{{ operatorCode }}</span></label><!-- 5位 -->
         </div>
     </div>
-    <button>退出</button>
+    <button @click="quit">退出</button>
   </template>
 
-<script setup>
-    import { UserOutlined } from '@ant-design/icons-vue';
+<script>
+import { UserOutlined } from '@ant-design/icons-vue';
+import AxiosInstance from '@/utils/axiosInstance';
+
+export default {
+  name: "Avatar",
+  data(){
+    return{
+      clientId:"",
+      operatorCode:"",
+    };
+  },
+  methods:{
+    quit(){
+      AxiosInstance.get(`/user/loginOut?operatorCode=${this.operatorCode}`).then(
+        response => {
+          localStorage.removeItem("clientId");
+          localStorage.removeItem("operatorCode");
+          localStorage.removeItem("token");
+          this.$router.push("/")
+        }).catch(error => {console.error("Logout failed:", error);});
+    }
+  },
+  mounted(){
+    this.clientId = localStorage.getItem("clientId")
+    this.operatorCode = localStorage.getItem("operatorCode")
+  }
+}
 </script>
 
   <style scoped>

@@ -1,107 +1,129 @@
 <template>
-  <a-form :form="form" :rules="rules" class="demo-ruleForm">
-    <a-form-item name="clientId" label="客户号">
-      <a-input v-model:value="form.clientId" placeholder="请输入客户号">
-        <template #prefix>
-          <a-icon type="user" />
-        </template>
-      </a-input>
-    </a-form-item>
-    <a-form-item name="operatorId" label="操作员">
-      <a-input v-model:value="form.operatorId" placeholder="请输入操作员号">
-        <template #prefix>
-          <a-icon type="user" />
-        </template>
-      </a-input>
-    </a-form-item>
-    <a-form-item name="password" label="密码">
-      <a-input-password
-          type="password"
-          v-model:value="form.password"
-          placeholder="密码"
+  <div class="main">
+    <a-form :label-col="{ span: 8 }" :wrapper-col="{ span: 10 }" autocomplete="off" class="logindiv">
+      <br><br>
+      <a-form-item name="clientId" label="客 户 号" >
+        <a-input v-model:value="form.clientId" placeholder="请输入客户号">
+        </a-input>
+      </a-form-item>
+      <a-form-item name="operatorCode" label="操 作 员" >
+        <a-input v-model:value="form.operatorCode" placeholder="请输入操作员代码">
+        </a-input>
+      </a-form-item>
+      <a-form-item name="password" label="密 码" >
+        <a-input-password
+            type="password"
+            v-model:value="form.password"
+            placeholder="请输入密码"
+        >
+        </a-input-password>
+      </a-form-item>
+      <a-form-item 
+        name="identifyCode" 
+        label="验 证 码" 
+        style=" display: flex; align-items: baseline;" 
       >
-        <template #prefix>
-          <a-icon type="lock" />
-        </template>
-      </a-input-password>
-    </a-form-item>
-    <a-form-item name="identifyCode" label="验证码">
-      <a-row :gutter="16">
-        <a-col :span="12">
+        <div style="display: flex; align-items: center ;">
           <a-input
-              v-model:value="form.identifyCode"
-              placeholder="请输入验证码"
-              @keyup.enter.native="submitForm"
+            v-model:value="iuputIdentifyCode"
+            placeholder="验证码"
+            style="flex: 1; width: 120px;  margin-right: 15px;"
           />
-        </a-col>
-        <a-col :span="12">
-          <div class="login-code" @click="refreshCode">
-            <!--验证码组件-->
-            <s-identify :identifyCode="identifyCode"></s-identify>
-          </div>
-        </a-col>
-      </a-row>
-    </a-form-item>
-    <a-form-item>
-      <div class="login-btn">
-        <a-button type="primary" @click="submitForm">登录</a-button>
-      </div>
-    </a-form-item>
-    <p style="font-size: 12px; line-height: 30px; color: #eaeaea">
-      Tips : 请输入账号密码登陆
-    </p>
-  </a-form>
+          <SIdentify v-model:value="iuputIdentifyCode" @sendData="getCode" style="flex: 1;"/>
+        </div>
+      </a-form-item>
+      <div class="buttonGroup">
+          <a-button type="primary" @click="submit">登录</a-button>
+          <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+          <a-button @click="reset">重置</a-button>
+        </div>
+    </a-form>
+  </div>
 </template>
 
-<script setup>
-import { ref } from "vue";
-import SIdentify from "@/components/SIdentify.vue";
-import { Form, Input, Button, Row, Col, Icon } from "ant-design-vue";
+<script>
+import SIdentify from '@/components/SIdentify.vue';
+import axios from "axios"
+export default {
+  name: "Login",
+  components:{SIdentify},
+  data(){
+    return{
+      form:{
+        clientId:"",
+        operatorCode:"",
+        password:""
+      },
+      iuputIdentifyCode:"",
+      validCode:""
+    };
+  },
+  methods:{
+    submit(){
+      if(this.form.clientId === ""){
+        alert("客户号不能为空！")
+      }else if(this.form.operatorCode === ""){
+        alert("操作员不能为空！")
+      }else if(this.iuputIdentifyCode === ""){
+        alert("验证码不能为空！")
+      }else if(this.iuputIdentifyCode !== this.validCode){
+        alert("验证码错误！")
+      }else{
+        axios.post("http://localhost:8800/user/login", this.form).then(
+          response => {
+            const result = response.data
+            if (result.code !== 200) {
+              alert(result.data)
+            } else {
+              localStorage.setItem("clientId",this.form.clientId)
+              localStorage.setItem("operatorCode",this.form.operatorCode)
+              localStorage.setItem("token",result.data.token)
 
-const form = ref({
-  clientId: "",
-  operatorId: "",
-  password: "",
-  identifyCode: "",
-});
-
-const rules = ref({
-  clientId: [{ required: true, message: "请输入客户号", trigger: "blur" }],
-  operatorId: [{ required: true, message: "请输入操作员号", trigger: "blur" }],
-
-  password: [{ required: true, message: "请输入密码", trigger: "blur" }],
-  identifyCode: [{ required: true, message: "请输入验证码", trigger: "blur" }],
-});
-
-const identifyCodes = "0123456789";
-
-let identifyCode = ref("");
-
-function randomNum(min, max) {
-  return Math.floor(Math.random() * (max - min) + min);
-}
-
-function makeCode(o, l) {
-  for (let i = 0; i < l; i++) {
-    identifyCode.value += o[randomNum(0, o.length)];
+              console.log('登陆成功,跳转...')
+              this.$router.push("/index")
+            }
+          }).catch(error => { console.log(error.message);});
+       }
+    },
+    reset(){
+      this.form.clientId = ""
+      this.form.operatorCode = ""
+      this.form.password = ""
+      this.iuputIdentifyCode = ""
+    },
+    getCode(data){
+      console.log('验证码：',data)
+      this.validCode = data;
+    }
+  },
+  mounted(){
+    const token = localStorage.getItem("token")
+    if(token !==null && token !== ""){
+      this.$router.push("/index")
+    }
   }
-}
-
-function refreshCode() {
-  identifyCode.value = "";
-  makeCode(identifyCodes, 4);
-}
-
-function submitForm() {
-  // 这里添加表单提交逻辑
-  console.log(form.value);
-}
+};
 </script>
 
 <style scoped>
-.demo-ruleForm {
+.main{
+  display: flex !important;
   justify-content: center;
   align-items: center;
-  height: 100vh; /* 这将使表单垂直居中 */
+  height: 100vh;
+  background: rgb(42, 71, 199);
+}
+.logindiv{
+  border: 1px solid black;
+  height: 47vh;
+  width: 76vh;
+  background:white;
+  border-radius: 5px;
+  box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.5);
+}
+.buttonGroup{
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 </style>
