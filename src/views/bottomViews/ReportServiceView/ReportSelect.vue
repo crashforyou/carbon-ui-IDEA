@@ -4,9 +4,7 @@
         <span>日终报表查询</span>
       </div>
       <a-form :layout="'inline'" @submit="handleSubmit">
-        <a-form-item label="&nbsp;&nbsp;客户号">
-          <a-input size="small"/>
-        </a-form-item>
+        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
         <a-form-item label="成交日期">
           <a-date-picker v-model="dateRange" size="small"/>
         </a-form-item>

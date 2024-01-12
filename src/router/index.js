@@ -171,19 +171,19 @@ const routes = [
         }
       },
       {
+        path:'/Account/QuotaAccountManage',
+        name:'QuotaAccountManage',
+        component:{
+          buttomView:QuotaAccountManage
+        }
+      },
+      {
         path:'/Account/CapitalAccountManage',
         name:'CapitalAccountManage',
         components:{
           buttomView:CapitalAccountManage
         }
       },
-      {
-        path:'/Account/QuotaAccountManage',
-        name:'QuotaAccountManage',
-        component:{
-          buttomView:QuotaAccountManage
-        }
-      }
     ]
   },
 ]

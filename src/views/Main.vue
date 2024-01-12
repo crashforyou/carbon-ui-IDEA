@@ -146,7 +146,7 @@
           <router-link to="/Account/CapitalAccountManage">
             <a-menu-item key="sub8_1">资金账户管理</a-menu-item>
           </router-link>
-          <router-link to="/Account/QuotaAccountManage">
+          <router-link to="/Account/CapitalAccountManage">
             <a-menu-item key="sub8_2">配额账户管理</a-menu-item>
           </router-link>
         </a-sub-menu>
