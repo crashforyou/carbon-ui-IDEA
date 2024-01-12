@@ -1,5 +1,5 @@
 <template>
-    <div id="main" style="width:75%; height:100%;"></div>
+    <div id="main" style="width:100%; height:100%;"></div>
 </template>
 <script setup>
 import { nextTick } from 'vue'
@@ -265,4 +265,5 @@ nextTick(() => {//页面dom渲染完成后再去获取dom，避免出现invalid 
     }, 100)
 })
 </script>
-<style scoped></style>
+<style scoped>
+</style>
