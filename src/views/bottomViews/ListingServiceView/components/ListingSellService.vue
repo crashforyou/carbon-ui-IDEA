@@ -5,36 +5,36 @@
   <div class="left">
     <a-form :model="listingPost" :label-col="{ span: 7 }" :wrapper-col="{ span: 15 }" >
       <a-form-item label="标的物代码">
-        <a-input v-model="listingPost.subjectMatterCode"/>
+        <a-input v-model:value="listingPost.subjectMatterCode"/>
       </a-form-item>
       <a-form-item label="标的物名称">
-        <a-input v-model="listingPost.subjectMatterName" disabled/>
+        <a-input v-model:value="listingPost.subjectMatterName"/>
       </a-form-item>
       <a-form-item label="账户类型">
-        <a-select v-model="listingPost.accountType">
+        <a-input v-model:value="listingPost.accountType">
           <!-- 添加选项 -->
-        </a-select>
+        </a-input>
       </a-form-item>
       <a-form-item label="库存账号">
-        <a-select v-model="listingPost.QuotaAccount">
+        <a-input v-model:value="listingPost.quotaAccount">
           <!-- 添加选项 -->
-        </a-select>
+        </a-input>
       </a-form-item>
-      <a-form-item
-          label="可用库存"
-          v-show="listingPost.flowType === '卖出'"
-      >
-        <a-input
-            v-model="listingPost.available"
-            suffix="吨"
-        />
-      </a-form-item>
+<!--      <a-form-item-->
+<!--          label="可用库存"-->
+<!--          v-show="listingPost.flowType === '卖出'"-->
+<!--      >-->
+<!--        <a-input-->
+<!--            v-model="listingPost.available"-->
+<!--            suffix="吨"-->
+<!--        />-->
+<!--      </a-form-item>-->
 
       <a-form-item label="委托价格">
-        <a-input v-model="listingPost.price" suffix="元"/>
+        <a-input v-model:value="listingPost.price" suffix="元"/>
       </a-form-item>
       <a-form-item label="委托数量">
-        <a-input v-model="listingPost.Num" suffix="吨"/>
+        <a-input v-model:value="listingPost.Num" suffix="吨"/>
       </a-form-item>
       <div class="buttonGroup">
         <button @click="submitForm">提交</button>
@@ -50,7 +50,7 @@
 import {ref, nextTick} from "vue";
 import BuyListing from "./BuyListing.vue"
 import axios from "axios";
-
+import AxiosInstance from "@/utils/axiosInstance";
 const listingPost = ref({
   subjectMatterCode: "",
   subjectMatterName: "",
@@ -75,13 +75,14 @@ const submitForm = () => {
   listingPost.value.status="未完成";
   listingPost.value.operatorCode=localStorage.getItem("operatorCode");
   // 提交表单
-  axios
-      .post(`http://localhost:8800/listing/seller`,
+  AxiosInstance
+      .post(`/listing/seller`,
           //表单数据
           listingPost.value
       )
       .then((res)=>{
         console.log(res);
+        alert(res.data.message)
       })
       .catch((err)=>{
         console.log(err);

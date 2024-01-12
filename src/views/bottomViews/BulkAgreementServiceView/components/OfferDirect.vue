@@ -5,17 +5,18 @@
         <a-input v-model:value="directionalOfferFormModel.subjectMatterCode"/>
       </a-form-item>
       <a-form-item label="标的物名称">
-        <a-input v-model:value="directionalOfferFormModel.subjectMatterName" disabled/>
+        <a-input v-model:value="directionalOfferFormModel.subjectMatterName" />
       </a-form-item>
       <a-form-item label="账户类型">
-        <a-select v-model:value="directionalOfferFormModel.accountType">
-          <!-- 添加选项 -->
-        </a-select>
+<!--        <a-select v-model:value="directionalOfferFormModel.accountType">-->
+<!--          &lt;!&ndash; 添加选项 &ndash;&gt;-->
+<!--          <a-select-option value="资金账户">资金账户</a-select-option>-->
+<!--          <a-select-option value="配额账户">配额账户</a-select-option>-->
+<!--        </a-select>-->
+        <a-input v-model:value="directionalOfferFormModel.accountType"/>
       </a-form-item>
       <a-form-item label="报价账号">
-        <a-select v-model:value="directionalOfferFormModel.account">
-          <!-- 添加选项 -->
-        </a-select>
+        <a-input v-model:value="directionalOfferFormModel.account"/>
       </a-form-item>
       <a-form-item label="买卖方向">
         <a-radio-group
@@ -26,26 +27,26 @@
           <a-radio value="买入">买入</a-radio>
         </a-radio-group>
       </a-form-item>
-      <a-form-item
-          label="可用数量"
-          v-show="directionalOfferFormModel.flowType === '卖出'"
-      >
-        <a-input
-            v-model="directionalOfferFormModel.available"
-            suffix="吨"
-            disabled
-        />
-      </a-form-item>
-      <a-form-item
-          label="可用资金"
-          v-show="directionalOfferFormModel.flowType === '买入'"
-      >
-        <a-input
-            v-model:value="directionalOfferFormModel.available"
-            suffix="元"
-            disabled
-        />
-      </a-form-item>
+<!--      <a-form-item-->
+<!--          label="可用数量"-->
+<!--          v-show="directionalOfferFormModel.flowType === '卖出'"-->
+<!--      >-->
+<!--        <a-input-->
+<!--            v-model="directionalOfferFormModel.available"-->
+<!--            suffix="吨"-->
+<!--            disabled-->
+<!--        />-->
+<!--      </a-form-item>-->
+<!--      <a-form-item-->
+<!--          label="可用资金"-->
+<!--          v-show="directionalOfferFormModel.flowType === '买入'"-->
+<!--      >-->
+<!--        <a-input-->
+<!--            v-model:value="directionalOfferFormModel.available"-->
+<!--            suffix="元"-->
+<!--            disabled-->
+<!--        />-->
+<!--      </a-form-item>-->
 
       <a-form-item label="价格">
         <a-input v-model:value="directionalOfferFormModel.price" suffix="元"/>
@@ -103,6 +104,8 @@ const submitForm = () => {
           directionalOfferFormModel.value
       )
       .then((res) => {
+        let message = res.data.message;
+        alert(message);
         console.log(res);
       })
       .catch((err) => {

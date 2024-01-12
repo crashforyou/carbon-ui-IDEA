@@ -33,6 +33,7 @@
 <script setup>
 import {onMounted, ref} from "vue";
 import axios from "axios";
+import AxiosInstance from "@/utils/axiosInstance";
 
 const columns = [
   {
@@ -47,50 +48,38 @@ const columns = [
   },
   {
     title: "绑定银行",
-    dataIndex: "boundBank",
-    key: "boundBank",
+    dataIndex: "bindBank",
+    key: "bindBank",
   },
   {
     title: "银行账号",
-    dataIndex: "bankAccount",
-    key: "bankAccount",
+    dataIndex: "bankAccountId",
+    key: "bankAccountId",
   },
    {
     title: "划转类型",
-    dataIndex: "transferType",
-    key: "transferType",
+    dataIndex: "type",
+    key: "type",
   },
   {
     title: "申请状态",
-    dataIndex: "applicationStatus",
-    key: "applicationStatus",
+    dataIndex: "requestState",
+    key: "requestState",
   },
   {
     title: "发生金额",
-    dataIndex: "amount",
-    key: "amount",
+    dataIndex: "actualAmount",
+    key: "actualAmount",
   },
   {
     title: "备注",
-    dataIndex: "remark",
-    key: "remark",
+    dataIndex: "description",
+    key: "description",
   },
 ];
 
 const data = ref([]); // 从后端获取数据
-for (let i = 0; i < 100; i++) {
-  data.value.push({
-    key: i,
-    time:"交易时间",
-    account:"资金账号",
-    boundBank:"绑定银行",
-    bankAccount:"银行账号",
-    transferType:"划转类型",
-    applicationStatus:"申请状态",
-    amount:"发生金额",
-    remake:"备注",
-  });
-}
+
 // 在组件创建后立即执行
 const fetchData = async () => {
   try {
@@ -103,9 +92,9 @@ const fetchData = async () => {
 
 onMounted(() => {
   let operatorCode= localStorage.getItem("operatorCode");
-  axios.get(`http://localhost:8800/capital/selectDepositAndWithdrawalRequestRecord/${operatorCode}`)
+  AxiosInstance.get(`http://localhost:8800/capital/selectDepositAndWithdrawalRequestRecord/${operatorCode}`)
       .then((res) => {
-        data.value = res.data;
+        data.value = res.data.data;
         console.log(res);
       })
       .catch((err) => {

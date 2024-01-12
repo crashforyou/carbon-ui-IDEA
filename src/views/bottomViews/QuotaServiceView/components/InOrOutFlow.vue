@@ -35,30 +35,26 @@
 <script setup>
 import {onMounted, ref} from "vue";
 import axios from "axios";
+import AxiosInstance from "@/utils/axiosInstance";
 
 const selectedCode = ref(null);
 const codes = ref(["代码1", "代码2", "代码3"]);
 const data = ref([]);
-for (let i = 0; i < 100; i++) {
-  data.value.push({
-    key: i,
-    tradeTime:"交易时间",
-  });
-}
+
 const columns = [
-  {title: "交易时间", dataIndex: "tradeTime", width: 120},
-  {title: "客户号", dataIndex: "customerNumber",width: 120},
-  {title: "客户名称", dataIndex: "customerName",width: 120},
+  {title: "交易时间", dataIndex: "time", width: 120},
+  {title: "客户号", dataIndex: "clientId",width: 120},
+  {title: "客户名称", dataIndex: "clientName",width: 120},
   {title: "操作员代码", dataIndex: "operatorCode",width: 120},
-  {title: "买卖方向", dataIndex: "tradeDirection",width: 120},
-  {title: "标的物代码", dataIndex: "code",width: 120},
-  {title: "标的物名称", dataIndex: "name",width: 120},
-  {title: "划转数量（吨）", dataIndex: "transferAmount",width: 120},
-  {title: "持有数量（吨）", dataIndex: "holdAmount",width: 120},
-  {title: "可用数量（吨）", dataIndex: "availableAmount",width: 120},
-  {title: "交易账号", dataIndex: "account",width: 120},
-  {title: "划入划出状态", dataIndex: "transferStatus",width: 120},
-  {title: "备注", dataIndex: "remark",width: 120},
+  {title: "买卖方向", dataIndex: "type",width: 120},
+  {title: "标的物代码", dataIndex: "subjectMatterCode",width: 120},
+  {title: "标的物名称", dataIndex: "subjectMatterName",width: 120},
+  {title: "划转数量（吨）", dataIndex: "actualAmount",width: 120},
+  {title: "持有数量（吨）", dataIndex: "possessAmount",width: 120},
+  {title: "可用数量（吨）", dataIndex: "availableQuotaAmount",width: 120},
+  {title: "交易账号", dataIndex: "quotaAccount",width: 120},
+  {title: "划入划出状态", dataIndex: "status",width: 120},
+  {title: "备注", dataIndex: "description",width: 120},
 ];
 const pagination = {pageSize: 10};
 
@@ -73,9 +69,9 @@ const clear = () => {
 
 onMounted(() => {
   let clientId= localStorage.getItem("clientId");
-  axios.get(`http://localhost:8800/quota/selectInOrOutQuotaRecord/${clientId}`)
+  AxiosInstance.get(`http://localhost:8800/quota/selectInOrOutQuotaRecord/${clientId}`)
       .then((res) => {
-        data.value = res.data;
+        data.value = res.data.data;
         console.log(res);
       })
       .catch((err) => {

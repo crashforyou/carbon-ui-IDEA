@@ -35,47 +35,30 @@
 import {onMounted, reactive, ref} from "vue";
 import {Form, Select, Button, Table, DatePicker, message} from "ant-design-vue";
 import axios from "axios";
+import AxiosInstance from "@/utils/axiosInstance";
 
 const targetCode = ref(null);
 const dateRange = ref([]);
 const direction = ref(null);
-const data = [];
+const data = ref([]);
 const pagination = reactive({current: 1, pageSize: 10});
 
 const columns = [
-  {title: "委托编号", dataIndex: "orderNumber", width: 100},
-  {title: "委托时间", dataIndex: "orderTime", width: 100},
-  {title: "标的物代码", dataIndex: "code", width: 120},
-  {title: "标的物名称", dataIndex: "name", width: 120},
+  {title: "委托编号", dataIndex: "id", width: 100},
+  {title: "委托时间", dataIndex: "time", width: 100},
+  {title: "标的物代码", dataIndex: "subjectMatterCode", width: 120},
+  {title: "标的物名称", dataIndex: "subjectMatterName", width: 120},
   {title: "账户类型", dataIndex: "accountType", width: 100},
-  {title: "库存账号", dataIndex: "account", width: 100},
-  {title: "买卖方向", dataIndex: "direction", width: 100},
-  {title: "挂牌方式", dataIndex: "listingMode", width: 100},
-  {title: "委托价格", dataIndex: "orderPrice", width: 100},
-  {title: "委托数量", dataIndex: "orderQuantity", width: 100},
+  {title: "库存账号", dataIndex: "quotaAccount", width: 100},
+  {title: "买卖方向", dataIndex: "flowType", width: 100},
+  {title: "挂牌方式", dataIndex: "listingType", width: 100},
+  {title: "委托价格", dataIndex: "price", width: 100},
+  {title: "委托数量", dataIndex: "amount", width: 100},
   {title: "操作员代码", dataIndex: "operatorCode", width: 120},
   {title: "状态", dataIndex: "status", width: 100},
-  {title: "撤牌时间", dataIndex: "cancelTime", width: 100},
+  {title: "撤牌时间", dataIndex: "delistingTime", width: 100},
 ];
 
-for (let i = 0; i < 100; i++) {
-  data.push({
-    key:i,
-    orderNumber: `委托编号${i + 1}`,
-    orderTime: `委托时间${i + 1}`,
-    code: `标的物代码${i + 1}`,
-    name: `标的物名称${i + 1}`,
-    accountType: "账户类型",
-    account:"库存账号",
-    operatorCode: `操作员代码${i + 1}`,
-    direction: `买卖方向${i + 1}`,
-    listingMode: `挂牌方式${i + 1}`,
-    orderQuantity: `委托数量${i + 1}`,
-    orderPrice: `委托价格${i + 1}`,
-    cancelTime: `撤单时间${i + 1}`,
-    status: `状态${i + 1}`,
-  });
-}
 
 const handleSubmit = async () => {
   try {
@@ -107,9 +90,9 @@ const handleReset = () => {
 
 onMounted(() => {
   let clientId= localStorage.getItem("clientId");
-  axios.get(`http://localhost:8800/listing/selectDayListingPost/${clientId}`)
+  AxiosInstance.get(`http://localhost:8800/listing/selectDayListingPost/${clientId}`)
       .then((res) => {
-        data.value = res.data;
+        data.value = res.data.data;
         console.log(res);
       })
       .catch((err) => {

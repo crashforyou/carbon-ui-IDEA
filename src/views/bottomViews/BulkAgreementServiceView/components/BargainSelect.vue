@@ -11,6 +11,7 @@
 <script setup>
 import {onMounted, ref} from 'vue';
 import axios from 'axios';
+import AxiosInstance from "@/utils/axiosInstance";
 
 const data = ref([]);
 const columns = ref([
@@ -34,21 +35,23 @@ const pagination = ref({
   total: 0,
 });
 
-const fetchData = async () => {
-  let clientId = localStorage.getItem('clientId');
-  const response = await axios.get(`http://localhost:8080/bulkAgreement/selectDirectionDoneRecord/${clientId}`, {
-    params: {
-      page: pagination.value.current,
-      pageSize: pagination.value.pageSize,
-    },
-  });
-
-  data.value = response.data;
-  pagination.value.total = response.data.total;
-};
 
 onMounted(() => {
-  fetchData();
+  const clientId = localStorage.getItem('clientId');
+  AxiosInstance({
+    method: 'get',
+    url: `/bulkAgreement/selectDirectionDoneRecord/${clientId}`,
+    params: {
+      page: pagination.value.current,
+      size: pagination.value.pageSize,
+    },
+  }).then((res) => {
+    data.value = res.data.data;
+    pagination.value.total = res.data.data.total;
+    console.log(res);
+  }).catch((err) => {
+    console.log(err);
+  });
 });
 
 </script>

@@ -88,6 +88,8 @@ const handleEdit = (record) => {
   let directionPostId = record.key[9];
   AxiosInstance.post(`/bulkAgreement/modifyDirectionOffer/${directionPostId}`, record)
       .then((res) => {
+        let message = res.data.message;
+        alert(message);
         console.log(res);
       })
       .catch((err) => {
@@ -95,15 +97,24 @@ const handleEdit = (record) => {
       });
 };
 const handleRevoke = (record) => {
-  let directionPostId = record.key[9];
-  axios.post(`http://localhost:8080/bulkAgreement/deleteDirectionOffer/${directionPostId}`, record)
+  let operatorCode = localStorage.getItem("operatorCode");
+  let directionPostId = record.id;
+  AxiosInstance.post(`/bulkAgreement/deleteDirectionOffer/${directionPostId}`, record)
       .then((res) => {
-        console.log(res);
+        let message = res.data.message;
+        alert(message);
       })
       .catch((err) => {
         console.log(err);
       });
-  console.log(record);
+  data1.value = [];
+  AxiosInstance.get(`/bulkAgreement/selectDirectionOffer/${operatorCode}`)
+      .then((res) => {
+        data1.value = res.data.data;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
 };
 onMounted(() => {
   let operatorCode = localStorage.getItem("operatorCode");
@@ -122,16 +133,13 @@ onMounted(() => {
   AxiosInstance
       .get(`/bulkAgreement/selectDirectionDoneRecord/${clientId}`)
       .then((res) => {
-        data2.value = res.data;
+        data2.value = res.data.data;
       })
       .catch((err) => {
         console.log(err);
       });
 });
-onMounted(async () => {
-  await nextTick();
-  console.log(data1.value);
-});
+
 
 </script>
 <style scoped>
