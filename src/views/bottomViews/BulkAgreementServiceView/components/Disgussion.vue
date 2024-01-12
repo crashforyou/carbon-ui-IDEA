@@ -113,7 +113,7 @@ for (let i = 0; i < 2; i++) {
 const quoteColumns = ref([
   {title: "序号", dataIndex: "id", key: "index"},
   {title: "操作", dataIndex: "operation", key: "operation"},
-  {title: "议价方", dataIndex: "directionClient", key: "negotiator"},
+  {title: "议价方", dataIndex: "operatorCode", key: "negotiator"},
   {title: "协议价格", dataIndex: "price", key: "agreedPrice"},
   {title: "出价类型", dataIndex: "flowType", key: "bidType"},
   {title: "协议数量", dataIndex: "amount", key: "agreedQuantity"},
@@ -121,9 +121,9 @@ const quoteColumns = ref([
   {title: "协议备注", dataIndex: "agreedNote", key: "agreedNote"},
 ]);
 onMounted(() => {
-  let operatorCode = localStorage.getItem("operatorCode");
+  let clientId=localStorage.getItem("clientId")
   AxiosInstance
-      .get(`/bulkAgreement/selectDirectionEnquiry/${operatorCode}`)
+      .get(`/bulkAgreement/selectDirectionEnquiry/${clientId}`)
       .then((res) => {
         quoteData.value = res.data.data;
         console.log(res);

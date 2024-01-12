@@ -34,7 +34,7 @@
         <a-input v-model:value="listingPost.price" suffix="元"/>
       </a-form-item>
       <a-form-item label="委托数量">
-        <a-input v-model:value="listingPost.Num" suffix="吨"/>
+        <a-input v-model:value="listingPost.amount" suffix="吨"/>
       </a-form-item>
       <div class="buttonGroup">
         <button @click="submitForm">提交</button>

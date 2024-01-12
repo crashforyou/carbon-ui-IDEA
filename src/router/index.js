@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Main from "@/views/Main.vue"
-import Login from "@/views/Login.vue"
+import Login from "@/views/login.vue"
 import BulkAgreementGroupView from '@/views/bottomViews/BulkAgreementServiceView/Group.vue'
 import BulkAgreementOfferView from '@/views/bottomViews/BulkAgreementServiceView/Offer.vue'
 import BulkAgreementQueryView from '@/views/bottomViews/BulkAgreementServiceView/Query.vue'
@@ -76,7 +76,7 @@ const routes = [
         path:'/bulkAgreement/Components/NegotiationPage',
         name:'NegotiationPage',
         components:{
-          buttomView:()=>import('@/views/bottomViews/BulkAgreementServiceView/components/NegotiationPage.vue')
+          buttomView:()=>import('@/views/bottomViews/BulkAgreementServiceView/components/Disgussion.vue')
         }
       },
       {
