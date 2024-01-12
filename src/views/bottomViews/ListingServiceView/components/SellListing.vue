@@ -3,7 +3,7 @@
     <a-table
         :columns="columns"
         :data-source="data"
-        :scroll="{y: 186}"
+        :scroll="{y: 235}"
         size="small"
         bordered
     >

@@ -4,7 +4,8 @@
       :columns="columns"
       :rowKey="record => record.id"
       :pagination="pagination"
-      :scroll="{ y: 240 }"
+      size="small"
+      :scroll="{x:1600, y: 232 }"
   />
 </template>
 

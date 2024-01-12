@@ -13,8 +13,8 @@
         </a-select-option>
       </a-select>
     </a-form-item>
-    <a-form-item class="capitalAccount">
-      <button type="primary" @click="search">搜索</button>
+    <a-form-item>
+      <button @click="search">搜索</button>
     </a-form-item>
   </a-form>
     <a-table
@@ -81,8 +81,8 @@ onMounted(() => {
 </script>
 <style scoped>
 button {
-  margin: 5px;
-  padding: 8px 13px;
+  margin: 1px;
+  padding: 3px 12px;
   font-size: 14px;
   border: none;
   border-radius: 5px;
@@ -95,9 +95,4 @@ button:hover, button.active {
   cursor: pointer;
 }
 
-.selectButton {
-  background: #eceff6;
-  border-top: 2px solid #a8b7d3;
-  border-bottom: 2px solid #a8b7d3;
-}
 </style>

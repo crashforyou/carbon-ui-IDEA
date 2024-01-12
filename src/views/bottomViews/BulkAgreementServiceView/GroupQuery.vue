@@ -14,12 +14,8 @@
 import {ref} from "vue";
 import QuerySelectGroup from "@/views/bottomViews/BulkAgreementServiceView/components/QuerySelectGroup.vue";
 import BargainSelectGroup from "@/views/bottomViews/BulkAgreementServiceView/components/BargainSelectGroup.vue";
-import QuerySelect from "@/views/bottomViews/BulkAgreementServiceView/components/QuerySelect.vue";
-import BargainSelect from "@/views/bottomViews/BulkAgreementServiceView/components/BargainSelect.vue";
 
 const activeButton = ref('button1')
-const isQuerySelect = ref(true);
-const isBargainSelect = ref(false);
 
 </script>
 <style scoped>

@@ -35,21 +35,39 @@
     </a-layout-sider>
     <a-layout >
       <a-layout-content >
-<!--        <a-table-->
-<!--            :columns="columns"-->
-<!--            :data-source="data"-->
-<!--            size="small"-->
-<!--            bordered-->
-<!--            :scroll="{ y: 198 }"-->
-<!--        />-->
         <ListingBuyService v-if="selectedOption === 1"></ListingBuyService>
         <ListingSellService v-if="selectedOption === 2"></ListingSellService>
         <DeListingService v-if="selectedOption === 3"></DeListingService>
-        <CapitalAccount v-if="selectedOption === 4"></CapitalAccount>
-        <ListingDayCommission v-if="selectedOption === 5"></ListingDayCommission>
-        <ListingDayBargain v-if="selectedOption === 6"></ListingDayBargain>
-        <ListingHistoryCommission v-if=" selectedOption === 7"></ListingHistoryCommission>
-        <ListingHistoryBargain v-if="selectedOption === 8"></ListingHistoryBargain>
+        <div v-if="selectedOption === 4">
+          <div style="border-bottom: 2px solid #a8b7d3;padding: 1.5vh;">
+            <span>资金持仓</span>
+          </div>
+          <CapitalAccount ></CapitalAccount>
+        </div>
+        <div v-if="selectedOption === 5">
+          <div style="border-bottom: 2px solid #a8b7d3;padding: 1.5vh;">
+            <span>当日委托</span>
+          </div>
+          <ListingDayCommission ></ListingDayCommission>
+        </div>
+        <div v-if="selectedOption === 6">
+          <div style="border-bottom: 2px solid #a8b7d3;padding: 1.5vh;">
+            <span>当日成交</span>
+          </div>
+          <ListingDayBargain ></ListingDayBargain>
+        </div>
+        <div v-if=" selectedOption === 7">
+          <div style="border-bottom: 2px solid #a8b7d3;padding: 1.5vh;">
+            <span>历史委托</span>
+          </div>
+          <ListingHistoryCommission ></ListingHistoryCommission>
+        </div>
+        <div v-if="selectedOption === 8">
+          <div style="border-bottom: 2px solid #a8b7d3;padding: 1.5vh;">
+            <span>历史成交</span>
+          </div>
+          <ListingHistoryBargain ></ListingHistoryBargain>
+        </div>
       </a-layout-content>
     </a-layout>
   </a-layout>

@@ -181,7 +181,7 @@ const routes = [
         path:'/Account/QuotaAccountManage',
         name:'QuotaAccountManage',
         component:{
-        buttomView:QuotaAccountManage
+          buttomView:QuotaAccountManage
         }
       }
     ]

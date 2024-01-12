@@ -1,13 +1,5 @@
 <!--大宗协议询价-->
 <template>
-  <!-- <a-tabs v-model:activeKey="activeKey">
-    <a-tab-pane key="1" tab="询价查询" @click="showQuerySelect">
-      <QuerySelect datasrc="queryResult1"/>
-    </a-tab-pane>
-    <a-tab-pane key="2" tab="成交查询" @click="showBargainSelect" force-render>
-      <BargainSelect datasrc="queryResult2"/>
-    </a-tab-pane>
-  </a-tabs> -->
   <div class="main">
     <div class="butttonGroup">
       <button :class="{ active: activeButton === 'button1' }" @click="activeButton = 'button1'">询价查询</button>

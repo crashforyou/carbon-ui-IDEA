@@ -155,22 +155,6 @@
 
     <a-layout-content style="margin: 0 2px">
       <div class="content">
-        <!-- <a-tabs v-model:activeKey="activeKey" class="topView">
-          <a-tab-pane key="1" tab="买入摘牌"
-          >Content of Tab Pane 1
-          </a-tab-pane
-          >
-          <a-tab-pane key="2" tab="卖出摘牌" force-render
-          >Content of Tab Pane 2
-          </a-tab-pane
-          >
-          <a-tab-pane key="3" tab="市场">Content of Tab Pane 3</a-tab-pane>
-          <a-tab-pane key="4" tab="分时">Content of Tab Pane 3</a-tab-pane>
-
-          <a-tab-pane key="5" tab="K线">Content of Tab Pane 3</a-tab-pane>
-
-          <a-tab-pane key="6" tab="分笔">Content of Tab Pane 3</a-tab-pane>
-        </a-tabs> -->
         <TopView></TopView>
         <router-view name="buttomView" class="bottomView"></router-view>
       </div>

@@ -3,7 +3,8 @@
     <span>卖出挂牌</span>
   </div>
   <div class="left">
-    <a-form :model="listingPost" :label-col="{ span: 7 }" :wrapper-col="{ span: 15 }" >
+    <a-form :model="listingPost" :label-col="{ span: 10 }" :wrapper-col="{ span: 12 }" >
+      <br>
       <a-form-item label="标的物代码">
         <a-input v-model:value="listingPost.subjectMatterCode"/>
       </a-form-item>
@@ -105,14 +106,12 @@ const clearForm = () => {
   float: left;
   height: 40.8vh;
   box-sizing: border-box;
-  width: 17vw;
+  width: 17.5vw;
   overflow: auto;
-  background: #eceff6;
-  border-right: 2px solid #a8b7d3;
 }
 .right {
   float: right;
-  width: 76%;
+  width: 75.5%;
 }
 
 .buttonGroup{
